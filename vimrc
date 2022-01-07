@@ -1,4 +1,5 @@
 filetype off                  " required
+set syntax on
 
 set shiftwidth=2 softtabstop=2 expandtab
 set autoindent
@@ -85,6 +86,7 @@ set rtp+=~/.vim/photon/comments
 let g:NERDSpaceDelims = 1
 
 set rtp+=~/.vim/photon/tags
+
 
   " Plugin 'airblade/vim-gitgutter'
 
