@@ -4,6 +4,9 @@
 [submodule "photon/snippets"]
 	path = photon/snippets
 	url = git@github.com:photon-platform/photon-vim-snippets
+[submodule "photon/snippets-util"]
+	path = photon/snippets-util
+	url = git@github.com:photon-platform/photon-vim-snippets-util
 [submodule "photon/completion"]
 	path = photon/completion
 	url = git@github.com:photon-platform/photon-vim-completion
@@ -28,6 +31,3 @@
 [submodule "photon/tags"]
 	path = photon/tags
 	url = git@github.com:photon-platform/photon-vim-tags
-[submodule "photon/snippets-util"]
-	path = photon/snippets-util
-	url = git@github.com:photon-platform/photon-vim-snippets-util
