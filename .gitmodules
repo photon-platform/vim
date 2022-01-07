@@ -1,0 +1,33 @@
+[submodule "photon/color"]
+	path = photon/color
+	url = git@github.com:photon-platform/photon-vim-color
+[submodule "photon/snippets"]
+	path = photon/snippets
+	url = git@github.com:photon-platform/photon-vim-snippets
+[submodule "photon/ultisnips"]
+	path = photon/ultisnips
+	url = git@github.com:photon-platform/photon-vim-ultisnips
+[submodule "photon/completion"]
+	path = photon/completion
+	url = git@github.com:photon-platform/photon-vim-completion
+[submodule "photon/airline"]
+	path = photon/airline
+	url = git@github.com:photon-platform/photon-vim-airline
+[submodule "photon/airline-themes"]
+	path = photon/airline-themes
+	url = git@github.com:photon-platform/photon-vim-airline-themes
+[submodule "photon/fzf-util"]
+	path = photon/fzf-util
+	url = git@github.com:photon-platform/photon-vim-fzf-util
+[submodule "photon/fzf"]
+	path = photon/fzf
+	url = git@github.com:photon-platform/photon-vim-fzf
+[submodule "photon/surround"]
+	path = photon/surround
+	url = git@github.com:photon-platform/photon-vim-surround
+[submodule "photon/comments"]
+	path = photon/comments
+	url = git@github.com:photon-platform/photon-vim-comments
+[submodule "photon/tags"]
+	path = photon/tags
+	url = git@github.com:photon-platform/photon-vim-tags
