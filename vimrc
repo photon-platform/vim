@@ -1,5 +1,5 @@
 filetype off                  " required
-set syntax on
+syntax on
 
 set shiftwidth=2 softtabstop=2 expandtab
 set autoindent
