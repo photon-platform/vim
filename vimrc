@@ -66,7 +66,7 @@ augroup CursorLine
 augroup END
 
 set rtp+=~/.vim/photon/snippets
-set rtp+=~/.vim/photon/snippets-utils
+set rtp+=~/.vim/photon/snippets-util
 let g:UltiSnipsExpandTrigger="<c-x>"
 
 set rtp+=~/.vim/photon/completion
