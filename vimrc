@@ -20,10 +20,6 @@ set foldlevel=99
 
 " set showtabline=2
 
-
-
-
-
 let mapleader = "\<Space>"
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -65,7 +61,7 @@ augroup CursorLine
    au WinLeave * setlocal nocursorline
 augroup END
 
-set rtp+=~/.vim/photon/snippets
+" set rtp+=~/.vim/photon/snippets
 set rtp+=~/.vim/photon/snippets-util
 let g:UltiSnipsExpandTrigger="<c-x>"
 
