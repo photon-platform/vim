@@ -28,3 +28,6 @@
 [submodule "photon/tags"]
 	path = photon/tags
 	url = git@github.com:photon-platform/photon-vim-tags
+[submodule "photon/riv"]
+	path = photon/riv
+	url = git@github.com:photon-platform/photon-vim-riv

@@ -83,6 +83,8 @@ let g:NERDSpaceDelims = 1
 
 set rtp+=~/.vim/photon/tags
 
+set rtp+=~/.vim/photon/riv
+
 
   " Plugin 'airblade/vim-gitgutter'
 
