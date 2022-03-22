@@ -6,6 +6,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+set textwidth=80
+
 nnoremap <leader>yc ggjV/---/<cr>kzf<cr>j:noh<cr>
 nnoremap <leader>yo ggjzo
 nnoremap <leader>yt gg/title:/<cr>:noh<cr>2w
