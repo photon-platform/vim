@@ -129,6 +129,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 
-imap <F5> <Esc>:w<CR>:!clear;python %<CR>
-map <F5> <Esc>:w<CR>:!clear;python %<CR>
+imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
 
