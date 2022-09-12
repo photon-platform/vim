@@ -34,3 +34,6 @@
 [submodule "photon/voom"]
 	path = photon/voom
 	url = git@github.com:photon-platform/photon-vim-voom
+[submodule "photon/jinja"]
+	path = photon/jinja
+	url = git@github.com:photon-platform/photon-vim-jinja
