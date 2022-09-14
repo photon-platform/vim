@@ -113,6 +113,11 @@ set rtp+=~/.vim/photon/voom
 " Put your non-Plugin stuff after this line
 
 
+" <<<<<<< HEAD
 " imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
 " map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+" =======
+" " imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+" " map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+" >>>>>>> d42fc233bd967a647452910572716bf419a25464
 
