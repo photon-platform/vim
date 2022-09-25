@@ -123,3 +123,4 @@ set rtp+=~/.vim/photon/voom
 " " map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
 " >>>>>>> d42fc233bd967a647452910572716bf419a25464
 
+let g:python_highlight_all = 1
