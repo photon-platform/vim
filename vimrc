@@ -33,6 +33,8 @@ nnoremap <leader>w :%s/\s\+$//e<cr>
 nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap { {zzzv
+nnoremap } }zzzv
 
 
 set rtp+=~/.vim/photon/snippets-util
