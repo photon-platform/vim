@@ -37,3 +37,6 @@
 [submodule "photon/jinja"]
 	path = photon/jinja
 	url = git@github.com:photon-platform/photon-vim-jinja
+[submodule "photon/python-syntax"]
+	path = photon/python-syntax
+	url = git@github.com:photon-platform/photon-vim-python-syntax
