@@ -72,6 +72,7 @@ set rtp+=~/.vim/photon/tags
 
 set rtp+=~/.vim/photon/riv
 set rtp+=~/.vim/photon/voom
+set rtp+=~/.vim/photon/jinja
 
 
 " Plugin 'airblade/vim-gitgutter'
