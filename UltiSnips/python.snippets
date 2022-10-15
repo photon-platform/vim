@@ -238,14 +238,14 @@ def write_numpy_docstring_args(args, snip):
 
 
 def write_init_body(args, parents, snip):
-	parents = [p.strip() for p in parents.split(",")]
-	parents = [p for p in parents if p != 'object']
+	# parents = [p.strip() for p in parents.split(",")]
+	# parents = [p for p in parents if p != 'object']
 
-	for p in parents:
-		snip += p + ".__init__(self)"
+	# for p in parents:
+	snip += "super().__init__(self)"
 
-	if parents:
-		snip.rv += '\n' + snip.mkline('', indent='')
+	# if parents:
+		# snip.rv += '\n' + snip.mkline('', indent='')
 
 	for arg in filter(lambda arg: not arg.is_vararg(), args):
 		snip += "self._%s = %s" % (arg, arg)

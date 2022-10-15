@@ -33,6 +33,8 @@ nnoremap <leader>w :%s/\s\+$//e<cr>
 nnoremap Y y$
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap { {zzzv
+nnoremap } }zzzv
 
 
 set rtp+=~/.vim/photon/snippets-util
@@ -74,6 +76,8 @@ set rtp+=~/.vim/photon/riv
 set rtp+=~/.vim/photon/voom
 set rtp+=~/.vim/photon/jinja
 
+set rtp+=~/.vim/photon/python-syntax
+" let g:python_highlight_all = 1
 
 " Plugin 'airblade/vim-gitgutter'
 
@@ -111,14 +115,5 @@ set rtp+=~/.vim/photon/jinja
 
 
 
-" Put your non-Plugin stuff after this line
 
-
-" <<<<<<< HEAD
-" imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
-" map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
-" =======
-" " imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
-" " map <F5> <Esc>:w<CR>:!clear;python3 %<CR>
-" >>>>>>> d42fc233bd967a647452910572716bf419a25464
 
