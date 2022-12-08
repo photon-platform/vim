@@ -193,10 +193,11 @@ endsnippet
 ###########################################################################
 #						  More Specialized Stuff.						  #
 ###########################################################################
-snippet cb "Code Block" b
-.. code-block:: ${1:`!p snip.rv = get_popular_code_type()`}
+# .. code-block:: ${1:`!p snip.rv = get_popular_code_type()`}
+snippet cbp "Code Block Python" b
+.. code:: ${1:python}
 
-	${2:${VISUAL:code}}
+   ${2:${VISUAL:code}}
 
 $0
 endsnippet
