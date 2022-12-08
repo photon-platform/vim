@@ -73,6 +73,9 @@ let g:NERDSpaceDelims = 1
 set rtp+=~/.vim/photon/tags
 
 set rtp+=~/.vim/photon/riv
+let wiki_phi = {'name': 'phi ARCHITECT', 'path': '~/Projects/PHIARCHITECT/notes'}
+let g:riv_projects = [wiki_phi]
+
 set rtp+=~/.vim/photon/voom
 
 set rtp+=~/.vim/photon/python-syntax
