@@ -77,6 +77,7 @@ let wiki_phi = {'name': 'phi ARCHITECT', 'path': '~/Projects/PHIARCHITECT/notes'
 let g:riv_projects = [wiki_phi]
 
 set rtp+=~/.vim/photon/voom
+set rtp+=~/.vim/photon/jinja
 
 set rtp+=~/.vim/photon/python-syntax
 " let g:python_highlight_all = 1
