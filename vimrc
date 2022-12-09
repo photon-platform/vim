@@ -18,6 +18,9 @@ set foldenable
 set foldmethod=indent
 set foldlevel=99
 
+set list
+set listchars=tab:!·,trail:·
+
 " set showtabline=2
 
 let mapleader = "\<Space>"
@@ -38,6 +41,7 @@ nnoremap } }zzzv
 
 
 set rtp+=~/.vim/photon/snippets-util
+
 let g:UltiSnipsExpandTrigger="<c-x>"
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
@@ -113,7 +117,7 @@ set rtp+=~/.vim/photon/python-syntax
 " Plugin 'jasonshell/vim-svg-indent'
 " Plugin 'chrisbra/unicode.vim'
 
-
+helptags ALL
 
 
 
