@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Riv: QuickStart &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/riv/doc/riv_quickstart.html" />
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="riv-quickstart">
+<h1>Riv: QuickStart<a class="headerlink" href="#riv-quickstart" title="Permalink to this heading">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rykka G.F</p>
+</dd>
+<dt class="field-even">Date<span class="colon">:</span></dt>
+<dd class="field-even"><p>2012-10-18</p>
+</dd>
+</dl>
+<p>Riv is for better working with reStructuredText in Vim.</p>
+<p>This tutor is to show enough commands to work with it.</p>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The commands of this document will modify the text.
+Make sure it’s a copy of quickstart.rst</p>
+<p>If you started <code class="docutils literal notranslate"><span class="pre">:RivQuickStart</span></code>,
+Then it is a copy, and at ‘~/Documents/riv_quickstart.rst’</p>
+</dd>
+<dt class="field-even">NOTE<span class="colon">:</span></dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;</span></code> in commands means <code class="docutils literal notranslate"><span class="pre">Ctrl+E</span></code> or <code class="docutils literal notranslate"><span class="pre">Ctrl+e</span></code> ,</p>
+<p>It is based on <code class="docutils literal notranslate"><span class="pre">g:riv_global_leader</span></code>
+If you have changed it, using yours.</p>
+</dd>
+</dl>
+<section id="read">
+<h2>Read<a class="headerlink" href="#read" title="Permalink to this heading">¶</a></h2>
+<section id="folding">
+<h3>Folding<a class="headerlink" href="#folding" title="Permalink to this heading">¶</a></h3>
+<p>This document was opened with some of them are folded.</p>
+<p><strong>Toggle Folding</strong></p>
+<p>Click or press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> on the folding to open it.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">za</span></code> to toggle folding.</p>
+<p><strong>Update Folding</strong></p>
+<p>Folding will be auto updated when you write to file,</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">zx</span></code> to update folding manually.</p>
+</section>
+<section id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">¶</a></h3>
+<p><strong>Items</strong></p>
+<p>Items are highlighted.</p>
+<p><em>Italic</em>, <strong>Strong</strong>, <code class="docutils literal notranslate"><span class="pre">Inline</span> <span class="pre">Literal</span></code>, <cite>Interpreted</cite>,
+www.python.org <a class="reference internal" href="#syntax">Syntax</a></p>
+<p><strong>Code</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">code</span></code> directive are highlighted by it’s language.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="write">
+<h2>Write<a class="headerlink" href="#write" title="Permalink to this heading">¶</a></h2>
+<section id="insert">
+<h3>Insert<a class="headerlink" href="#insert" title="Permalink to this heading">¶</a></h3>
+<p><strong>Insert Misc Things</strong></p>
+<p>To Insert current date
+<code class="docutils literal notranslate"><span class="pre">:RivCreateDate</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;cdd</span></code></p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Date<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</div></blockquote>
+<p>Create a strong text
+<code class="docutils literal notranslate"><span class="pre">:RivCreateStrong</span></code> or  <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;cs</span></code>,</p>
+<blockquote>
+<div><p>Strong</p>
+</div></blockquote>
+<p>Create a strong text in Visual Mode.</p>
+<blockquote>
+<div><p>Make it Strong</p>
+</div></blockquote>
+<p>These commands can be view by menu or by <code class="docutils literal notranslate"><span class="pre">:popup</span> <span class="pre">Riv.Insert</span></code></p>
+</section>
+<section id="indent">
+<h3>Indent<a class="headerlink" href="#indent" title="Permalink to this heading">¶</a></h3>
+<p><strong>Indents are fixed.</strong></p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> to change a line’s indent.</p>
+<p>Also <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;BS&gt;</span></code> in Insert Mode
+at the beginning of line will change it’s indent.</p>
+<ul>
+<li><p>This is a List</p>
+<blockquote>
+<div><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> at This line to align it to parent.</p>
+<p>In Insert Mode, <code class="docutils literal notranslate"><span class="pre">I&lt;BS&gt;</span></code> at the line begining can be used.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Change Multiple lines in Visual Mode</strong></p>
+<ul>
+<li><p>This is a List</p>
+<blockquote>
+<div><p>Line 1 <code class="docutils literal notranslate"><span class="pre">Vjj&lt;</span></code> will align these lines to parent.
+Line 2
+Line 3</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>List item will change it’s level while Shifting.</strong></p>
+<ul class="simple">
+<li><p>This is a List</p>
+<ul>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> to change it’s level to parent list</p></li>
+</ul>
+</li>
+<li><p>To get a unfixed Indent, Use <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&lt;</span></code></p>
+<ul>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&lt;</span></code> to change it’s level to parent list</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="rst">
+<h2>RST<a class="headerlink" href="#rst" title="Permalink to this heading">¶</a></h2>
+<section id="section">
+<h3>Section<a class="headerlink" href="#section" title="Permalink to this heading">¶</a></h3>
+<p><strong>Create a Section title</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivTitle1</span></code> to <code class="docutils literal notranslate"><span class="pre">:RivTitle6</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s1</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s6</span></code></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s3</span></code> to create a level 3 title</p>
+<p>A Level 3 title</p>
+<p><strong>View current document’s sections</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivHelpSection</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;hs</span></code></p>
+<p><strong>Insert the Table of Contents</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivCreateContent</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;cc</span></code></p>
+</section>
+<section id="block">
+<h3>Block<a class="headerlink" href="#block" title="Permalink to this heading">¶</a></h3>
+<p><strong>Create a literal-block</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivCreateLiteralBlock</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;cb</span></code></p>
+<p><strong>Create a explicit-mark</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivCreateExplicitMark</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;cm</span></code></p>
+</section>
+<section id="list">
+<h3>List<a class="headerlink" href="#list" title="Permalink to this heading">¶</a></h3>
+<p><strong>Toggle current line to list</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivListToggle</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;l`</span></code></p>
+<ul class="simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;l`</span></code> on this line To toggle the List</p></li>
+</ul>
+<p><strong>Create a new list</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivListNew</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ln</span></code>,
+Also <code class="docutils literal notranslate"><span class="pre">&lt;C-Enter&gt;</span></code> in Inert Mode</p>
+<ol class="arabic simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">A&lt;C-Enter&gt;</span></code> to create a new list item</p></li>
+</ol>
+<p><strong>Create a sub list</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivListSub</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;lb</span></code>,
+Also <code class="docutils literal notranslate"><span class="pre">&lt;S-Enter&gt;</span></code> in Inert Mode</p>
+<ol class="arabic simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">A&lt;S-Enter&gt;</span></code> to create a sub list item</p></li>
+</ol>
+<p><strong>Create a sup list</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivListSup</span></code>  or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;lp</span></code>,
+Also <code class="docutils literal notranslate"><span class="pre">&lt;C-S-Enter&gt;</span></code> in Insert Mode</p>
+<ol class="arabic">
+<li><p>This is a List</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">A&lt;C-S-Enter&gt;</span></code> to create a sup list item</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="link">
+<h3>Link<a class="headerlink" href="#link" title="Permalink to this heading">¶</a></h3>
+<p><strong>Navigate between links</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivLinkNext</span></code> <code class="docutils literal notranslate"><span class="pre">:RivLinkPrev</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> in Normal Mode</p>
+<p><a class="reference internal" href="#section">Section</a> <a class="reference internal" href="#link">Link</a></p>
+<p><strong>Jump to Link Target</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivLinkOpen</span></code> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ko</span></code>
+Or <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or Double clicking in Normal Mode</p>
+<blockquote>
+<div><p><a class="reference external" href="www.google.com">Google</a></p>
+</div></blockquote>
+<p><strong>Link can targets to sections</strong></p>
+<p>Use `` or ‘’ to jump back</p>
+<blockquote>
+<div><p><a class="reference internal" href="#section">Section</a></p>
+</div></blockquote>
+<p><strong>Create a link</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivCreateLink</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ck</span></code></p>
+<blockquote>
+<div><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ck</span></code> on Github to create the Link</p>
+</div></blockquote>
+</section>
+<section id="table">
+<h3>Table<a class="headerlink" href="#table" title="Permalink to this heading">¶</a></h3>
+<p><strong>Create a Grid Table</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivTableCreate</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;tc</span></code></p>
+<p>Table will be auto formatted when you leave insert mode.</p>
+<p>In Insert mode:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> to create a new line</p></td>
+</tr>
+<tr class="row-even"><td><p>Press <code class="docutils literal notranslate"><span class="pre">&lt;C-Enter&gt;</span></code> to create a new row</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Insert a <code class="docutils literal notranslate"><span class="pre">|</span></code> to create new columns.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>A Table</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="publish">
+<h3>Publish<a class="headerlink" href="#publish" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="http://docutils.sourceforge.net/">docutils</a> package required.</p>
+<p><strong>Convert document to other format</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:Riv2HtmlAndBrowse</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2hh</span></code> will convert current file to html and browse.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:Riv2Odt</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2oo</span></code> will convert current file to odt.</p>
+<p>If you are working in a project.</p>
+<p><code class="docutils literal notranslate"><span class="pre">:Riv2HtmlProject</span></code> will convert current project to html.
+<code class="docutils literal notranslate"><span class="pre">:RivProjectHtmlIndex</span></code> will open index in browser.</p>
+</section>
+</section>
+<section id="riv">
+<h2>Riv<a class="headerlink" href="#riv" title="Permalink to this heading">¶</a></h2>
+<section id="project">
+<h3>Project<a class="headerlink" href="#project" title="Permalink to this heading">¶</a></h3>
+<p>Put your documents in a project</p>
+<p><strong>Open main project’s index file</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivProjectIndex</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ww</span></code> to</p>
+<p><strong>Show project list</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivProjectList</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;wa</span></code></p>
+</section>
+<section id="file">
+<h3>File<a class="headerlink" href="#file" title="Permalink to this heading">¶</a></h3>
+<p>Link files</p>
+<p><strong>File link in vim</strong></p>
+<p>File with specified extensions will be highlighted and linked.</p>
+<blockquote>
+<div><p>index.rst ~/Documents/ test.py</p>
+</div></blockquote>
+<p>It’s not converted, so in vim only.</p>
+<p><strong>File link in other format</strong></p>
+<p>To make links working after converting.
+Riv provide two styles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Moinmoin style: [[riv]]
+
+Sphinx style: :doc:`riv`
+</pre></div>
+</div>
+<p>by default the Moinmoin style are used,
+and the links of this style will be converted.</p>
+<p>If you are using Sphinx style.
+You must convert it using <a class="reference external" href="http://sphinx.pocoo.org/">Sphinx</a> toolkit.</p>
+</section>
+<section id="todo">
+<h3>Todo<a class="headerlink" href="#todo" title="Permalink to this heading">¶</a></h3>
+<p>Things Todos</p>
+<p><strong>Create todo item and toggle state</strong></p>
+<p>On List lines, Press <code class="docutils literal notranslate"><span class="pre">:RivTodoToggle</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ee</span></code>,
+You can also click the todo items to toggle it’s state.</p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>[ ] Press <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ee</span></code> to toggle the todo state.</p></li>
+</ol>
+</div></blockquote>
+<p><strong>Change Priorities</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivTodoPrior</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ep</span></code></p>
+<blockquote>
+<div><ol class="upperalpha simple">
+<li><p>[ ] Press <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ep</span></code> to toggle the todo prior</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="scratch">
+<h3>Scratch<a class="headerlink" href="#scratch" title="Permalink to this heading">¶</a></h3>
+<p>A place to hold your diaries or notes.</p>
+<p><strong>Create scratch of Today</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivScratchCreate</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;sc</span></code></p>
+<p><strong>View Scratch Index</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivScratchView</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;sv</span></code></p>
+</section>
+<section id="helper">
+<h3>Helper<a class="headerlink" href="#helper" title="Permalink to this heading">¶</a></h3>
+<p>Help manage the document.</p>
+<p><strong>Section Helper</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivHelpSection</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;hs</span></code></p>
+<p><strong>File Helper</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivHelpFile</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;hf</span></code></p>
+<p><strong>Todo Helper</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">:RivHelpTodo</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ht</span></code></p>
+</section>
+</section>
+<section id="where-to-go">
+<h2>Where To go<a class="headerlink" href="#where-to-go" title="Permalink to this heading">¶</a></h2>
+<p>The QuickStart for Riv have finished.</p>
+<p>You can starting your reStructuredText in Vim.</p>
+<p>For Vim help, use <code class="docutils literal notranslate"><span class="pre">:h</span></code>.</p>
+<p>To get a quick view of reStructuredText, use <code class="docutils literal notranslate"><span class="pre">:RivPrimer</span></code></p>
+<p>To view the detailed Riv instruction, use <code class="docutils literal notranslate"><span class="pre">:RivInstruction</span></code> or <code class="docutils literal notranslate"><span class="pre">:RivDoc</span></code></p>
+<p>Get Latest Riv or post issues at <a class="reference external" href="www.github.com/Rykka/riv.vim">riv.vim</a></p>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../">
+    <img class="logo" src="../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../_sources/photon/riv/doc/riv_quickstart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

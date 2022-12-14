@@ -1,0 +1,980 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>API Overview &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../../../../../" id="documentation_options" src="../../../../../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/completion/third_party/ycmd/third_party/jedi_deps/jedi/docs/docs/api.html" />
+    <link rel="index" title="Index" href="../../../../../../../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../../../../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../../../../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="api-overview">
+<h1>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This documentation is mostly for Plugin developers, who want to
+improve their editors/IDE with Jedi.</p>
+</div>
+<p id="api">The API consists of a few different parts:</p>
+<ul class="simple">
+<li><p>The main starting points for complete/goto: <a class="reference internal" href="#jedi.Script" title="jedi.Script"><code class="xref py py-class docutils literal notranslate"><span class="pre">Script</span></code></a> and
+<a class="reference internal" href="#jedi.Interpreter" title="jedi.Interpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreter</span></code></a>. If you work with Jedi you want to understand these
+classes first.</p></li>
+<li><p><a class="reference internal" href="../api-classes/#api-classes"><span class="std std-ref">API Result Classes</span></a></p></li>
+<li><p><a class="reference internal" href="#environments"><span class="std std-ref">Python Versions/Virtualenv Support</span></a> with functions like
+<a class="reference internal" href="#jedi.find_system_environments" title="jedi.find_system_environments"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_system_environments()</span></code></a> and <a class="reference internal" href="#jedi.find_virtualenvs" title="jedi.find_virtualenvs"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_virtualenvs()</span></code></a></p></li>
+<li><p>A way to work with different <a class="reference internal" href="#projects"><span class="std std-ref">Folders / Projects</span></a></p></li>
+<li><p>Helpful functions: <a class="reference internal" href="#jedi.preload_module" title="jedi.preload_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">preload_module()</span></code></a> and <a class="reference internal" href="#jedi.set_debug_function" title="jedi.set_debug_function"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_debug_function()</span></code></a></p></li>
+</ul>
+<p>The methods that you are most likely going to use to work with Jedi are the
+following ones:</p>
+<section id="script">
+<h2>Script<a class="headerlink" href="#script" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="jedi.Script">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">Script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Script is the base for completions, goto or whatever you want to do with
+Jedi. The counter part of this class is <a class="reference internal" href="#jedi.Interpreter" title="jedi.Interpreter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Interpreter</span></code></a>, which works
+with actual dictionaries and can work with a REPL. This class
+should be used when a user edits code in an editor.</p>
+<p>You can either use the <code class="docutils literal notranslate"><span class="pre">code</span></code> parameter or <code class="docutils literal notranslate"><span class="pre">path</span></code> to read a file.
+Usually you’re going to want to use both of them (in an editor).</p>
+<p>The Script’s <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> is very customizable:</p>
+<ul class="simple">
+<li><p>If <cite>project</cite> is provided with a <code class="docutils literal notranslate"><span class="pre">sys_path</span></code>, that is going to be used.</p></li>
+<li><p>If <cite>environment</cite> is provided, its <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> will be used
+(see <a class="reference internal" href="#jedi.api.environment.Environment.get_sys_path" title="jedi.api.environment.Environment.get_sys_path"><code class="xref py py-func docutils literal notranslate"><span class="pre">Environment.get_sys_path</span></code></a>);</p></li>
+<li><p>Otherwise <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> will match that of the default environment of
+Jedi, which typically matches the sys path that was used at the time
+when Jedi was imported.</p></li>
+</ul>
+<p>Most methods have a <code class="docutils literal notranslate"><span class="pre">line</span></code> and a <code class="docutils literal notranslate"><span class="pre">column</span></code> parameter. Lines in Jedi are
+always 1-based and columns are always zero based. To avoid repetition they
+are not always documented. You can omit both line and column. Jedi will
+then just do whatever action you are calling at the end of the file. If you
+provide only the line, just will complete at the end of that line.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>By default <a class="reference internal" href="../settings/#jedi.settings.fast_parser" title="jedi.settings.fast_parser"><code class="xref py py-attr docutils literal notranslate"><span class="pre">jedi.settings.fast_parser</span></code></a> is enabled, which means
+that parso reuses modules (i.e. they are not immutable). With this setting
+Jedi is <strong>not thread safe</strong> and it is also not safe to use multiple
+<a class="reference internal" href="#jedi.Script" title="jedi.Script"><code class="xref py py-class docutils literal notranslate"><span class="pre">Script</span></code></a> instances and its definitions at the same time.</p>
+<p>If you are a normal plugin developer this should not be an issue. It is
+an issue for people that do more complex stuff with Jedi.</p>
+<p>This is purely a performance optimization and works pretty well for all
+typical usages, however consider to turn the setting off if it causes
+you problems. See also
+<a class="reference external" href="https://github.com/davidhalter/jedi/issues/1240">this discussion</a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<em>str</em>) – The source code of the current file, separated by newlines.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em><em> or </em><em>None</em>) – The path of the file in the file system, or <code class="docutils literal notranslate"><span class="pre">''</span></code> if
+it hasn’t been saved yet.</p></li>
+<li><p><strong>environment</strong> (<a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><em>Environment</em></a>) – Provide a predefined <a class="reference internal" href="#environments"><span class="std std-ref">Environment</span></a>
+to work with a specific Python version or virtualenv.</p></li>
+<li><p><strong>project</strong> (<a class="reference internal" href="#jedi.Project" title="jedi.Project"><em>Project</em></a>) – Provide a <a class="reference internal" href="#jedi.Project" title="jedi.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a> to make sure finding
+references works well, because the right folder is searched. There are
+also ways to modify the sys path and other things.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.complete">
+<span class="sig-name descname"><span class="pre">complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuzzy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Completes objects under the cursor.</p>
+<p>Those objects contain information about the completions, more than just
+names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fuzzy</strong> – Default False. Will return fuzzy completions, which means
+that e.g. <code class="docutils literal notranslate"><span class="pre">ooa</span></code> will match <code class="docutils literal notranslate"><span class="pre">foobar</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Completion objects, sorted by name. Normal names appear
+before “private” names that start with <code class="docutils literal notranslate"><span class="pre">_</span></code> and those appear
+before magic methods and name mangled names that start with <code class="docutils literal notranslate"><span class="pre">__</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Completion" title="jedi.api.classes.Completion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Completion</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.complete_search">
+<span class="sig-name descname"><span class="pre">complete_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.complete_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#jedi.Script.search" title="jedi.Script.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.search()</span></code></a>, but completes that string. If you want to
+have all possible definitions in a file you can also provide an empty
+string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_scopes</strong> (<em>bool</em>) – Default False; searches not only for
+definitions on the top level of a module level, but also in
+functions and classes.</p></li>
+<li><p><strong>fuzzy</strong> – Default False. Will return fuzzy completions, which means
+that e.g. <code class="docutils literal notranslate"><span class="pre">ooa</span></code> will match <code class="docutils literal notranslate"><span class="pre">foobar</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../api-classes/#jedi.api.classes.Completion" title="jedi.api.classes.Completion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Completion</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.extract_function">
+<span class="sig-name descname"><span class="pre">extract_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.extract_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves an expression to a new function.</p>
+<p>For example if you have the cursor on <code class="docutils literal notranslate"><span class="pre">foo</span></code> and provide a
+<code class="docutils literal notranslate"><span class="pre">new_name</span></code> called <code class="docutils literal notranslate"><span class="pre">bar</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">global_var</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">x</span><span class="p">():</span>
+    <span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">global_var</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the code above will become:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">global_var</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">foo</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">global_var</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">x</span><span class="p">():</span>
+    <span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">bar</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_name</strong> – The expression under the cursor will be replaced with
+a function with this name.</p></li>
+<li><p><strong>until_line</strong> (<em>int</em>) – The the selection range ends at this line, when
+omitted, Jedi will be clever and try to define the range itself.</p></li>
+<li><p><strong>until_column</strong> (<em>int</em>) – The the selection range ends at this column, when
+omitted, Jedi will be clever and try to define the range itself.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.RefactoringError" title="jedi.RefactoringError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RefactoringError</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../api-classes/#jedi.api.refactoring.Refactoring" title="jedi.api.refactoring.Refactoring"><code class="xref py py-class docutils literal notranslate"><span class="pre">Refactoring</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.extract_variable">
+<span class="sig-name descname"><span class="pre">extract_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.extract_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves an expression to a new statemenet.</p>
+<p>For example if you have the cursor on <code class="docutils literal notranslate"><span class="pre">foo</span></code> and provide a
+<code class="docutils literal notranslate"><span class="pre">new_name</span></code> called <code class="docutils literal notranslate"><span class="pre">bar</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the code above will become:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_name</strong> – The expression under the cursor will be renamed to
+this string.</p></li>
+<li><p><strong>until_line</strong> (<em>int</em>) – The the selection range ends at this line, when
+omitted, Jedi will be clever and try to define the range itself.</p></li>
+<li><p><strong>until_column</strong> (<em>int</em>) – The the selection range ends at this column, when
+omitted, Jedi will be clever and try to define the range itself.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.RefactoringError" title="jedi.RefactoringError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RefactoringError</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../api-classes/#jedi.api.refactoring.Refactoring" title="jedi.api.refactoring.Refactoring"><code class="xref py py-class docutils literal notranslate"><span class="pre">Refactoring</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.get_context">
+<span class="sig-name descname"><span class="pre">get_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.get_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the scope context under the cursor. This basically means the
+function, class or module where the cursor is at.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.get_names">
+<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.get_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns names defined in the current file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_scopes</strong> – If True lists the names of all scopes instead of
+only the module namespace.</p></li>
+<li><p><strong>definitions</strong> – If True lists the names that have been defined by a
+class, function or a statement (<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> returns <code class="docutils literal notranslate"><span class="pre">a</span></code>).</p></li>
+<li><p><strong>references</strong> – If True lists all the names that are not listed by
+<code class="docutils literal notranslate"><span class="pre">definitions=True</span></code>. E.g. <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">b</span></code> returns <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.get_references">
+<span class="sig-name descname"><span class="pre">get_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.get_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists all references of a variable in a project. Since this can be
+quite hard to do for Jedi, if it is too complicated, Jedi will stop
+searching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>include_builtins</strong> – Default <code class="docutils literal notranslate"><span class="pre">True</span></code>. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, checks if a definition
+is a builtin (e.g. <code class="docutils literal notranslate"><span class="pre">sys</span></code>) and in that case does not return it.</p></li>
+<li><p><strong>scope</strong> – Default <code class="docutils literal notranslate"><span class="pre">'project'</span></code>. If <code class="docutils literal notranslate"><span class="pre">'file'</span></code>, include references in
+the current module only.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.get_signatures">
+<span class="sig-name descname"><span class="pre">get_signatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.get_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the function object of the call under the cursor.</p>
+<p>E.g. if the cursor is here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="c1"># &lt;-- cursor is here</span>
+</pre></div>
+</div>
+<p>This would return the <code class="docutils literal notranslate"><span class="pre">abs</span></code> function. On the other hand:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">()</span><span class="c1"># &lt;-- cursor is here</span>
+</pre></div>
+</div>
+<p>This would return an empty list..</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Signature" title="jedi.api.classes.Signature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.get_syntax_errors">
+<span class="sig-name descname"><span class="pre">get_syntax_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.get_syntax_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists all syntax errors in the current file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.errors.SyntaxError" title="jedi.api.errors.SyntaxError"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyntaxError</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.goto">
+<span class="sig-name descname"><span class="pre">goto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_builtin_imports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_stubs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefer_stubs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.goto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes to the name that defined the object under the cursor. Optionally
+you can follow imports.
+Multiple objects may be returned, depending on an if you can have two
+different versions of a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>follow_imports</strong> – The method will follow imports.</p></li>
+<li><p><strong>follow_builtin_imports</strong> – If <code class="docutils literal notranslate"><span class="pre">follow_imports</span></code> is True will try
+to look up names in builtins (i.e. compiled or extension modules).</p></li>
+<li><p><strong>only_stubs</strong> – Only return stubs for this method.</p></li>
+<li><p><strong>prefer_stubs</strong> – Prefer stubs to Python objects for this method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.help">
+<span class="sig-name descname"><span class="pre">help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to display a help window to users.  Uses <a class="reference internal" href="#jedi.Script.goto" title="jedi.Script.goto"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.goto()</span></code></a> and
+returns additional definitions for keywords and operators.</p>
+<p>Typically you will want to display <a class="reference internal" href="../api-classes/#jedi.api.classes.BaseName.docstring" title="jedi.api.classes.BaseName.docstring"><code class="xref py py-meth docutils literal notranslate"><span class="pre">BaseName.docstring()</span></code></a> to the
+user for all the returned definitions.</p>
+<p>The additional definitions are <code class="docutils literal notranslate"><span class="pre">Name(...).type</span> <span class="pre">==</span> <span class="pre">'keyword'</span></code>.
+These definitions do not have a lot of value apart from their docstring
+attribute, which contains the output of Python’s <a class="reference internal" href="#jedi.Script.help" title="jedi.Script.help"><code class="xref py py-func docutils literal notranslate"><span class="pre">help()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.infer">
+<span class="sig-name descname"><span class="pre">infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_stubs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefer_stubs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.infer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the definitions of under the cursor. It is basically a wrapper
+around Jedi’s type inference.</p>
+<p>This method follows complicated paths and returns the end, not the
+first definition. The big difference between <a class="reference internal" href="#jedi.Script.goto" title="jedi.Script.goto"><code class="xref py py-meth docutils literal notranslate"><span class="pre">goto()</span></code></a> and
+<a class="reference internal" href="#jedi.Script.infer" title="jedi.Script.infer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">infer()</span></code></a> is that <a class="reference internal" href="#jedi.Script.goto" title="jedi.Script.goto"><code class="xref py py-meth docutils literal notranslate"><span class="pre">goto()</span></code></a> doesn’t
+follow imports and statements. Multiple objects may be returned,
+because depending on an option you can have two different versions of a
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>only_stubs</strong> – Only return stubs for this method.</p></li>
+<li><p><strong>prefer_stubs</strong> – Prefer stubs to Python objects for this method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of <a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.inline">
+<span class="sig-name descname"><span class="pre">inline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.inline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inlines a variable under the cursor. This is basically the opposite of
+extracting a variable. For example with the cursor on bar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>the code above will become:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="o">=</span> <span class="mf">3.1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#jedi.RefactoringError" title="jedi.RefactoringError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RefactoringError</span></code></a></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../api-classes/#jedi.api.refactoring.Refactoring" title="jedi.api.refactoring.Refactoring"><code class="xref py py-class docutils literal notranslate"><span class="pre">Refactoring</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames all references of the variable under the cursor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_name</strong> – The variable under the cursor will be renamed to this
+string.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.RefactoringError" title="jedi.RefactoringError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RefactoringError</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../api-classes/#jedi.api.refactoring.Refactoring" title="jedi.api.refactoring.Refactoring"><code class="xref py py-class docutils literal notranslate"><span class="pre">Refactoring</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Script.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_scopes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Script.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches a name in the current file. For a description of how the
+search string should look like, please have a look at
+<a class="reference internal" href="#jedi.Project.search" title="jedi.Project.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Project.search()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>all_scopes</strong> (<em>bool</em>) – Default False; searches not only for
+definitions on the top level of a module level, but also in
+functions and classes.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="interpreter">
+<h2>Interpreter<a class="headerlink" href="#interpreter" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="jedi.Interpreter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">Interpreter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespaces</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Interpreter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jedi’s API for Python REPLs.</p>
+<p>Implements all of the methods that are present in <a class="reference internal" href="#jedi.Script" title="jedi.Script"><code class="xref py py-class docutils literal notranslate"><span class="pre">Script</span></code></a> as well.</p>
+<p>In addition to completions that normal REPL completion does like
+<code class="docutils literal notranslate"><span class="pre">str.upper</span></code>, Jedi also supports code completion based on static code
+analysis. For example Jedi will complete <code class="docutils literal notranslate"><span class="pre">str().upper</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span> <span class="o">=</span> <span class="n">Interpreter</span><span class="p">(</span><span class="s1">&#39;join(&quot;&quot;).up&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">namespace</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">script</span><span class="o">.</span><span class="n">complete</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">upper</span>
+</pre></div>
+</div>
+<p>All keyword arguments are same as the arguments for <a class="reference internal" href="#jedi.Script" title="jedi.Script"><code class="xref py py-class docutils literal notranslate"><span class="pre">Script</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<em>str</em>) – Code to parse.</p></li>
+<li><p><strong>namespaces</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – A list of namespace dictionaries such as the one
+returned by <code class="xref py py-func docutils literal notranslate"><span class="pre">globals()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">locals()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="projects">
+<span id="id1"></span><h2>Projects<a class="headerlink" href="#projects" title="Permalink to this heading">¶</a></h2>
+<span class="target" id="module-jedi.api.project"></span><p>Projects are a way to handle Python projects within Jedi. For simpler plugins
+you might not want to deal with projects, but if you want to give the user more
+flexibility to define sys paths and Python interpreters for a project,
+<a class="reference internal" href="#jedi.Project" title="jedi.api.project.Project"><code class="xref py py-class docutils literal notranslate"><span class="pre">Project</span></code></a> is the perfect way to allow for that.</p>
+<p>Projects can be saved to disk and loaded again, to allow project definitions to
+be used across repositories.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.get_default_project">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">get_default_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.get_default_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a project is not defined by the user, Jedi tries to define a project by
+itself as well as possible. Jedi traverses folders until it finds one of
+the following:</p>
+<ol class="arabic simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">.jedi/config.json</span></code></p></li>
+<li><p>One of the following files: <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">.git</span></code>, <code class="docutils literal notranslate"><span class="pre">.hg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">MANIFEST.in</span></code>.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jedi.Project">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_unsafe_extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sys_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">added_sys_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smart_sys_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects are a simple way to manage Python folders and define how Jedi does
+import resolution. It is mostly used as a parameter to <a class="reference internal" href="#jedi.Script" title="jedi.Script"><code class="xref py py-class docutils literal notranslate"><span class="pre">Script</span></code></a>.
+Additionally there are functions to search a whole project.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jedi.Project.added_sys_path">
+<span class="sig-name descname"><span class="pre">added_sys_path</span></span><a class="headerlink" href="#jedi.Project.added_sys_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sys path that is going to be added at the end of the</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Project.complete_search">
+<span class="sig-name descname"><span class="pre">complete_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Project.complete_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <a class="reference internal" href="#jedi.Script.search" title="jedi.Script.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.search()</span></code></a>, but completes that string. An empty string
+lists all definitions in a project, so be careful with that.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>all_scopes</strong> (<em>bool</em>) – Default False; searches not only for
+definitions on the top level of a module level, but also in
+functions and classes.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../api-classes/#jedi.api.classes.Completion" title="jedi.api.classes.Completion"><code class="xref py py-class docutils literal notranslate"><span class="pre">Completion</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Project.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Project.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a project from a specific path. You should not provide the path
+to <code class="docutils literal notranslate"><span class="pre">.jedi/project.json</span></code>, but rather the path to the project folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> – The path of the directory you want to use as a project.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jedi.Project.load_unsafe_extensions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_unsafe_extensions</span></span><a class="headerlink" href="#jedi.Project.load_unsafe_extensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wheter the project loads unsafe extensions.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jedi.Project.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#jedi.Project.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base path for this project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Project.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Project.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project configuration in the project in <code class="docutils literal notranslate"><span class="pre">.jedi/project.json</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.Project.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_scopes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.Project.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches a name in the whole project. If the project is very big,
+at some point Jedi will stop searching. However it’s also very much
+recommended to not exhaust the generator. Just display the first ten
+results to the user.</p>
+<p>There are currently three different search patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">foo</span></code> to search for a definition foo in any file or a file called
+<code class="docutils literal notranslate"><span class="pre">foo.py</span></code> or <code class="docutils literal notranslate"><span class="pre">foo.pyi</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">foo.bar</span></code> to search for the <code class="docutils literal notranslate"><span class="pre">foo</span></code> and then an attribute <code class="docutils literal notranslate"><span class="pre">bar</span></code>
+in it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">foo.bar.Bar</span></code> or <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">foo.bar.baz</span></code> to search for a specific
+API type.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>all_scopes</strong> (<em>bool</em>) – Default False; searches not only for
+definitions on the top level of a module level, but also in
+functions and classes.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../api-classes/#jedi.api.classes.Name" title="jedi.api.classes.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jedi.Project.smart_sys_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">smart_sys_path</span></span><a class="headerlink" href="#jedi.Project.smart_sys_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the sys path is going to be calculated in a smart way, where
+additional paths are added.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jedi.Project.sys_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sys_path</span></span><a class="headerlink" href="#jedi.Project.sys_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sys path provided to this project. This can be None and in that
+case will be auto generated.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="environments">
+<span id="id2"></span><h2>Environments<a class="headerlink" href="#environments" title="Permalink to this heading">¶</a></h2>
+<span class="target" id="module-jedi.api.environment"></span><p>Environments are a way to activate different Python versions or Virtualenvs for
+static analysis. The Python binary in that environment is going to be executed.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.find_system_environments">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">find_system_environments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.find_system_environments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ignores virtualenvs and returns the Python versions that were installed on
+your system. This might return nothing, if you’re running Python e.g. from
+a portable version.</p>
+<p>The environments are sorted from latest to oldest Python version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.find_virtualenvs">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">find_virtualenvs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_environment_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.find_virtualenvs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paths</strong> – A list of paths in your file system to be scanned for
+Virtualenvs. It will search in these paths and potentially execute the
+Python binaries.</p></li>
+<li><p><strong>safe</strong> – Default True. In case this is False, it will allow this
+function to execute potential <cite>python</cite> environments. An attacker might
+be able to drop an executable in a path this function is searching by
+default. If the executable has not been installed by root, it will not
+be executed.</p></li>
+<li><p><strong>use_environment_vars</strong> – Default True. If True, the VIRTUAL_ENV
+variable will be checked if it contains a valid VirtualEnv.
+CONDA_PREFIX will be checked to see if it contains a valid conda
+environment.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.get_system_environment">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">get_system_environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.get_system_environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first Python environment found for a string of the form ‘X.Y’
+where X and Y are the major and minor versions of Python.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#jedi.InvalidPythonEnvironment" title="jedi.InvalidPythonEnvironment"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPythonEnvironment</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.create_environment">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">create_environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">safe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.create_environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make it possible to manually create an Environment object by specifying a
+Virtualenv path or an executable path and optional environment variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#jedi.InvalidPythonEnvironment" title="jedi.InvalidPythonEnvironment"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidPythonEnvironment</span></code></a></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.get_default_environment">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">get_default_environment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jedi.get_default_environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to return an active Virtualenv or conda environment.
+If there is no VIRTUAL_ENV variable or no CONDA_PREFIX variable set
+set it will return the latest Python version installed on the system. This
+makes it possible to use as many new Python features as possible when using
+autocompletion and other functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#jedi.api.environment.Environment" title="jedi.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="jedi.InvalidPythonEnvironment">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">InvalidPythonEnvironment</span></span><a class="headerlink" href="#jedi.InvalidPythonEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you see this exception, the Python executable or Virtualenv you have
+been trying to use is probably not a correct Python version.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jedi.api.environment.Environment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.api.environment.</span></span><span class="sig-name descname"><span class="pre">Environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.api.environment.Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is supposed to be created by internal Jedi architecture. You
+should not create it directly. Please use create_environment or the other
+functions instead. It is then returned by that function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="jedi.api.environment.Environment.get_sys_path">
+<span class="sig-name descname"><span class="pre">get_sys_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#jedi.api.environment.Environment.get_sys_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sys path for this environment. Does not include potential
+modifications from e.g. appending to <code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.preload_module">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">preload_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">modules</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.preload_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preloading modules tells Jedi to load a module now, instead of lazy parsing
+of modules. This can be useful for IDEs, to control which modules to load
+on startup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>modules</strong> – different module names, list of string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jedi.set_debug_function">
+<span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">set_debug_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_cb=&lt;function</span> <span class="pre">print_to_stdout&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notices=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jedi.set_debug_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a callback debug function to get all the debug messages.</p>
+<p>If you don’t specify any arguments, debug messages will be printed to stdout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_cb</strong> – The callback function for debug messages.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="jedi.InternalError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">InternalError</span></span><a class="headerlink" href="#jedi.InternalError" title="Permalink to this definition">¶</a></dt>
+<dd><p>This error might happen a subprocess is crashing. The reason for this is
+usually broken C code in third party libraries. This is not a very common
+thing and it is safe to use Jedi again. However using the same calls might
+result in the same error again.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="jedi.RefactoringError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jedi.</span></span><span class="sig-name descname"><span class="pre">RefactoringError</span></span><a class="headerlink" href="#jedi.RefactoringError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refactorings can fail for various reasons. So if you work with refactorings
+like <a class="reference internal" href="#jedi.Script.rename" title="jedi.Script.rename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.rename()</span></code></a>, <a class="reference internal" href="#jedi.Script.inline" title="jedi.Script.inline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.inline()</span></code></a>,
+<a class="reference internal" href="#jedi.Script.extract_variable" title="jedi.Script.extract_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.extract_variable()</span></code></a> and <a class="reference internal" href="#jedi.Script.extract_function" title="jedi.Script.extract_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Script.extract_function()</span></code></a>, make
+sure to catch these. The descriptions in the errors are ususally valuable
+for end users.</p>
+<p>A typical <code class="docutils literal notranslate"><span class="pre">RefactoringError</span></code> would tell the user that inlining is not
+possible if no name is under the cursor.</p>
+</dd></dl>
+
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<section id="completions">
+<h3>Completions<a class="headerlink" href="#completions" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jedi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;import json; json.l&#39;&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span> <span class="o">=</span> <span class="n">jedi</span><span class="o">.</span><span class="n">Script</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;example.py&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span>
+<span class="go">&lt;Script: &#39;example.py&#39; &lt;SameEnvironment: 3.9.0 in /usr&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completions</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completions</span>
+<span class="go">[&lt;Completion: load&gt;, &lt;Completion: loads&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;Completion: loads&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">complete</span>
+<span class="go">&#39;oads&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;loads&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="type-inference-goto">
+<h3>Type Inference / Goto<a class="headerlink" href="#type-inference-goto" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jedi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">def my_func():</span>
+<span class="gp">... </span><span class="s1">    print &#39;called&#39;</span>
+<span class="gp">...</span><span class="s1"></span>
+<span class="gp">... </span><span class="s1">alias = my_func</span>
+<span class="gp">... </span><span class="s1">my_list = [1, None, alias]</span>
+<span class="gp">... </span><span class="s1">inception = my_list[2]</span>
+<span class="gp">...</span><span class="s1"></span>
+<span class="gp">... </span><span class="s1">inception()&#39;&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span> <span class="o">=</span> <span class="n">jedi</span><span class="o">.</span><span class="n">Script</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[&lt;Name full_name=&#39;__main__.inception&#39;, description=&#39;inception = my_list[2]&#39;&gt;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span><span class="o">.</span><span class="n">infer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[&lt;Name full_name=&#39;__main__.my_func&#39;, description=&#39;def my_func&#39;&gt;]</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jedi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">x = 3</span>
+<span class="gp">... </span><span class="s1">if 1 == 2:</span>
+<span class="gp">... </span><span class="s1">    x = 4</span>
+<span class="gp">... </span><span class="s1">else:</span>
+<span class="gp">... </span><span class="s1">    del x&#39;&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">script</span> <span class="o">=</span> <span class="n">jedi</span><span class="o">.</span><span class="n">Script</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rns</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rns</span>
+<span class="go">[&lt;Name full_name=&#39;__main__.x&#39;, description=&#39;x = 3&#39;&gt;,</span>
+<span class="go"> &lt;Name full_name=&#39;__main__.x&#39;, description=&#39;x = 4&#39;&gt;,</span>
+<span class="go"> &lt;Name full_name=&#39;__main__.x&#39;, description=&#39;del x&#39;&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rns</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rns</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">column</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="deprecations">
+<h2>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this heading">¶</a></h2>
+<p>The deprecation process is as follows:</p>
+<ol class="arabic simple">
+<li><p>A deprecation is announced in any release.</p></li>
+<li><p>The next major release removes the deprecated functionality.</p></li>
+</ol>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../../../../../../../">
+    <img class="logo" src="../../../../../../../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../../../../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../../../../../../../_sources/photon/completion/third_party/ycmd/third_party/jedi_deps/jedi/docs/docs/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

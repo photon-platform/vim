@@ -1,0 +1,2088 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Riv: Instruction &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/riv/doc/riv_instruction.html" />
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="riv-instruction">
+<h1>Riv: Instruction<a class="headerlink" href="#riv-instruction" title="Permalink to this heading">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rykka G.F</p>
+</dd>
+<dt class="field-even">Update<span class="colon">:</span></dt>
+<dd class="field-even"><p>2014-08-09</p>
+</dd>
+<dt class="field-odd">Version<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0.77</p>
+</dd>
+<dt class="field-even">Github<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://github.com/Rykka/riv.vim">https://github.com/Rykka/riv.vim</a></p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><span class="target" id="index">Index</span>:</p>
+<ul>
+<li><p>1 <a class="reference internal" href="#instructions">Instructions</a> : Detailed Instructions</p>
+<ul>
+<li><p>1.1 <a class="reference internal" href="#vim">Vim</a> : Vim Improved Feature</p>
+<ul>
+<li><p>1.1.1 <a class="reference internal" href="#folding">Folding</a> : Overview the structure.</p></li>
+<li><p>1.1.2 <a class="reference internal" href="#syntax">Syntax</a> : Extra highlighting.</p></li>
+<li><p>1.1.3 <a class="reference internal" href="#indent">Indent</a> : Smarter indent.</p></li>
+<li><p>1.1.4 <a class="reference internal" href="#insert">Insert</a> : Speed up the input!</p></li>
+</ul>
+</li>
+<li><p>1.2 <a class="reference internal" href="#rst">RST</a> : Better RST Supporting</p>
+<ul>
+<li><p>1.2.1 <a class="reference internal" href="#sections">Sections</a> : Easy create, easy view.</p></li>
+<li><p>1.2.2 <a class="reference internal" href="#lists">Lists</a> : Auto numbered, auto leveled and auto indented.</p></li>
+<li><p>1.2.3 <a class="reference internal" href="#links">Links</a> : Jumping and Highlighting.</p></li>
+<li><p>1.2.4 <a class="reference internal" href="#table">Table</a> : Auto formatted.</p></li>
+<li><p>1.2.5 <a class="reference internal" href="#publish">Publish</a> : Convert to html/xml/latex/odt…</p></li>
+</ul>
+</li>
+<li><p>1.3 <a class="reference internal" href="#riv">Riv</a> : Management by Riv</p>
+<ul>
+<li><p>1.3.1 <a class="reference internal" href="#sphinx">Sphinx</a> :  Working with Sphinx.</p></li>
+<li><p>1.3.2 <a class="reference internal" href="#project">Project</a> : A workspace for your documents.</p></li>
+<li><p>1.3.3 <a class="reference internal" href="#file">File</a> : Link local file in the document.</p></li>
+<li><p>1.3.4 <a class="reference internal" href="#scratch">Scratch</a> : Writing notes and diaries.</p></li>
+<li><p>1.3.5 <a class="reference internal" href="#todos">Todos</a> : Keep track of todo things.</p></li>
+<li><p>1.3.6 <a class="reference internal" href="#helpers">Helpers</a> : Help work with document/project.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2 <a class="reference internal" href="#appendix">Appendix</a> : Extra Infomations</p>
+<ul>
+<li><p>2.1 <a class="reference internal" href="#commands">Commands</a> : Commands and Mappings.</p></li>
+<li><p>2.2 <a class="reference internal" href="#options">Options</a> : Options and Settings.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">¶</a></h2>
+<p>This is the detailed Instruction for Riv.</p>
+<p>To View the Riv Intro , Use <a class="reference internal" href="#rivintro">:RivIntro</a></p>
+<section id="vim">
+<h3>Vim<a class="headerlink" href="#vim" title="Permalink to this heading">¶</a></h3>
+<p>Following features are improved with vim built-in one.</p>
+<section id="folding">
+<h4>Folding<a class="headerlink" href="#folding" title="Permalink to this heading">¶</a></h4>
+<p><strong>Folding</strong> is a vim feature.</p>
+<p>It shows a range of lines as a single line.
+Thus you can get a better overview of the document structures.</p>
+<p>And you can operate the folded lines with one line actions,
+like: select(V), copy(yy), paste(p) … Etc.</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">:h</span> <span class="pre">folding</span></code> for more infos.</p>
+<p>With Riv, Sections, lists, and blocks are folded automatically,
+And extra infos are provided.</p>
+<ul>
+<li><p>Commands:</p>
+<p><strong>Normal Mode</strong></p>
+<p>These ‘z’ folding commands can be used.
+Like ‘zo’ ‘zc’ …</p>
+<p>Also extra commands are provided.</p>
+<ul>
+<li><p>Open/Close Folding: <code class="docutils literal notranslate"><span class="pre">zo</span></code>, <code class="docutils literal notranslate"><span class="pre">zc</span></code>, <code class="docutils literal notranslate"><span class="pre">zM</span></code>, <code class="docutils literal notranslate"><span class="pre">zR</span></code></p></li>
+<li><p>Update Folding: <code class="docutils literal notranslate"><span class="pre">zx</span></code></p>
+<p>And foldings will be auto updated whilst writing buffer to file, <code class="docutils literal notranslate"><span class="pre">:write</span></code> or <code class="docutils literal notranslate"><span class="pre">:update</span></code>.</p>
+<p>You can disable it by setting ‘<a class="reference internal" href="#g-riv-fold-auto-update">g:riv_fold_auto_update</a>’ to 0.</p>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>When you write to a file without updating folding,
+Previous folding structure of the document will be breaked.
+Manual updating is needed.</p>
+<p>So use it with caution.</p>
+</dd>
+<dt class="field-even">NOTE<span class="colon">:</span></dt>
+<dd class="field-even"><p>When document’s folding stucked, you can use <a class="reference internal" href="#rivreload">:RivReload</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;t`</span></code>
+to reload document and the folding.</p>
+</dd>
+</dl>
+</li>
+<li><p>Toggle Folding: <code class="docutils literal notranslate"><span class="pre">za</span></code>, <code class="docutils literal notranslate"><span class="pre">zA</span></code>…</p>
+<p>You can define your own mappings for folding in your vimrc,
+I use <code class="docutils literal notranslate"><span class="pre">&lt;Space&gt;&lt;Space&gt;</span></code> to toggle folding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>nno &lt;silent&gt; &lt;Space&gt;&lt;Space&gt; @=(foldclosed(&#39;.&#39;)&gt;0?&#39;zv&#39;:&#39;zc&#39;)&lt;CR&gt;
+</pre></div>
+</div>
+</li>
+<li><p>Toggle folding with Cursor.</p>
+<p>Pressing <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or double clicking on folded lines
+will open the fold. Like <code class="docutils literal notranslate"><span class="pre">zo</span></code></p>
+<p>Pressing <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or double clicking on section heading
+will close the fold of the section. Like <code class="docutils literal notranslate"><span class="pre">zc</span></code></p>
+</li>
+</ul>
+</li>
+<li><p>Extra Infos:</p>
+<p>Some extra info of folded lines will be shown at the first line.
+And the number of folded lines will be shown.</p>
+<ul class="simple">
+<li><p>Folded <a class="reference internal" href="#sections">Sections</a> will show it’s section number.</p></li>
+<li><p>Folded <a class="reference internal" href="#todos">Todos</a> will show the Todo progress in percentage.</p></li>
+<li><p>Folded <a class="reference internal" href="#table">Table</a> will show number of rows and columns.</p></li>
+<li><p>‘<a class="reference internal" href="#g-riv-fold-info-pos">g:riv_fold_info_pos</a>’ can be used to change info’s position.</p></li>
+</ul>
+</li>
+<li><p>Extra Options:</p>
+<ul>
+<li><p>To show the blank lines in the end of a folding, use ‘<a class="reference internal" href="#g-riv-fold-blank">g:riv_fold_blank</a>’.</p></li>
+<li><p>For large files. Calculate folding may cost time.
+So there are some options about it.</p>
+<ul class="simple">
+<li><p>‘<a class="reference internal" href="#g-riv-fold-level">g:riv_fold_level</a>’ set which structures to be fold.</p></li>
+<li><p>‘<a class="reference internal" href="#g-riv-auto-fold-force">g:riv_auto_fold_force</a>’, ‘<a class="reference internal" href="#g-riv-auto-fold1-lines">g:riv_auto_fold1_lines</a>’, ‘<a class="reference internal" href="#g-riv-auto-fold2-lines">g:riv_auto_fold2_lines</a>’
+reducing fold level when editing large files.</p></li>
+</ul>
+</li>
+<li><p>To open some of the fold when entering a file .
+You can use <code class="docutils literal notranslate"><span class="pre">:set</span> <span class="pre">fdls=1</span></code> or use <code class="docutils literal notranslate"><span class="pre">modeline</span></code> for some files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>  <span class="n">vim</span><span class="p">:</span> <span class="n">fdls</span><span class="o">=</span><span class="mi">0</span> <span class="p">:</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="syntax">
+<h4>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">¶</a></h4>
+<p>Improved highlights for syntax items.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#file">File</a> Link are highlighted.</p>
+<ul>
+<li><p>normal style: <code class="docutils literal notranslate"><span class="pre">xxx.rst_</span></code></p></li>
+<li><p>extension style: <code class="docutils literal notranslate"><span class="pre">xxx.rst</span> <span class="pre">xxx.vim</span></code></p></li>
+<li><p>moinmoin style: <code class="docutils literal notranslate"><span class="pre">[[xxx]]</span> <span class="pre">[[xxx.vim]]</span></code></p></li>
+<li><p>Sphinx style: <code class="docutils literal notranslate"><span class="pre">:doc:`xxx`</span> <span class="pre">:download:`xxx.vim`</span></code></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#todos">Todos</a> Item are highlighted.</p></li>
+<li><p>You can use <code class="docutils literal notranslate"><span class="pre">:set</span> <span class="pre">spell</span></code> for spell checking,
+and <code class="docutils literal notranslate"><span class="pre">spell</span></code> is on in Literal-Block.</p></li>
+</ul>
+<section id="code-highlighting">
+<h5>Code Highlighting<a class="headerlink" href="#code-highlighting" title="Permalink to this heading">¶</a></h5>
+<p>For the <code class="docutils literal notranslate"><span class="pre">code</span></code> directives (also <code class="docutils literal notranslate"><span class="pre">sourcecode</span></code> and <code class="docutils literal notranslate"><span class="pre">code-block</span></code>).
+Syntax highlighting of Specified languages are on</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="p">::</span> <span class="n">python</span>
+
+    <span class="c1"># python highlighting</span>
+    <span class="c1"># github does not support syntax highlighting rendering for rst file yet.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>There are code block indicator for every code directives,
+It’s first column of the line in code block are highlighted to
+indicate it’s a code block.</p>
+<p>You can disable it by setting <a class="reference internal" href="#g-riv-code-indicator">g:riv_code_indicator</a> to 0.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">highlights</span></code> directives in <a class="reference internal" href="#sphinx">Sphinx</a> could also be used to
+highlight big block of codes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">highlights</span><span class="p">::</span> <span class="n">python</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+
+<span class="o">..</span> <span class="n">highlights</span><span class="p">::</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use ‘<a class="reference internal" href="#g-riv-highlight-code">g:riv_highlight_code</a>’ to set which languages to be highlighted.</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>To highlighting codes in converted file,
+<a class="reference external" href="http://pygments.org/">pygments</a> package must installed for <a class="reference external" href="http://docutils.sourceforge.net/">docutils</a> to
+parse syntax highlighting.</p>
+<p>See <a class="reference external" href="http://docutils.sourceforge.net/sandbox/code-block-directive/tools/pygments-enhanced-front-ends/">http://docutils.sourceforge.net/sandbox/code-block-directive/tools/pygments-enhanced-front-ends/</a></p>
+</dd>
+</dl>
+</section>
+<section id="cursor-highlighting">
+<h5>Cursor Highlighting<a class="headerlink" href="#cursor-highlighting" title="Permalink to this heading">¶</a></h5>
+<p>Some item that could operate by cursor are highlighted when cursor is on.</p>
+<ul class="simple">
+<li><p>Links are highlighted in <code class="docutils literal notranslate"><span class="pre">hl-incSearch</span></code></p>
+<ul>
+<li><p>if the target file is invalid, it will be highlighted by
+‘<a class="reference internal" href="#g-riv-file-link-invalid-hl">g:riv_file_link_invalid_hl</a>’</p></li>
+</ul>
+</li>
+<li><p>Todo items are highlighted in <code class="docutils literal notranslate"><span class="pre">hl-DiffAdd</span></code></p></li>
+</ul>
+<p>You can disable Cursor Highlighting by set ‘<a class="reference internal" href="#g-riv-link-cursor-hl">g:riv_link_cursor_hl</a>’ to 0</p>
+</section>
+<section id="docstring-highlighting">
+<h5>Docstring Highlighting<a class="headerlink" href="#docstring-highlighting" title="Permalink to this heading">¶</a></h5>
+<p>For python files.
+DocString can be highlighted using reStructuredText.</p>
+<p>You can enable it by setting <code class="docutils literal notranslate"><span class="pre">g:riv_python_rst_hl</span></code> to 1.</p>
+<p>Also you can set the file type to <code class="docutils literal notranslate"><span class="pre">rst</span></code>
+to gain riv features in python file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">ft</span><span class="o">=</span><span class="n">rst</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="indent">
+<h4>Indent<a class="headerlink" href="#indent" title="Permalink to this heading">¶</a></h4>
+<p>Smarter indent in insert mode.</p>
+<p>As indenting in reStructuredText is complicated.
+Riv will fixed indent for lines in the context of
+blocks, list, explicit marks.</p>
+<p>If no fix is needed, <code class="docutils literal notranslate"><span class="pre">shiftwidth</span></code> will be used for the indenting.</p>
+<ul>
+<li><p>Commands:</p>
+<p><strong>Normal</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> will indent with fixed indent.</p>
+<p>To use original <code class="docutils literal notranslate"><span class="pre">shiftwidth</span></code> indent.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&lt;</span></code></p>
+</li>
+</ul>
+<p><strong>Insert</strong></p>
+<ul class="simple">
+<li><p>Newline (<code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">o</span></code> in Normal mode):
+will start newline with fixed indentation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;BS&gt;</span></code> (Backspace key) and <code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> .
+Will use fixed indentation if no preceding non-whitespace character,
+otherwise <code class="docutils literal notranslate"><span class="pre">&lt;BS&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> (Tab key).
+Will use fixed indentation if no preceding non-whitespace character,
+otherwise <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="insert">
+<h4>Insert<a class="headerlink" href="#insert" title="Permalink to this heading">¶</a></h4>
+<p>Super <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> and Super <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> in insert mode.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enter</span></code> and <code class="docutils literal notranslate"><span class="pre">KEnter</span></code> (Keypad Enter)
+(with modifier ‘Ctrl’ and ‘Shift’):</p>
+<ul>
+<li><p>When in a grid table: creating table lines.</p>
+<p>See <a class="reference internal" href="#table">Table</a> for details.</p>
+</li>
+<li><p>When in a list context: creating list lines.</p>
+<p>See <a class="reference internal" href="#lists">Lists</a> for details.</p>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Tab</span></code> and <code class="docutils literal notranslate"><span class="pre">Shift-Tab</span></code>:</p>
+<ul>
+<li><p>If insert-popup-menu is visible, will act as <code class="docutils literal notranslate"><span class="pre">&lt;C-N&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-P&gt;</span></code></p>
+<p>Disable it by setting ‘<a class="reference internal" href="#g-riv-i-tab-pum-next">g:riv_i_tab_pum_next</a>’ to 0.</p>
+</li>
+<li><p>When in a table , <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> to next cell , <code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> to previous one.</p></li>
+<li><p>When not in a table,</p>
+<ul>
+<li><p>If it’s a list, and cursor is before the list item, will shift the list.</p></li>
+<li><p>if have fixed indent, will indent with fixed indent. See <a class="reference internal" href="#indent">indent</a>.</p></li>
+<li><p>Otherwise:</p>
+<ul>
+<li><p>if ‘<a class="reference internal" href="#g-riv-i-tab-user-cmd">g:riv_i_tab_user_cmd</a>’ is not empty , executing it.</p>
+<p>It’s for users who want different behavior with <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot; For snipmate user.</span>
+<span class="n">let</span> <span class="n">g</span><span class="p">:</span><span class="n">riv_i_tab_pum_next</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="s2">&quot; quote cmd with &#39;&quot;</span><span class="s1">&#39;, special key must contain &#39;</span>\<span class="s1">&#39;</span>
+<span class="n">let</span> <span class="n">g</span><span class="p">:</span><span class="n">riv_i_tab_user_cmd</span> <span class="o">=</span> <span class="s2">&quot;\&lt;c-g&gt;u\&lt;c-r&gt;=snipMate#TriggerSnippet()\&lt;cr&gt;&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>else act as <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;BS&gt;</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> is acting as <code class="docutils literal notranslate"><span class="pre">&lt;BS&gt;</span></code> when not in list or table .</p>
+</dd>
+</dl>
+</li>
+<li><p>Backspace: indent with fixed indent. See <a class="reference internal" href="#indent">indent</a>.</p></li>
+<li><p>Most commands can be used in insert mode. Like <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ee</span></code> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s1</span></code> …</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>To disable mapping of <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> etc. in insert mode.</p>
+<p>Set it in ‘<a class="reference internal" href="#g-riv-ignored-imaps">g:riv_ignored_imaps</a>’ , each item is split with <code class="docutils literal notranslate"><span class="pre">,</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot; no &lt;Tab&gt; and &lt;S-Tab&gt;</span>
+<span class="n">let</span> <span class="n">g</span><span class="p">:</span><span class="n">riv_ignored_imaps</span> <span class="o">=</span> <span class="s2">&quot;&lt;Tab&gt;,&lt;S-Tab&gt;&quot;</span>
+</pre></div>
+</div>
+<p>You can view default mappings with ‘<span class="target" id="g-riv-default-buf-imaps">g:riv_default.buf_imaps</span>’</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>Insert extra fields.</p>
+<ul>
+<li><p><a class="reference internal" href="#rivcreatedate">:RivCreateDate</a> : Insert current date</p></li>
+<li><p><a class="reference internal" href="#rivcreatetime">:RivCreateTime</a> : Insert current time</p></li>
+<li><p><a class="reference internal" href="#rivcreateemphasis">:RivCreateEmphasis</a> : Create Emphasis text</p></li>
+<li><p><a class="reference internal" href="#rivcreatestrong">:RivCreateStrong</a> : Create Strong text</p></li>
+<li><p><a class="reference internal" href="#rivcreatelink">:RivCreateLink</a> : Create Link based on current word</p></li>
+<li><p><a class="reference internal" href="#rivcreatefoot">:RivCreateFoot</a> : Create Footnote</p></li>
+<li><p><a class="reference internal" href="#rivcreatedate">:RivCreateDate</a> : Insert Current Date</p></li>
+<li><p><a class="reference internal" href="#rivcreatetime">:RivCreateTime</a> : Insert Current time</p></li>
+<li><p><a class="reference internal" href="#rivcreateinterpreted">:RivCreateInterpreted</a> : Interpreted</p></li>
+<li><p><a class="reference internal" href="#rivcreateliteralinline">:RivCreateLiteralInline</a> : LiteralInline</p></li>
+<li><p><a class="reference internal" href="#rivcreateliteralblock">:RivCreateLiteralBlock</a> : LiteralBlock</p></li>
+<li><p><a class="reference internal" href="#rivcreatehyperlink">:RivCreateHyperLink</a> : HyperLink</p></li>
+<li><p><a class="reference internal" href="#rivcreatetransition">:RivCreateTransition</a> : Transition</p></li>
+<li><p><a class="reference internal" href="#rivcreateexplicitmark">:RivCreateExplicitMark</a> : ExplicitMark</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="rst">
+<h3>RST<a class="headerlink" href="#rst" title="Permalink to this heading">¶</a></h3>
+<p>Following features are for all document which filetype is <code class="docutils literal notranslate"><span class="pre">rst</span></code>.
+And are all standard reStructuredText syntax.</p>
+<section id="sections">
+<h4>Sections<a class="headerlink" href="#sections" title="Permalink to this heading">¶</a></h4>
+<p>Section level and numbers are auto detected.</p>
+<p>And it’s folded by it’s level.</p>
+<ul>
+<li><p>Commands:</p>
+<p><strong>Normal and Insert Mode</strong></p>
+<ul>
+<li><p>Create and Modify titles:</p>
+<p>Use <a class="reference internal" href="#rivtitle1">:RivTitle1</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s1</span></code> …  <a class="reference internal" href="#rivtitle6">:RivTitle6</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s6</span></code> ,
+To create level 1 to level 6 section title from current word.</p>
+<p>If the line empty, you will be asked to input a title.</p>
+<p>And <a class="reference internal" href="#rivtitle0">:RivTitle0</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;s0</span></code> will create a section title
+with an overline.</p>
+<p>Other commands is <code class="docutils literal notranslate"><span class="pre">underline</span></code> only.</p>
+<p>Riv use following punctuations for titles:</p>
+<p><code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">-</span> <span class="pre">~</span> <span class="pre">&quot;</span> <span class="pre">'</span> <span class="pre">`</span></code> , (HTML has 6 levels)</p>
+<p>You can change it with ‘<a class="reference internal" href="#g-riv-section-levels">g:riv_section_levels</a>’</p>
+<p>The <a class="reference internal" href="#rivtitle0">:RivTitle0</a> will use <code class="docutils literal notranslate"><span class="pre">#</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Keep in mind sub titles should be one level deeper
+than current one.</p>
+</dd>
+</dl>
+</li>
+<li><p>Folding:</p>
+<p>Pressing <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or double clicking on the section title
+will toggle the folding of the section.</p>
+<p>The section number will be shown when folded.</p>
+</li>
+<li><p>Jumping:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or Clicking on the section reference will bring you to the section title.</p>
+<p>E.g.: click the link of <a class="reference internal" href="#lists">Lists</a> will bring you to the <code class="docutils literal notranslate"><span class="pre">Lists</span></code> Section (in vim)</p>
+</li>
+<li><p>Create a content table:</p>
+<p>Use <a class="reference internal" href="#rivcreatecontent">:RivCreateContent</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ic</span></code> to create it.</p>
+<p>It’s similar with the <code class="docutils literal notranslate"><span class="pre">content</span></code> directive,
+except it create the content table into the document.</p>
+<p>The advantage is you can jumping with it in vim,
+and have full control of it.</p>
+<p>The disadvantage is you must update it every time
+after you have changed the document structure.</p>
+<p>You can set ‘<a class="reference internal" href="#g-riv-content-format">g:riv_content_format</a>’ to change it’s format.</p>
+</li>
+</ul>
+</li>
+<li><p>Extra Options:</p>
+<ul>
+<li><p>Section mark:</p>
+<p>Section number are separated by ‘<a class="reference internal" href="#g-riv-fold-section-mark">g:riv_fold_section_mark</a>’</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>See <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#sections">reStructuredText sections</a> for syntax details.</p>
+<ul>
+<li><p>Misc:</p>
+<p>For convenience, Page-break <code class="docutils literal notranslate"><span class="pre">^L</span></code> (Ctrl-L in insert mode) was made to break current section in vim, works like <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#transitions">transitions</a>.</p>
+</li>
+</ul>
+</section>
+<section id="lists">
+<h4>Lists<a class="headerlink" href="#lists" title="Permalink to this heading">¶</a></h4>
+<p>There are several types of list items in reStructuredText.</p>
+<p>They are highlighted. Some are folded.</p>
+<ul>
+<li><p>Auto Leveled:</p>
+<p>Bullet and enumerated list.</p>
+<p>When you shift the list or add child/parent list ,
+the type of list item will be changed automatically.</p>
+<p>The level sequence is as follows:</p>
+<p><code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">+</span> <span class="pre">-</span> <span class="pre">1.</span> <span class="pre">A.</span> <span class="pre">a.</span> <span class="pre">I.</span> <span class="pre">i.</span> <span class="pre">1)</span> <span class="pre">A)</span> <span class="pre">a)</span> <span class="pre">I)</span> <span class="pre">i)</span> <span class="pre">(1)</span> <span class="pre">(A)</span> <span class="pre">(a)</span> <span class="pre">(I)</span> <span class="pre">(i)</span></code></p>
+<p>You can use any of them as a list item, but the changing sequence is hard coded.</p>
+<p>This means when you shift right or add a child list with a <code class="docutils literal notranslate"><span class="pre">-</span></code> list item,
+the new one will be <code class="docutils literal notranslate"><span class="pre">1.</span></code></p>
+<p>And if you shift left or add a parent list item with a <code class="docutils literal notranslate"><span class="pre">a.</span></code> list item ,
+the new one will be <code class="docutils literal notranslate"><span class="pre">A.</span></code></p>
+</li>
+<li><p>Auto Numbered:</p>
+<p>Bullet and enumerated list.</p>
+<p>When you adding a new list or shifting an list,
+these list items will be auto numbered.</p>
+</li>
+<li><p>Auto Indented:</p>
+<p>Bullet and enumerated list and field list.</p>
+<p>When you adding a new list or shifting an list,
+these list items will be auto indented.</p>
+</li>
+<li><p>Commands:</p>
+<ul>
+<li><p>Shifting:</p>
+<p><strong>Normal and Visual Mode</strong></p>
+<ul>
+<li><p>Shift right: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> <a class="reference internal" href="#rivshiftright">:RivShiftRight</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-ScrollWheelDown&gt;(UNIX</span> <span class="pre">only)</span></code></p>
+<p>Shift rightwards with <code class="docutils literal notranslate"><span class="pre">ShiftWidth</span></code></p>
+<p>If it’s a list item, it will indent to the list item’s sub list</p>
+</li>
+<li><p>Shift left: <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> <a class="reference internal" href="#rivshiftleft">:RivShiftLeft</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-ScrollWheelUp&gt;(UNIX</span> <span class="pre">only)</span></code></p>
+<p>Shift leftwards with <code class="docutils literal notranslate"><span class="pre">ShiftWidth</span></code></p>
+<p>If it’s a list item, it will indent to the list item’s parent list</p>
+</li>
+<li><p>Format:   <code class="docutils literal notranslate"><span class="pre">=</span></code>
+Format list’s level and number.</p></li>
+<li><p>To act as the vim’s original <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">=</span></code>,
+just preceding a <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;</span></code>,  as <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&lt;</span></code> , <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;=</span></code></p>
+<p>Also <code class="docutils literal notranslate"><span class="pre">&lt;S-ScrollWheelDown&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;S-ScrollWheelUp&gt;</span></code> can
+be used in UNIX</p>
+</li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">Tips<span class="colon">:</span></dt>
+<dd class="field-odd"><p>To make shifting with mouse more easier.</p>
+<p>You should make sure the vim option <code class="docutils literal notranslate"><span class="pre">'selectmode'</span></code> not contain <code class="docutils literal notranslate"><span class="pre">mouse</span></code>,
+in order to use mouse to start visual mode, not select mode
+As commands not working in Select Mode.</p>
+<p>And this option will be reset by <code class="docutils literal notranslate"><span class="pre">:behave</span> <span class="pre">mswin</span></code>.
+So you should put it behind that.</p>
+</dd>
+</dl>
+<p><strong>Insert Mode</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> when cursor is before the list’s content
+will shift right.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> when cursor is before the list’s content.
+Will shift left.</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>As this will break the <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> inserting operation
+in <code class="docutils literal notranslate"><span class="pre">visual-block</span> <span class="pre">insert</span></code>.</p>
+<p>You should use <code class="docutils literal notranslate"><span class="pre">&lt;Space&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code></p>
+<p>or use <code class="docutils literal notranslate"><span class="pre">visual-block</span> <span class="pre">replace</span></code>
+See <code class="docutils literal notranslate"><span class="pre">:h</span> <span class="pre">v_b_i</span></code> and <code class="docutils literal notranslate"><span class="pre">:h</span> <span class="pre">v_b_r</span></code></p>
+</dd>
+</dl>
+</li>
+<li><p>New List:</p>
+<p>Insert Mode Only. Note that some terminals pass <code class="docutils literal notranslate"><span class="pre">&lt;C-CR&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;S-CR&gt;</span></code>
+as different (or indistinguishable) mappings, so the alternative key mapping
+should be used.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;CR&gt;\&lt;KEnter&gt;</span></code> (enter key and keypad enter key)
+Insert the content of this list.</p>
+<p>To insert content in new line of this list item. Add a blank line before it.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;C-CR&gt;\&lt;C-KEnter&gt;</span></code>
+or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ln</span></code>
+Insert a new list of current list level</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;S-CR&gt;\&lt;S-KEnter&gt;</span></code>
+or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;lb</span></code>
+Insert a new list of current child list level</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;C-S-CR&gt;\&lt;C-S-KEnter&gt;</span></code>
+or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;lp</span></code>
+Insert a new list of current parent list level</p></li>
+<li><p>When it’s a field list, only the indent is inserted.</p></li>
+</ul>
+</li>
+<li><p>Change List Type:</p>
+<p>Normal and Insert Mode:</p>
+<ul>
+<li><p><a class="reference internal" href="#rivlisttype0">:RivListType0</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;l1</span></code> … <a class="reference internal" href="#rivlisttype4">:RivListType4</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;l5</span></code>
+Change or add list item symbol of type.</p>
+<p>The list item of each type is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;*&#39;</span> <span class="p">,</span> <span class="s1">&#39;1.&#39;</span> <span class="p">,</span> <span class="s1">&#39;a.&#39;</span> <span class="p">,</span> <span class="s1">&#39;A)&#39;</span> <span class="p">,</span><span class="s1">&#39;i)&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>You should act this on a new list or list with no sub line.</p>
+<p>As list item changes, the indentation of it is changed.
+But this action does not change the sub item’s indent.</p>
+<p>To change a list and it’s sub item
+with indentation fix , use shifting: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference internal" href="#rivlistdelete">:RivListDelete</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;lx</span></code>
+Delete current list item symbol</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="links">
+<h4>Links<a class="headerlink" href="#links" title="Permalink to this heading">¶</a></h4>
+<p>You can jumping with links.</p>
+<p>And it’s highlighted with <a class="reference internal" href="#cursor-highlighting">Cursor Highlighting</a>.</p>
+<ul>
+<li><p>Commands:</p>
+<p><strong>Jumping(Normal Mode):</strong></p>
+<ul>
+<li><p>Clicking on a links  will jump to it’s target.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;/&lt;KEnter&gt;</span></code> or double click or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ko</span></code></p>
+<ul>
+<li><p>A web link ( www.xxx.xxx or <a class="reference external" href="http://xxx.xxx.xxx">http://xxx.xxx.xxx</a> or <a class="reference external" href="mailto:xxx&#37;&#52;&#48;xxx&#46;xxx">xxx<span>&#64;</span>xxx<span>&#46;</span>xxx</a> ):</p>
+<p>Open web browser.</p>
+<p>And if it’s an email address <code class="docutils literal notranslate"><span class="pre">xxx&#64;xxx.xxx</span></code>,  <code class="docutils literal notranslate"><span class="pre">mailto:</span></code> will be added.</p>
+<p>Web browser is set by ‘<a class="reference internal" href="#g-riv-web-browser">g:riv_web_browser</a>’.</p>
+</li>
+<li><p>A internal reference ( <code class="docutils literal notranslate"><span class="pre">xxx_</span> <span class="pre">[xxx]_</span> <span class="pre">`xxx`_</span></code> ):</p>
+<p>Find and Jump to the target.</p>
+<p>If it’s an anonymous reference <code class="docutils literal notranslate"><span class="pre">xxx__</span></code>,</p>
+<p>Will jump to the nearest anonymous target.</p>
+</li>
+<li><p>A internal targets (<code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">[xxx]:</span>&#160; <span class="pre">..</span> <span class="pre">_xxx:</span></code>)</p>
+<p>Find and Jump to the nearest backward reference.</p>
+</li>
+<li><p>A local file (if ‘<a class="reference internal" href="#g-riv-file-link-style">g:riv_file_link_style</a>’ is not 0):</p>
+<p>Like (<code class="docutils literal notranslate"><span class="pre">xxx.vim</span></code> or <code class="docutils literal notranslate"><span class="pre">[[xxx/xxx]]</span></code>)</p>
+<p>Edit the file.</p>
+<p>To split editing:
+As no split editing commands were defined,
+you should split document first:
+<code class="docutils literal notranslate"><span class="pre">&lt;C-W&gt;&lt;C-S&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-W&gt;&lt;C-V&gt;</span></code></p>
+</li>
+</ul>
+</li>
+<li><p>You can jump back to origin position with <code class="docutils literal notranslate"><span class="pre">``</span></code> or <code class="docutils literal notranslate"><span class="pre">''</span></code></p></li>
+</ul>
+<p><strong>Navigate(Normal Mode):</strong></p>
+<ul>
+<li><p>Navigate to next/previous link in document.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;/&lt;S-Tab&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;kn/&lt;C-E&gt;kp</span></code></p>
+</li>
+</ul>
+<p><strong>Create (Normal and Insert):</strong></p>
+<ul>
+<li><p><a class="reference internal" href="#rivcreatelink">:RivCreateLink</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ik</span></code>
+create a link from current word.</p>
+<p>If it’s empty, you will be asked to input one.</p>
+<p>If the link is not Anonymous References,
+The target will be put at the end of file by default.</p>
+<p>‘<a class="reference internal" href="#g-riv-create-link-pos">g:riv_create_link_pos</a>’ can be used to change the target postion.</p>
+</li>
+<li><p><a class="reference internal" href="#rivcreatefoot">:RivCreateFoot</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;if</span></code>
+create a auto numbered footnote.
+And append the footnote target to the end of file.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="table">
+<h4>Table<a class="headerlink" href="#table" title="Permalink to this heading">¶</a></h4>
+<p>Tables are highlighted and folded.</p>
+<p>For Grid table, it is auto formatted.</p>
+<ul>
+<li><p>Grid Table:</p>
+<p>Highlighted and Folded.
+When folded, the numbers of rows and columns will be shown as ‘3x2’</p>
+<p>Will be auto formated. Only support equal columns each row (no span).
+Disable auto-formatting by setting ‘<a class="reference internal" href="#g-riv-auto-format-table">g:riv_auto_format_table</a>’ to 0.</p>
+<ul>
+<li><p>Commands:</p>
+<ul>
+<li><p>Create: Use <code class="docutils literal notranslate"><span class="pre">`&lt;C-E&gt;tc</span></code> or <a class="reference internal" href="#rivtablecreate">:RivTableCreate</a> to create table</p></li>
+<li><p>Format: Use <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;tf</span></code> or <a class="reference internal" href="#rivtableformat">:RivTableFormat</a> to format table.</p>
+<p>It will be auto formatted after leaving insert mode,
+or pressing <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> in insert mode.</p>
+</li>
+</ul>
+<p><strong>Insert Mode Only:</strong></p>
+<ul>
+<li><p>Inside the Table</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>Grid Table (No column or row span supported yet)</p></td>
+</tr>
+<tr class="row-even"><td><p>Lines</p></td>
+<td><ul class="simple">
+<li><p>&lt;Enter&gt; in column to add a new line</p></li>
+<li><p>This is the second line of in same row of table.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Rows</p></td>
+<td><ul class="simple">
+<li><p>&lt;C-Enter&gt; to add a separator and a new row</p></li>
+<li><p>&lt;C-S-Enter&gt; to add a header seperator and a new row
+(There could be only one header seperator in a table)</p></li>
+<li><p>&lt;S-Enter&gt; to jump to next line</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Cell</p></td>
+<td><ul class="simple">
+<li><p>&lt;C-E&gt;tn or &lt;Tab&gt; or RivTableNextCell, jump to next cell</p></li>
+<li><p>&lt;C-E&gt;tp or &lt;S-Tab&gt; or RivTablePrevCell, jump to prev cell</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Multi</p></td>
+<td><ul class="simple">
+<li><p>Multi Byte characters are OK</p></li>
+<li><p>一二三四五  かきくけこ</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>See <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#grid-tables">Grid Tables</a> for syntax details.</p>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>As <code class="docutils literal notranslate"><span class="pre">visual-block</span> <span class="pre">insert</span></code> be overrided and could not be used in
+a table.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">visual-block</span> <span class="pre">Replace</span></code> instead. see <code class="docutils literal notranslate"><span class="pre">:h</span> <span class="pre">v_b_r</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><p>Simple Table:</p>
+<p>Highlighted and folded.
+When folded, the numbers of rows and columns will be shown as ‘3+2’</p>
+<p>No auto formatting.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p>A Simple Table</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Col 1</p></th>
+<th class="head"><p>Col 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>row 1</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>row 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><ul class="simple">
+<li><p>first line row 3</p></li>
+<li><p>second line of row 3</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#simple-tables">Simple Tables</a> for syntax details.</p>
+</li>
+</ul>
+</section>
+<section id="publish">
+<h4>Publish<a class="headerlink" href="#publish" title="Permalink to this heading">¶</a></h4>
+<p>Convert rst files to html/xml/latex/odt/…
+(Some command wrapper, <a class="reference external" href="http://docutils.sourceforge.net/">docutils</a> required)</p>
+<ul>
+<li><p>Commands:</p>
+<ul>
+<li><p>Convert to Html</p>
+<ul>
+<li><p><a class="reference internal" href="#rivprojecthtmlindex">:RivProjectHtmlIndex</a>  <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;wi</span></code>
+browse the html index page.</p></li>
+<li><p><a class="reference internal" href="#riv2htmlfile">:Riv2HtmlFile</a>  <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2hf</span></code>
+convert to html file.</p></li>
+<li><p><a class="reference internal" href="#riv2htmlandbrowse">:Riv2HtmlAndBrowse</a>  <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2hh</span></code>
+convert to html file and browse.
+Default is ‘firefox’</p>
+<p>The browser is set by <a class="reference internal" href="#g-riv-web-browser">g:riv_web_browser</a>, default is <code class="docutils literal notranslate"><span class="pre">firefox</span></code></p>
+</li>
+<li><p><a class="reference internal" href="#riv2htmlproject">:Riv2HtmlProject</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2hp</span></code> converting whole project into html.
+And will ask you to copy all the file with extension in ‘<a class="reference internal" href="#g-riv-file-link-ext">g:riv_file_link_ext</a>’</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#riv2odt">:Riv2Odt</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2oo</span></code> convert to odt file and browse by ft browser</p>
+<p>The file browser is set with ‘<a class="reference internal" href="#g-riv-ft-browser">g:riv_ft_browser</a>’.</p>
+</li>
+<li><p><a class="reference internal" href="#riv2xml">:Riv2Xml</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2xx</span></code> convert to xml file and browse by web browser</p></li>
+<li><p><a class="reference internal" href="#riv2s5">:Riv2S5</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2ss</span></code> convert to s5 file and browse by web browser</p></li>
+<li><p><a class="reference internal" href="#riv2latex">:Riv2Latex</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2ll</span></code> convert to latex file and edit in vim</p></li>
+<li><p><a class="reference internal" href="#riv2pdf">:Riv2Pdf</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2pp</span></code> convert to latex file and then convert to pdf file.</p></li>
+</ul>
+</li>
+<li><p>Options:</p>
+<ul>
+<li><p>If you have installed <a class="reference external" href="http://pygments.org/">Pygments</a> , code will be highlighted
+in html , as the syntax highlight style sheet have been embedded
+in it by Riv.</p>
+<p>You can change the style sheet with ‘<a class="reference internal" href="#g-riv-html-code-hl-style">g:riv_html_code_hl_style</a>’</p>
+<ul class="simple">
+<li><p>Syntax highlight for other formatting are not supported yet.</p></li>
+</ul>
+</li>
+<li><p>Some misc changing have been done on the style sheet for better view in html.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">literal</span></code> and <code class="docutils literal notranslate"><span class="pre">literal-block</span></code>’s background have been set to ‘#eeeeee’.</p>
+</li>
+<li><p>To add some args while converting.</p>
+<p><a class="reference internal" href="#g-riv-rst2html-args">g:riv_rst2html_args</a> , <a class="reference internal" href="#g-riv-rst2latex-args">g:riv_rst2latex_args</a> and Etc. can be used.</p>
+</li>
+<li><p>Output files path</p>
+<ul>
+<li><p>For the files that are in a project.
+The path of converted files by default is under <code class="docutils literal notranslate"><span class="pre">build_path</span></code> of your project directory.</p>
+<ol class="arabic">
+<li><p>Default is <code class="docutils literal notranslate"><span class="pre">_build</span></code></p></li>
+<li><p>To change the path. Set it in your vimrc:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot; Assume you have a project name project 1</span>
+<span class="n">let</span> <span class="n">project1</span><span class="o">.</span><span class="n">build_path</span> <span class="o">=</span> <span class="s1">&#39;~/Documents/Riv_Build&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open the build path: <a class="reference internal" href="#riv2buildpath">:Riv2BuildPath</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;2b</span></code></p></li>
+<li><p>Local file link converting will be done.
+See <a class="reference internal" href="#local-file-link-converting">local file link converting</a> for details.</p></li>
+<li><p>Set <a class="reference internal" href="#g-riv-auto-rst2html">g:riv_auto_rst2html</a> to 1 to automatic convert after writing.
+only project file are auto converted.</p></li>
+</ol>
+</li>
+<li><p>For the files that not in a project.
+‘<a class="reference internal" href="#g-riv-temp-path">g:riv_temp_path</a>’ is used to determine the output path</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>When converting, It will first try <code class="docutils literal notranslate"><span class="pre">rst2xxxx2.py</span></code> , then try <code class="docutils literal notranslate"><span class="pre">rst2xxxx.py</span></code></p>
+<p>You’d better install the package of python 2 version.</p>
+<p>And make sure it’s in your <code class="docutils literal notranslate"><span class="pre">$PATH</span></code></p>
+<p>Otherwise errors may occur as py3 version uses ‘bytes’.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="riv">
+<h3>Riv<a class="headerlink" href="#riv" title="Permalink to this heading">¶</a></h3>
+<p>Following features provides more functions for rst documents.</p>
+<ul class="simple">
+<li><p>You can change some setting for a better working with <a class="reference internal" href="#sphinx">Sphinx</a>.</p></li>
+<li><p><a class="reference internal" href="#project">Project</a>, <a class="reference internal" href="#scratch">Scratch</a>, <a class="reference internal" href="#helpers">Helpers</a> are extra function for managing rst documents.</p></li>
+<li><p><a class="reference internal" href="#file">File</a>, <a class="reference internal" href="#todos">Todos</a> are extended syntax items for writing rst document.</p></li>
+</ul>
+<section id="sphinx">
+<h4>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this heading">¶</a></h4>
+<p>Riv can work with Sphinx (see <a class="reference external" href="http://sphinx.pocoo.org/">Sphinx Home</a> ).</p>
+<ul>
+<li><p>For now, you can use Cross-referencing document <code class="docutils literal notranslate"><span class="pre">:doc:`xxx`</span></code>
+and downloadable file <code class="docutils literal notranslate"><span class="pre">:download:`xxx`</span></code> to jump to that document.
+With setting <cite>g:riv_file_link_style</cite> to 2.</p>
+<p>The Cross-referencing arbitrary locations <code class="docutils literal notranslate"><span class="pre">:ref:`xxx`</span></code>
+are not supported yet.</p>
+</li>
+<li><p>To work with other master_doc and source_suffix,
+like ‘main.txt’ instead of ‘index.rst’</p>
+<p>Define the global ‘<a class="reference internal" href="#g-riv-master-doc">g:riv_master_doc</a>’ and ‘<a class="reference internal" href="#g-riv-source-suffix">g:riv_source_suffix</a>’
+or define ‘master_doc’ and ‘source_suffix’ in your project.</p>
+</li>
+<li><p>There are no wrapper for making command of Sphinx.
+You should use <code class="docutils literal notranslate"><span class="pre">:make</span> <span class="pre">html</span></code> by your own.</p>
+<p>And you can view the index page by <a class="reference internal" href="#rivprojecthtmlindex">:RivProjectHtmlIndex</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;wi</span></code></p>
+</li>
+</ul>
+</section>
+<section id="project">
+<h4>Project<a class="headerlink" href="#project" title="Permalink to this heading">¶</a></h4>
+<p>Project is a place to hold your rst documents.</p>
+<p>Though you can edit reStructuredText documents anywhere.
+There are some convenience with projects.</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#file">File</a></dt><dd><p>Write documents and navigating with local file link.</p>
+</dd>
+<dt><a class="reference internal" href="#publish">Publish</a></dt><dd><p>Convert whole project to html, and view them as wiki.</p>
+</dd>
+<dt><a class="reference internal" href="#todos">Todos</a></dt><dd><p>Manage all the todo items in a project</p>
+</dd>
+<dt><a class="reference internal" href="#scratch">Scratch</a></dt><dd><p>Writing diary in a project</p>
+</dd>
+</dl>
+<ul>
+<li><p>Global Commands:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rivprojectindex">:RivProjectIndex</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ww</span></code> to open the first project index.</p></li>
+<li><p><a class="reference internal" href="#rivprojectlist">:RivProjectList</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;wa</span></code> to choose one project to open.</p></li>
+<li><p><a class="reference internal" href="#rivprojecthtmlindex">:RivProjectHtmlIndex</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;wi</span></code> Browse project html index.</p></li>
+</ul>
+</li>
+<li><p>All projects are in <a class="reference internal" href="#g-riv-projects">g:riv_projects</a>,</p>
+<ul>
+<li><p>Define a project with a dictionary of options,
+If not defined, it will have the default value</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">project1</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="s1">&#39;My Working Notes&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;~/Dropbox/rst&#39;</span><span class="p">,}</span>
+<span class="n">let</span> <span class="n">g</span><span class="p">:</span><span class="n">riv_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">project1</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>To add multiple projects</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">project2</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;~/Dropbox/rst2&#39;</span><span class="p">,}</span>
+<span class="n">let</span> <span class="n">g</span><span class="p">:</span><span class="n">riv_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">project1</span><span class="p">,</span> <span class="n">project2</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>if you are editing a rst document outside
+a project.</p>
+<p>It’s settings will using the first one.</p>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="file">
+<h4>File<a class="headerlink" href="#file" title="Permalink to this heading">¶</a></h4>
+<p>The link to edit local files.  <code class="docutils literal notranslate"><span class="pre">non-reStructuredText</span> <span class="pre">syntax</span></code></p>
+<p>As reStructuredText haven’t define a pattern for local files currently.</p>
+<p>Riv provides some convenient way to link to other local files in
+the rst documents.</p>
+<ul>
+<li><p>For linking with local file in vim easily,
+The filename with extension ,
+like <code class="docutils literal notranslate"><span class="pre">xxx.rst</span></code>  <code class="docutils literal notranslate"><span class="pre">~/Documents/xxx.py</span></code>,
+will be highlighted and linked, only in vim.</p>
+<p>And you can disable highlighting it with
+setting ‘<a class="reference internal" href="#g-riv-file-ext-link-hl">g:riv_file_ext_link_hl</a>’ to 0.</p>
+</li>
+<li><p>Using Rst’s default HyperLink syntax to link local files.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xxx</span><span class="o">.</span><span class="n">rst_</span>
+<span class="n">Dir</span>
+
+<span class="o">..</span> <span class="n">_xxx</span><span class="o">.</span><span class="n">rst</span><span class="p">:</span> <span class="n">xxx</span><span class="o">.</span><span class="n">rst</span>
+<span class="o">..</span> <span class="n">_Dir</span><span class="p">:</span> <span class="n">Dir</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">:RivCreateLink</span></code> (<code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ck</span></code>) command are optimized to simplify working with them.</p>
+<p>You can type a <code class="docutils literal notranslate"><span class="pre">xxx.rst</span></code> or <code class="docutils literal notranslate"><span class="pre">Dir/</span></code> then use the command to make a link.</p>
+<p>For Simpify using, The local file links with
+<a class="reference internal" href="#g-riv-file-link-ext">g:riv_file_link_ext</a> will be auto opened in vim with
+<code class="docutils literal notranslate"><span class="pre">&lt;2-Leftmouse&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;CR&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">:RivLinkOpen</span></code>
+if <a class="reference internal" href="#g-riv-open-link-location">g:riv_open_link_location</a> is set to 1.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">:RivLinkShow</span></code> to move to the location only.</p>
+<p>Also, The <code class="docutils literal notranslate"><span class="pre">xxx.rst</span></code> will be changed to <code class="docutils literal notranslate"><span class="pre">xxx.html</span></code> when convert to html</p>
+</li>
+<li><p>WARNING! This method is deprecated! Use rst’s normal link</p>
+<p>Two types for linking file while converting to other format.
+(works for document in project only.)</p>
+<dl class="field-list">
+<dt class="field-odd">MoinMoin<span class="colon">:</span></dt>
+<dd class="field-odd"><p>use <code class="docutils literal notranslate"><span class="pre">[[xxx]]</span></code> to link to a local file.</p>
+</dd>
+<dt class="field-even">Sphinx<span class="colon">:</span></dt>
+<dd class="field-even"><p>use <code class="docutils literal notranslate"><span class="pre">:doc:`xxx`</span></code> and <code class="docutils literal notranslate"><span class="pre">:download:`xxx.rst`</span></code> to link to local
+file and local document.</p>
+<p>See <a class="reference external" href="http://sphinx.pocoo.org/markup/inline.html#role-doc">Sphinx_Role_Doc</a>.</p>
+<p>It will be not changed to link with Riv.
+You’d better use it with Sphinx’s tool set.</p>
+</dd>
+</dl>
+<ul>
+<li><p>You can switch style with ‘<a class="reference internal" href="#g-riv-file-link-style">g:riv_file_link_style</a>’</p>
+<ul>
+<li><p>when set to 1, <code class="docutils literal notranslate"><span class="pre">MoinMoin</span></code>:</p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">[[xxx]]</span></code> <code class="docutils literal notranslate"><span class="pre">[[xxx.vim]]</span></code> will be detected as file link.</p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">[[xxx/]]'</span> <span class="pre">will</span> <span class="pre">link</span> <span class="pre">to</span> <span class="pre">``xxx/index.rst</span></code></p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">[[/xxxx/xxx.rst]]</span></code>
+will link to <code class="docutils literal notranslate"><span class="pre">DOC_ROOT/xxx/xxx.rst</span></code></p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">[[~/xxx/xxx.rst]]</span></code>  <code class="docutils literal notranslate"><span class="pre">[[x:/xxx/xxx.rst]]</span></code>
+will be considered as external file links</p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">[[/xxxx/xxx/]]</span></code> <code class="docutils literal notranslate"><span class="pre">[[~/xxx/xxx/]]</span></code>
+will be considered as external directory links,
+and link to the directory.</p>
+</li>
+<li><p>when set to 2, <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code>:</p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">:doc:`xxx.rst`</span></code> <code class="docutils literal notranslate"><span class="pre">:doc:`xxx.py`</span></code> <code class="docutils literal notranslate"><span class="pre">:doc:`xxx.cpp`</span></code> will be detected as file link.</p>
+<p>NOTE: words like <code class="docutils literal notranslate"><span class="pre">:doc:`xxx/`</span></code> are illegal in sphinx, You should use <code class="docutils literal notranslate"><span class="pre">:doc:`xxx/index`</span></code>  ,
+and link to <code class="docutils literal notranslate"><span class="pre">xxx/index.rst</span></code></p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">:doc:`/xxxx/xxx.rst`</span></code>
+will link to <code class="docutils literal notranslate"><span class="pre">DOC_ROOT/xxxx/xxx.rst</span></code></p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">:download:`~/xxx/xxx.py`</span></code> <code class="docutils literal notranslate"><span class="pre">:download:`/xxx/xxx.py`</span></code> <code class="docutils literal notranslate"><span class="pre">:download:`x:/xxx.rst`</span></code>
+will be considered as external file links</p>
+<p>Words like <code class="docutils literal notranslate"><span class="pre">:download:`~/xxx/xxx/`</span></code>
+will be considered as external directory links,
+and link to the directory.</p>
+<p>You can add other extensions with ‘<a class="reference internal" href="#g-riv-file-link-ext">g:riv_file_link_ext</a>’.</p>
+</li>
+<li><p>when set to 0, no local file link.</p></li>
+<li><p>default is 1.</p></li>
+</ul>
+</li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Difference between extension and link style.</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">[[/xxx]]</span></code> and <code class="docutils literal notranslate"><span class="pre">:doc:`/xxx`</span></code>
+are linked to Document Root <code class="docutils literal notranslate"><span class="pre">DOC_ROOT/xxx.rst</span></code>
+both with MoinMoin and sphinx style(?).</p>
+<p>But the <code class="docutils literal notranslate"><span class="pre">/xxx/xxx.rst</span></code> detected with extension
+will be linked to <code class="docutils literal notranslate"><span class="pre">/xxx/xxx.rst</span></code> in your disk</p>
+</dd>
+</dl>
+</li>
+<li><p>The file links are highlighted. See <a class="reference internal" href="#cursor-highlighting">Cursor Highlighting</a></p></li>
+<li><p>To delete a local file in project.</p>
+<p><a class="reference internal" href="#rivdeletefile">:RivDeleteFile</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;df</span></code>
+it will also delete all reference to this file in <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> of the directory.</p>
+</li>
+</ul>
+<section id="local-file-link-converting">
+<h5>Local File Link Converting<a class="headerlink" href="#local-file-link-converting" title="Permalink to this heading">¶</a></h5>
+<p>As the local file link is not the default syntax in reStructuredText.
+The links need converting before <a class="reference internal" href="#publish">Publish</a>.</p>
+<p>And it’s only converted for rst file in a <a class="reference internal" href="#project">Project</a>.</p>
+<p>Those detected local file link will be converted to an embedded link.
+in this form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`xxx.rst &lt;xxx.html&gt;`_ `xxx.py &lt;xxx.py&gt;`_
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">NOTE<span class="colon">:</span></dt>
+<dd class="field-odd"><p>link converting in a table will make the table error format.
+So you’d better convert it to a link manually.
+Use <a class="reference internal" href="#rivcreatelink">:RivCreateLink</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ck</span></code> to
+create it manually.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">rst_</span>
+
+<span class="o">..</span> <span class="n">_file</span><span class="o">.</span><span class="n">rst</span><span class="p">::</span> <span class="n">file</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>For now it’s overhead with substitute by a temp file.
+A parser for <a class="reference external" href="http://docutils.sourceforge.net/">docutils</a> is needed in the future.</p>
+<p>And for <a class="reference internal" href="#sphinx">Sphinx</a> users.
+You should use Sphinx’s tool set to convert it.</p>
+</section>
+</section>
+<section id="scratch">
+<h4>Scratch<a class="headerlink" href="#scratch" title="Permalink to this heading">¶</a></h4>
+<p>Scratch is a place for writing diary or notes.</p>
+<ul>
+<li><p><a class="reference internal" href="#rivscratchcreate">:RivScratchCreate</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;sc</span></code>
+Create or jump to the scratch of today.</p>
+<p>Scratches are created auto named by date in ‘%Y-%m-%d’ format.</p>
+</li>
+<li><p><a class="reference internal" href="#rivscratchview">:RivScratchView</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;sv</span></code>
+View Scratch index.</p>
+<p>The index is auto created. Separate scratches by years and month</p>
+<p>You can change the month name using
+‘<a class="reference internal" href="#g-riv-month-names">g:riv_month_names</a>’.</p>
+</li>
+</ul>
+<p>Scratches will be put in scratch folder in project directory.
+You can change it with ‘scratch_path’ of project setting ,default is ‘Scratch’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot; Use another directory</span>
+<span class="n">let</span> <span class="n">project1</span><span class="o">.</span><span class="n">scratch_path</span> <span class="o">=</span> <span class="s1">&#39;Diary&#39;</span>
+<span class="s2">&quot; Use absolute path, then no todo helper and no converting for it.</span>
+<span class="n">let</span> <span class="n">project1</span><span class="o">.</span><span class="n">scratch_path</span> <span class="o">=</span> <span class="s1">&#39;~/Documents/Diary&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="todos">
+<h4>Todos<a class="headerlink" href="#todos" title="Permalink to this heading">¶</a></h4>
+<p>Todo items to keep track of todo things.  <code class="docutils literal notranslate"><span class="pre">non-reStructuredText</span> <span class="pre">syntax</span></code></p>
+<p>It is Todo-box or Todo-keywords in a bullet/enumerated/field list.</p>
+<ul>
+<li><p>Todo Box:</p>
+<ul class="simple">
+<li><p>[ ] This is a todo item of initial state.</p></li>
+<li><p>[o] This is a todo item that’s in progress.</p></li>
+<li><p>[X] This is a todo item that’s finished.</p></li>
+<li><p>You can change the todo box item by ‘<a class="reference internal" href="#g-riv-todo-levels">g:riv_todo_levels</a>’ ,</p></li>
+</ul>
+</li>
+<li><p>Todo Keywords:</p>
+<p>Todo Keywords are also supported</p>
+<ul class="simple">
+<li><p>FIXED A todo item of FIXME/FIXED keyword group.</p></li>
+<li><p>DONE 2012-06-13 ~ 2012-06-23 A todo item of TODO/DONE keyword group.</p></li>
+<li><p>START A todo item of START/PROCESS/STOP keyword group.</p></li>
+<li><p>You can define your own keyword group for todo items with ‘<a class="reference internal" href="#g-riv-todo-keywords">g:riv_todo_keywords</a>’</p></li>
+</ul>
+</li>
+<li><p>Date stamps:</p>
+<p>Todo item’s start or end date.</p>
+<ul>
+<li><p>[X] 2012-06-23 A todo item with date stamp</p></li>
+<li><p>Double Click or <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or <a class="reference internal" href="#rivtododate">:RivTodoDate</a> on a date stamp to change date.</p>
+<p>If you have <a class="reference external" href="https://github.com/mattn/calendar-vim">Calendar</a> installed , it will use it to choose date.</p>
+</li>
+<li><p>It is controlled by ‘<a class="reference internal" href="#g-riv-todo-datestamp">g:riv_todo_datestamp</a>’</p>
+<ul class="simple">
+<li><p>when set to 0 , no date stamp</p></li>
+<li><p>when set to 1 , no initial date stamp ,
+will add a finish date stamp when it’s done.</p>
+<ol class="arabic simple">
+<li><p>[X] 2012-06-23 This is a todo item with finish date stamp,</p></li>
+</ol>
+</li>
+<li><p>when set to 2 , will initial with a start date stamp.
+And when it’s done , will add a finish date stamp.</p>
+<ol class="arabic simple">
+<li><p>[ ] 2012-06-23 This is a todo item with start date stamp</p></li>
+<li><p>[X] 2012-06-23 ~ 2012-06-23  A todo item with both start and finish date stamp.</p></li>
+</ol>
+</li>
+<li><p>Default is 1</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Priorities:</p>
+<p>The Priorities of todo item</p>
+<ul class="simple">
+<li><p>[ ] [#A] a todo item of priority A</p></li>
+<li><p>[ ] [#C] a todo item of priority C</p></li>
+<li><p>Double Click or <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or <a class="reference internal" href="#rivtodoprior">:RivTodoPrior</a> on priority item
+to change priority.</p></li>
+<li><p>You can define the priority chars by ‘<a class="reference internal" href="#g-riv-todo-priorities">g:riv_todo_priorities</a>’</p></li>
+</ul>
+</li>
+<li><p>Actions:</p>
+<p>Add Todo Item</p>
+<ul>
+<li><p>Use <a class="reference internal" href="#rivtodotoggle">:RivTodoToggle</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ee</span></code> to add or switch the todo progress.</p>
+<p>Change default todo group by ‘<a class="reference internal" href="#g-riv-todo-default-group">g:riv_todo_default_group</a>’</p>
+</li>
+<li><p>Use <a class="reference internal" href="#rivtodotype1">:RivTodoType1</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;e1</span></code> … <a class="reference internal" href="#rivtodotype4">:RivTodoType4</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;e4</span></code>
+to add or change the todo item by group.</p></li>
+<li><p>Use <a class="reference internal" href="#rivtodoask">:RivTodoAsk</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;e`</span></code> will show an keyword group list to choose.</p></li>
+</ul>
+<p>Change Todo Status</p>
+<ul class="simple">
+<li><p>Double Click or <code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> in the box/keyword to switch the todo progress.</p></li>
+</ul>
+<p>Delete Item</p>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="#rivtododel">:RivTodoDel</a> <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ex</span></code> to delete the whole todo item</p></li>
+</ul>
+<p>Helper</p>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="#rivhelptodo">:RivHelpTodo</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ht</span></code> to open a <a class="reference internal" href="#todo-helper">Todo Helper</a></p></li>
+</ul>
+</li>
+<li><p>Folding Info:</p>
+<p>When list is folded.
+The statistics of the child items (or this item) todo progress will be shown.</p>
+</li>
+<li><p>Highlights:</p>
+<p>Todo items are highlighted.</p>
+<p>As it’s not the reStructuredText syntax.
+So highlighted in vim only.</p>
+<p>When cursor are in a Todo Item , current item will be highlighted.</p>
+</li>
+</ul>
+</section>
+<section id="helpers">
+<h4>Helpers<a class="headerlink" href="#helpers" title="Permalink to this heading">¶</a></h4>
+<p>A window for helping project management.</p>
+<ul>
+<li><p>Basic Commands:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> to enter search mode.
+Search item matching inputing,
+<code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;Esc&gt;</span></code> to quit search mode.</p>
+<p>Set ‘<a class="reference internal" href="#g-riv-fuzzy-help">g:riv_fuzzy_help</a>’ to 1 to enable fuzzy searching in helper.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> to switch content,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Enter&gt;</span></code> or Double Click to jump to the item.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;Esc&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit the window</p>
+<p>Set ‘<a class="reference internal" href="#g-riv-todo-helper-ignore-done">g:riv_todo_helper_ignore_done</a>’ to 1 to ignore TODOs that are marked
+as DONE in the display.</p>
+</li>
+</ul>
+</li>
+</ul>
+<section id="todo-helper">
+<h5>Todo Helper<a class="headerlink" href="#todo-helper" title="Permalink to this heading">¶</a></h5>
+<p>A helper to manage todo items of current project.
+When current document is not in a project, will show current file’s todo items.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rivhelptodo">:RivHelpTodo</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;ht</span></code>
+Open Todo Helper.
+Default is in search mode.</p></li>
+</ul>
+</section>
+<section id="file-helper">
+<h5>File Helper<a class="headerlink" href="#file-helper" title="Permalink to this heading">¶</a></h5>
+<p>A helper to show rst files of current directory.</p>
+<p>Also indicating following files if exists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;ROOT&#39;</span><span class="p">:</span> <span class="s1">&#39;RT&#39;</span> <span class="n">Root</span> <span class="n">of</span> <span class="n">project</span>
+<span class="s1">&#39;INDX&#39;</span><span class="p">:</span> <span class="s1">&#39;IN&#39;</span> <span class="n">Index</span> <span class="n">of</span> <span class="n">current</span> <span class="n">directory</span>
+<span class="s1">&#39;CURR&#39;</span><span class="p">:</span> <span class="s1">&#39;CR&#39;</span> <span class="n">Current</span> <span class="n">file</span>
+<span class="s1">&#39;PREV&#39;</span><span class="p">:</span> <span class="s1">&#39;PR&#39;</span> <span class="n">Previous</span> <span class="n">file</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rivhelpfile">:RivHelpFile</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;hf</span></code>
+Open File Helper.
+Default is in normal mode.</p></li>
+</ul>
+</section>
+<section id="section-helper">
+<h5>Section Helper<a class="headerlink" href="#section-helper" title="Permalink to this heading">¶</a></h5>
+<p>A helper showing current document section numbers</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rivhelpsection">:RivHelpSection</a> or <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;hs</span></code>
+Open Section Helper.
+Default is in normal mode.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">¶</a></h2>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this heading">¶</a></h3>
+<ul>
+<li><p>Default leader map for Riv is <code class="docutils literal notranslate"><span class="pre">&lt;C-E&gt;</span></code>.
+You can change it by ‘<a class="reference internal" href="#g-riv-global-leader">g:riv_global_leader</a>’</p></li>
+<li><p>To remap a single mapping, use <code class="docutils literal notranslate"><span class="pre">map</span></code> in your vimrc:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">map</span> <span class="o">&lt;</span><span class="n">C</span><span class="o">-</span><span class="n">E</span><span class="o">&gt;</span><span class="n">wi</span>    <span class="p">:</span><span class="n">RivIndex</span><span class="o">&lt;</span><span class="n">CR</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>All commands can be executed by <code class="docutils literal notranslate"><span class="pre">:{cmd}</span></code>.
+For example: <code class="docutils literal notranslate"><span class="pre">:RivIndex</span></code> to open the default Project Index.</p></li>
+<li><p>You can use menu to view the commands Shortcut either.
+<code class="docutils literal notranslate"><span class="pre">:popup</span> <span class="pre">Riv</span></code> Can be used when you not showing the menu bar.</p></li>
+<li><p><strong>Global</strong></p>
+<ul>
+<li><p><span class="target" id="rivprojectindex">:RivProjectIndex</span> : Open the default Riv project index in vim.</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;ww,&lt;C-E&gt;&lt;C-W&gt;&lt;C-W&gt;</p>
+</li>
+<li><p><span class="target" id="rivprojectlist">:RivProjectList</span> : Show Riv project list.</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;wa,&lt;C-E&gt;&lt;C-W&gt;&lt;C-A&gt;</p>
+</li>
+<li><p><span class="target" id="rivprojecthtmlindex">:RivProjectHtmlIndex</span> : Browse project html index.</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;wi,&lt;C-E&gt;&lt;C-W&gt;&lt;C-I&gt;</p>
+</li>
+<li><p><span class="target" id="rivscratchcreate">:RivScratchCreate</span> : Create Or Edit Scratch of today.</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;sc,&lt;C-E&gt;&lt;C-S&gt;&lt;C-C&gt;</p>
+</li>
+<li><p><span class="target" id="rivscratchview">:RivScratchView</span> : View The Index of Scratch Directory</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;sv,&lt;C-E&gt;&lt;C-S&gt;&lt;C-V&gt;</p>
+</li>
+</ul>
+</li>
+<li><p><strong>View</strong></p>
+<ul>
+<li><p><span class="target" id="rivfoldtoggle">:RivFoldToggle</span> : Toggle Fold</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;&lt;Space&gt;&lt;Space&gt;</p>
+</li>
+<li><p><span class="target" id="rivfoldall">:RivFoldAll</span> : Toggle all folding</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;&lt;Space&gt;a</p>
+</li>
+<li><p><span class="target" id="rivfoldupdate">:RivFoldUpdate</span> : Update Folding</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;&lt;Space&gt;u</p>
+</li>
+<li><p><span class="target" id="rivlinkopen">:RivLinkOpen</span> : Open Link under Cursor</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;ko</p>
+</li>
+<li><p><span class="target" id="rivlinkshow">:RivLinkShow</span> : Move cursor to the link target.</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;ks</p>
+</li>
+<li><p><span class="target" id="rivlinknext">:RivLinkNext</span> : Jump to Next Link</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;kn,&lt;TAB&gt;</p>
+</li>
+<li><p><span class="target" id="rivlinkprev">:RivLinkPrev</span> : Jump to Prev Linx</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;kp,&lt;S-TAB&gt;</p>
+</li>
+<li><p><span class="target" id="rivshiftright">:RivShiftRight</span> : Shift Right with level and indent adjustment.</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;l&gt;,&gt;,&lt;C-ScrollwheelDown&gt;</p>
+</li>
+<li><p><span class="target" id="rivshiftleft">:RivShiftLeft</span> : Shift Left with level and indent adjustment.</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;l&lt;,&lt;,&lt;C-ScrollwheelUp&gt;</p>
+</li>
+<li><p><span class="target" id="rivshiftequal">:RivShiftEqual</span> : Format List level</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;l=,=</p>
+</li>
+<li><p><span class="target" id="rivnormright">:RivNormRight</span> : Normal Shift Right</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;&gt;,&lt;S-ScrollwheelDown&gt;</p>
+</li>
+<li><p><span class="target" id="rivnormleft">:RivNormLeft</span> : Normal Shift Left</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;&lt;lt&gt;,&lt;S-ScrollwheelUp&gt;</p>
+</li>
+<li><p><span class="target" id="rivnormequal">:RivNormEqual</span> : Normal Equal</p>
+<p><strong>Normal,Visual</strong> : &lt;C-E&gt;=</p>
+</li>
+<li><p><span class="target" id="rivitemclick">:RivItemClick</span> : Open Link,Toggle item and toggle section folding</p>
+<p><strong>Normal</strong> :        &lt;2-LeftMouse&gt;</p>
+</li>
+<li><p><span class="target" id="rivitemtoggle">:RivItemToggle</span> : Open Link, Toggle item</p>
+<p><strong>Normal</strong> :        &lt;CR&gt;,&lt;KEnter&gt;</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Doc</strong></p>
+<ul>
+<li><p><span class="target" id="rivtitle1">:RivTitle1</span> : Create Type 1 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s1</p>
+</li>
+<li><p><span class="target" id="rivtitle2">:RivTitle2</span> : Create Type 2 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s2</p>
+</li>
+<li><p><span class="target" id="rivtitle3">:RivTitle3</span> : Create Type 3 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s3</p>
+</li>
+<li><p><span class="target" id="rivtitle4">:RivTitle4</span> : Create Type 4 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s4</p>
+</li>
+<li><p><span class="target" id="rivtitle5">:RivTitle5</span> : Create Type 5 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s5</p>
+</li>
+<li><p><span class="target" id="rivtitle6">:RivTitle6</span> : Create Type 6 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s6</p>
+</li>
+<li><p><span class="target" id="rivtitle0">:RivTitle0</span> : Create Type 0 Title</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;s0</p>
+</li>
+<li><p><span class="target" id="rivtablecreate">:RivTableCreate</span> : Create a Table</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;tc</p>
+</li>
+<li><p><span class="target" id="rivtableformat">:RivTableFormat</span> : Format table</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;tf</p>
+</li>
+<li><p><span class="target" id="rivtablenextcell">:RivTableNextCell</span> : Nav to Next Cell</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;tn</p>
+</li>
+<li><p><span class="target" id="rivtableprevcell">:RivTablePrevCell</span> : Nav to Prev Cell</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;tp</p>
+</li>
+<li><p><span class="target" id="rivlistnew">:RivListNew</span> : Create a New List</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ln</p>
+</li>
+<li><p><span class="target" id="rivlistsub">:RivListSub</span> : Create a sub list item</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;lb</p>
+</li>
+<li><p><span class="target" id="rivlistsup">:RivListSup</span> : Create a sup list item</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;lp</p>
+</li>
+<li><p><span class="target" id="rivlisttoggle">:RivListToggle</span> : ToggleList item</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l`</p>
+</li>
+<li><p><span class="target" id="rivlistdelete">:RivListDelete</span> : Delete List item</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;lx</p>
+</li>
+<li><p><span class="target" id="rivlisttype0">:RivListType0</span> : Create a List type 0</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l1</p>
+</li>
+<li><p><span class="target" id="rivlisttype1">:RivListType1</span> : Create a List type 1</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l2</p>
+</li>
+<li><p><span class="target" id="rivlisttype2">:RivListType2</span> : Create a List type 2</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l3</p>
+</li>
+<li><p><span class="target" id="rivlisttype3">:RivListType3</span> : Create a List type 3</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l4</p>
+</li>
+<li><p><span class="target" id="rivlisttype4">:RivListType4</span> : Create a List type 4</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;l5</p>
+</li>
+<li><p><span class="target" id="rivtodotoggle">:RivTodoToggle</span> : Toggle Todo item’s status</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ee</p>
+</li>
+<li><p><span class="target" id="rivtododel">:RivTodoDel</span> : Del Todo Item</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ex</p>
+</li>
+<li><p><span class="target" id="rivtododate">:RivTodoDate</span> : Change Date stamp under cursor</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ed</p>
+</li>
+<li><p><span class="target" id="rivtodoprior">:RivTodoPrior</span> : Change Todo Priorties</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ep</p>
+</li>
+<li><p><span class="target" id="rivtodoask">:RivTodoAsk</span> : Show the todo group list</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;e`</p>
+</li>
+<li><p><span class="target" id="rivtodotype1">:RivTodoType1</span> : Change to group 1</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;e1</p>
+</li>
+<li><p><span class="target" id="rivtodotype2">:RivTodoType2</span> : Change to group 2</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;e2</p>
+</li>
+<li><p><span class="target" id="rivtodotype3">:RivTodoType3</span> : Change to group 3</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;e3</p>
+</li>
+<li><p><span class="target" id="rivtodotype4">:RivTodoType4</span> : Change to group 4</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;e4</p>
+</li>
+<li><p><span class="target" id="rivtodoupdatecache">:RivTodoUpdateCache</span> : Update Todo cache</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;uc</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Edit</strong></p>
+<ul>
+<li><p><span class="target" id="rivcreatelink">:RivCreateLink</span> : Create Link based on current word</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ck</p>
+</li>
+<li><p><span class="target" id="rivcreatefoot">:RivCreateFoot</span> : Create Footnote</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cf</p>
+</li>
+<li><p><span class="target" id="rivcreatedate">:RivCreateDate</span> : Insert Current Date</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cdd</p>
+</li>
+<li><p><span class="target" id="rivcreatetime">:RivCreateTime</span> : Insert Current time</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cdt</p>
+</li>
+<li><p><span class="target" id="rivcreatecontent">:RivCreateContent</span> : Insert Content Table</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;cc</p>
+</li>
+<li><p><span class="target" id="rivcreateemphasis">:RivCreateEmphasis</span> : Emphasis</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ce</p>
+</li>
+<li><p><span class="target" id="rivcreatestrong">:RivCreateStrong</span> : Strong</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cs</p>
+</li>
+<li><p><span class="target" id="rivcreateinterpreted">:RivCreateInterpreted</span> : Interpreted</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ci</p>
+</li>
+<li><p><span class="target" id="rivcreateliteralinline">:RivCreateLiteralInline</span> : LiteralInline</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cl</p>
+</li>
+<li><p><span class="target" id="rivcreateliteralblock">:RivCreateLiteralBlock</span> : LiteralBlock</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cb</p>
+</li>
+<li><p><span class="target" id="rivcreatehyperlink">:RivCreateHyperLink</span> : HyperLink</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;ch</p>
+</li>
+<li><p><span class="target" id="rivcreatetransition">:RivCreateTransition</span> : Transition</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cr</p>
+</li>
+<li><p><span class="target" id="rivcreateexplicitmark">:RivCreateExplicitMark</span> : ExplicitMark</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;cm</p>
+</li>
+<li><p><span class="target" id="rivdeletefile">:RivDeleteFile</span> : Delete Current File</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;df</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Miscs</strong></p>
+<ul>
+<li><p><span class="target" id="riv2htmlfile">:Riv2HtmlFile</span> : Convert to html</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2hf</p>
+</li>
+<li><p><span class="target" id="riv2htmlandbrowse">:Riv2HtmlAndBrowse</span> : Convert to html and browse current file</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2hh</p>
+</li>
+<li><p><span class="target" id="riv2htmlproject">:Riv2HtmlProject</span> : Convert project to html</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2hp</p>
+</li>
+<li><p><span class="target" id="riv2odt">:Riv2Odt</span> : Convert to odt</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2oo</p>
+</li>
+<li><p><span class="target" id="riv2s5">:Riv2S5</span> : Convert to S5</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2ss</p>
+</li>
+<li><p><span class="target" id="riv2xml">:Riv2Xml</span> : Convert to Xml</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2xx</p>
+</li>
+<li><p><span class="target" id="riv2latex">:Riv2Latex</span> : Convert to Latex</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2ll</p>
+</li>
+<li><p><span class="target" id="riv2pdf">:Riv2Pdf</span> : Convert to Pdf</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2pp</p>
+</li>
+<li><p><span class="target" id="riv2buildpath">:Riv2BuildPath</span> : Show Build Path of the project</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;2b</p>
+</li>
+<li><p><span class="target" id="rivreload">:RivReload</span> : Force reload Riv and Current Document</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;t`</p>
+</li>
+<li><p><span class="target" id="rivtestfold0">:RivTestFold0</span> : Test folding time</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;t1</p>
+</li>
+<li><p><span class="target" id="rivtestfold1">:RivTestFold1</span> : Test folding time and foldlevel</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;t2</p>
+</li>
+<li><p><span class="target" id="rivtesttest">:RivTestTest</span> : Test the test</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;t4</p>
+</li>
+<li><p><span class="target" id="rivtestobj">:RivTestObj</span> : Show Test object</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;t3</p>
+</li>
+<li><p><span class="target" id="rivsuperbackspace">:RivSuperBackSpace</span> : Super Backspace</p>
+<p><strong>Insert</strong> :        &lt;C-E&gt;mq,&lt;BS&gt;</p>
+</li>
+<li><p><span class="target" id="rivsupertab">:RivSuperTab</span> : Super Tab</p>
+<p><strong>Insert</strong> :        &lt;C-E&gt;me,&lt;Tab&gt;</p>
+</li>
+<li><p><span class="target" id="rivsuperstab">:RivSuperSTab</span> : Super Shift Tab</p>
+<p><strong>Insert</strong> :        &lt;C-E&gt;mw,&lt;S-Tab&gt;</p>
+</li>
+<li><p><span class="target" id="rivsuperenter">:RivSuperEnter</span> : Super Enter</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;mm,&lt;Enter&gt;,&lt;KEnter&gt;</p>
+</li>
+<li><p><span class="target" id="rivsupercenter">:RivSuperCEnter</span> : Super Ctrl Enter</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;mj,&lt;C-Enter&gt;,&lt;C-KEnter&gt;</p>
+</li>
+<li><p><span class="target" id="rivsupersenter">:RivSuperSEnter</span> : Super Shift Enter</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;mk,&lt;S-Enter&gt;,&lt;S-KEnter&gt;</p>
+</li>
+<li><p><span class="target" id="rivsupermenter">:RivSuperMEnter</span> : Super Alt Enter</p>
+<p><strong>Normal,Insert</strong> : &lt;C-E&gt;mh,&lt;C-S-Enter&gt;,&lt;M-Enter&gt;,&lt;C-S-KEnter&gt;,&lt;M-KEnter&gt;</p>
+</li>
+<li><p><span class="target" id="rivhelptodo">:RivHelpTodo</span> : Show Todo Helper</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;ht,&lt;C-E&gt;&lt;C-h&gt;&lt;C-t&gt;</p>
+</li>
+<li><p><span class="target" id="rivhelpfile">:RivHelpFile</span> : Show File Helper</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;hf,&lt;C-E&gt;&lt;C-h&gt;&lt;C-f&gt;</p>
+</li>
+<li><p><span class="target" id="rivhelpsection">:RivHelpSection</span> : Show Section Helper</p>
+<p><strong>Normal</strong> :        &lt;C-E&gt;hs</p>
+</li>
+<li><p><span class="target" id="rivvimtest">:RivVimTest</span> : Run doctest for Vim Script</p></li>
+<li><p><span class="target" id="rivintro">:RivIntro</span> : Show Riv Intro</p></li>
+<li><p><span class="target" id="rivinstruction">:RivInstruction</span> : Show Riv Instruction</p></li>
+<li><p><span class="target" id="rivquickstart">:RivQuickStart</span> : Show Riv QuickStart</p></li>
+<li><p><span class="target" id="rivprimer">:RivPrimer</span> : Show RST Primer</p></li>
+<li><p><span class="target" id="rivcheatsheet">:RivCheatSheet</span> : Show RST CheatSheet</p></li>
+<li><p><span class="target" id="rivspecification">:RivSpecification</span> : Show RST Specification</p></li>
+<li><p><span class="target" id="rivgetlatest">:RivGetLatest</span> : Show Get Latest Info</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="options">
+<h3>Options<a class="headerlink" href="#options" title="Permalink to this heading">¶</a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Name</strong></p></td>
+<td><p><strong>Description</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Main</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-default">g:riv_default</span></p>
+<p>{…}</p>
+</td>
+<td><p>The dictionary contain all riv runtime variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-projects">g:riv_projects</span></p>
+<p>[]</p>
+</td>
+<td><p>The list contain your project’s settings.</p>
+<p>Defaults are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&#39;path&#39;               : &#39;~/Documents/Riv&#39;
+&#39;build_path&#39;         : &#39;_build&#39;
+&#39;scratch_path&#39;       : &#39;Scratch&#39;
+&#39;source_suffix&#39;      : `g:riv_source_suffix`_
+&#39;master_doc&#39;         : `g:riv_master_doc`_
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#commands">Commands</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-global-leader">g:riv_global_leader</span></p>
+<p>‘&lt;C-E&gt;’</p>
+</td>
+<td><p>Leader map for Riv global mapping.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#file">File</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-master-doc">g:riv_master_doc</span></p>
+<p>‘index’</p>
+</td>
+<td><p>The master rst document for each directory in project.</p>
+<p>You can set it for each project.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-source-suffix">g:riv_source_suffix</span></p>
+<p>‘.rst’</p>
+</td>
+<td><p>The suffix of rst document.</p>
+<p>You can set it for each project.</p>
+<p>Also for all files with the suffix,
+filetype will be set to ‘rst’</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-file-link-ext">g:riv_file_link_ext</span></p>
+<p>‘vim,cpp,c,py,rb,lua,pl’</p>
+</td>
+<td><p>The file link with these extension will be recognized.</p>
+<p>These files will be copied when converting a porject.</p>
+<p>These files along with ,’rst,txt’ and
+source_suffixs used in your project will
+be highlighted.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-open-link-location">g:riv_open_link_location</span>
+1</p></td>
+<td><p>The file link with default extension will be recognized.
+These files will be opened when open it’s link reference</p>
+<p>when set to 0 , will just jump to the link location.</p>
+<p>when set to 1, will open exist files, relative file
+with  <a class="reference internal" href="#g-riv-file-link-ext">g:riv_file_link_ext</a> and links</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-file-ext-link-hl">g:riv_file_ext_link_hl</span></p>
+<p>1</p>
+</td>
+<td><p>Syntax highlighting for file with extensions
+in <a class="reference internal" href="#g-riv-file-link-ext">g:riv_file_link_ext</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-file-link-invalid-hl">g:riv_file_link_invalid_hl</span></p>
+<p>‘ErrorMsg’</p>
+</td>
+<td><p>Cursor Highlight Group for non-exists file link.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-file-link-style">g:riv_file_link_style</span></p>
+<p>1</p>
+</td>
+<td><p>The file link style.</p>
+<ul>
+<li><p>1:<code class="docutils literal notranslate"><span class="pre">MoinMoin</span></code> style:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[[xxx]] =&gt; xxx.rst
+[[xxx/]] =&gt; xxx/index.rst
+[[/xxx]] =&gt; DOC_ROOT/xxx.rst
+[[xxx.vim]] =&gt; xxx.vim
+(&#39;vim&#39; is in `g:riv_file_link_ext`_)
+[[~/xxx/xxx.rst]] =&gt; ~/xxx/xxx.rst
+</pre></div>
+</div>
+</li>
+<li><p>2: <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> style:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:doc:`xxx` =&gt; xxx.rst
+:doc:`xxx/index`  =&gt; xxx/index.rst
+
+:download:`xxx.py` =&gt; xxx.py
+</pre></div>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#syntax">Syntax</a></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-highlight-code">g:riv_highlight_code</span></p>
+<p>‘lua,python,cpp,javascript,vim,sh’</p>
+</td>
+<td><p>The language name</p>
+<p>is the syntax name used by vim.</p>
+<p>For some syntax have different name in pygments
+and vim,  you can use <cite>|</cite> to seperate it.</p>
+<p>e.g: pygments_code_name|vim_code_name</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-code-indicator">g:riv_code_indicator</span></p>
+<p>1</p>
+</td>
+<td><p>Highlight the first column of code directives.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-link-cursor-hl">g:riv_link_cursor_hl</span></p>
+<p>1</p>
+</td>
+<td><p>Cursor’s Hover Highlighting for links.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-python-rst-hl">g:riv_python_rst_hl</span></p>
+<p>0</p>
+</td>
+<td><p>Highlight <code class="docutils literal notranslate"><span class="pre">DocString</span></code> in python files</p>
+<p>with rst syntax.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#todos">Todos</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-todo-levels">g:riv_todo_levels</span></p>
+<p>“ ,o,X”</p>
+</td>
+<td><p>The Todo levels for Todo-Box.</p>
+<p>Means <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code>, <code class="docutils literal notranslate"><span class="pre">[o]</span></code>, <code class="docutils literal notranslate"><span class="pre">[X]</span></code> by default.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-todo-priorities">g:riv_todo_priorities</span></p>
+<p>“ABC”</p>
+</td>
+<td><p>The Todo Priorities for Todo-Items</p>
+<p>Only alphabetic or digits.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-todo-default-group">g:riv_todo_default_group</span></p>
+<p>0</p>
+</td>
+<td><p>The default Todo Group for ‘:RivTodoToggle’</p>
+<ul class="simple">
+<li><p>0 is the Todo-Box group.</p></li>
+<li><p>1 and other are the Todo-Keywords group.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-todo-datestamp">g:riv_todo_datestamp</span></p>
+<p>1</p>
+</td>
+<td><p>The datestamp behavior for Todo-Item.</p>
+<ul class="simple">
+<li><p>0: no DateStamp</p></li>
+<li><p>1: only finish datestamp</p></li>
+<li><p>2: both initial and finish datestamp</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-todo-keywords">g:riv_todo_keywords</span></p>
+<p>“TODO,DONE;FIXME,FIXED;START,PROCESS,STOP”</p>
+</td>
+<td><p>The Todo-Keywords groups.</p>
+<p>Each group is separated by ‘;’,
+Each keyword is separated by ‘,’.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#folding">Folding</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-disable-folding">g:riv_disable_folding</span></p>
+<p>0</p>
+</td>
+<td><p>Disable Folding or not</p>
+<ul class="simple">
+<li><p>0: Enable it.</p></li>
+<li><p>1: Disable it.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-fold-blank">g:riv_fold_blank</span></p>
+<p>2</p>
+</td>
+<td><p>Folding blank lines in the end of the folding lines.</p>
+<ul class="simple">
+<li><p>0: fold one blank line, show rest.</p></li>
+<li><p>1: fold all blank lines, show one if more than one.</p></li>
+<li><p>2: fold all blank lines.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-fold-level">g:riv_fold_level</span></p>
+<p>3</p>
+</td>
+<td><p>Folding more structure for document.</p>
+<ul class="simple">
+<li><p>0: ‘None’</p></li>
+<li><p>1: ‘Sections’</p></li>
+<li><p>2: ‘Sections and Lists’</p></li>
+<li><p>3: ‘Sections,Lists and Blocks’.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-fold-section-mark">g:riv_fold_section_mark</span></p>
+<p>‘.’</p>
+</td>
+<td><p>Mark to seperate the section numbers: ‘1.1’, ‘1.1.1’</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-fold-auto-update">g:riv_fold_auto_update</span></p>
+<p>1</p>
+</td>
+<td><p>Auto Update folding whilst write to buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-auto-fold-force">g:riv_auto_fold_force</span></p>
+<p>1</p>
+</td>
+<td><p>Reducing fold level for editing large files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-auto-fold1-lines">g:riv_auto_fold1_lines</span></p>
+<p>5000</p>
+</td>
+<td><p>Lines of file exceeds this will fold section only</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-auto-fold2-lines">g:riv_auto_fold2_lines</span></p>
+<p>3000</p>
+</td>
+<td><p>Lines of file exceeds this will fold section and list</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-fold-info-pos">g:riv_fold_info_pos</span></p>
+<p>‘right’</p>
+</td>
+<td><p>The position for fold info.</p>
+<ul class="simple">
+<li><p>‘left’, infos will be shown at left side.</p></li>
+<li><p>‘right’, show infos at right side.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#publish">Publish</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-web-browser">g:riv_web_browser</span></p>
+<p>‘firefox’</p>
+</td>
+<td><p>The browser for browsing html and web links.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-ft-browser">g:riv_ft_browser</span></p>
+<p>UNIX:’xdg-open’, windows:’start’</p>
+</td>
+<td><p>The browser for opening files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-rst2html-args">g:riv_rst2html_args</span></p>
+<p>‘’</p>
+</td>
+<td><p>Extra args for converting to html.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-rst2odt-args">g:riv_rst2odt_args</span></p>
+<p>‘’</p>
+</td>
+<td><p>Extra args for converting to odt.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-rst2xml-args">g:riv_rst2xml_args</span></p>
+<p>‘’</p>
+</td>
+<td><p>Extra args for converting to xml.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-rst2s5-args">g:riv_rst2s5_args</span></p>
+<p>‘’</p>
+</td>
+<td><p>Extra args for converting to s5.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-rst2latex-args">g:riv_rst2latex_args</span></p>
+<p>‘’</p>
+</td>
+<td><p>Extra args for converting to latex.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-temp-path">g:riv_temp_path</span></p>
+<p>1</p>
+</td>
+<td><p>The temp path for converting a file <strong>NOT</strong>
+in a project.</p>
+<ul class="simple">
+<li><p>0: put under the same directory of converting file.</p></li>
+<li><p>1: put in the temp path of vim.</p></li>
+<li><p>‘PATH’: to the path if it’s valid.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-html-code-hl-style">g:riv_html_code_hl_style</span></p>
+<p>‘default’</p>
+</td>
+<td><p>The code highlight style for html.</p>
+<ul class="simple">
+<li><p>‘default’, ‘emacs’, or ‘friendly’:
+use <a class="reference external" href="http://pygments.org/">pygments</a>’s relevant built-in style.</p></li>
+<li><p>‘FULL_PATH’: use your own style sheet in path.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#insert">Insert</a></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-disable-del">g:riv_disable_del</span></p>
+<p>0</p>
+</td>
+<td><p>Set to 1 to disable the invocation of :fixdel, which
+disabled the &lt;Del&gt; key from deleting a character under
+cursor; default is 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-disable-indent">g:riv_disable_indent</span></p>
+<p>0</p>
+</td>
+<td><p>Set to 1 to use vim’s default indent expr function.
+default is 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-i-tab-pum-next">g:riv_i_tab_pum_next</span></p>
+<p>1</p>
+</td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> to act as <code class="docutils literal notranslate"><span class="pre">&lt;C-N&gt;</span></code> in insert mode when
+there is a popup menu.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-i-tab-user-cmd">g:riv_i_tab_user_cmd</span></p>
+<p>‘’</p>
+</td>
+<td><p>User command to hook <code class="docutils literal notranslate"><span class="pre">&lt;Tab&gt;</span></code> in insert mode.</p>
+<p>let g:riv_i_tab_user_cmd =
+“&lt;c-g&gt;u&lt;c-r&gt;=snipMate#TriggerSnippet()&lt;cr&gt;”</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-i-stab-user-cmd">g:riv_i_stab_user_cmd</span></p>
+<p>‘’</p>
+</td>
+<td><p>User command to hook <code class="docutils literal notranslate"><span class="pre">&lt;S-Tab&gt;</span></code> in insert mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-ignored-imaps">g:riv_ignored_imaps</span></p>
+<p>‘’</p>
+</td>
+<td><p>Use to disable mapping in insert mode.</p>
+<p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">g:riv_ignored_imaps</span> <span class="pre">=</span> <span class="pre">&quot;&lt;Tab&gt;,&lt;S-Tab&gt;&quot;</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-ignored-nmaps">g:riv_ignored_nmaps</span></p>
+<p>‘’</p>
+</td>
+<td><p>Use to disable mapping in normal mode.</p>
+<p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">g:riv_ignored_nmaps</span> <span class="pre">=</span> <span class="pre">&quot;&lt;Tab&gt;,&lt;S-Tab&gt;&quot;</span></code></p>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-ignored-vmaps">g:riv_ignored_vmaps</span></p>
+<p>‘’</p>
+</td>
+<td><p>Use to disable mapping in visual mode.</p>
+<p><code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">g:riv_ignored_vmaps</span> <span class="pre">=</span> <span class="pre">&quot;&lt;Tab&gt;,&lt;S-Tab&gt;&quot;</span></code></p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Miscs</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-create-link-pos">g:riv_create_link_pos</span></p>
+<p>‘$’</p>
+</td>
+<td><p>Link Target’s position when created.</p>
+<ul class="simple">
+<li><p>‘.’ : below current line.</p></li>
+<li><p>‘$’ : append at end of file.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-month-names">g:riv_month_names</span></p>
+<p>‘January,February,March,April,
+May,June,July,August,September,
+October,November,December’</p>
+</td>
+<td><p>Month Names for Scratch Index</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-section-levels">g:riv_section_levels</span></p>
+<p>‘=-~”’’`’</p>
+</td>
+<td><p>The section line punctuations for section title.</p>
+<p><strong>NOTE</strong>
+Use <code class="docutils literal notranslate"><span class="pre">''</span></code> to escape <code class="docutils literal notranslate"><span class="pre">'</span></code> in literal-quote <code class="docutils literal notranslate"><span class="pre">'xxx'</span></code>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-content-format">g:riv_content_format</span></p>
+<p>‘%i%l%n %t’</p>
+</td>
+<td><p>The format for content table.</p>
+<ul class="simple">
+<li><p>%i is the indent of each line</p></li>
+<li><p>%l is the list symbol ‘+’</p></li>
+<li><p>%n is the section number</p></li>
+<li><p>%t is the section title</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-fuzzy-help">g:riv_fuzzy_help</span></p>
+<p>0</p>
+</td>
+<td><p>Fuzzy searching in helper.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-todo-helper-ignore-done">g:riv_todo_helper_ignore_done</span></p>
+<p>0</p>
+</td>
+<td><p>Ignore TODOs that are marked as DONE in helper.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-auto-format-table">g:riv_auto_format_table</span></p>
+<p>1</p>
+</td>
+<td><p>Auto formating table when leave Insert Mode</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="target" id="g-riv-auto-rst2html">g:riv_auto_rst2html</span></p>
+<p>0</p>
+</td>
+<td><p>Auto Converting rst to html after writing.
+file should in project.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="target" id="g-riv-default-path">g:riv_default_path</span></p>
+<p>‘~/Documents/Riv’</p>
+</td>
+<td><p>Default path for your project.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../">
+    <img class="logo" src="../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../_sources/photon/riv/doc/riv_instruction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

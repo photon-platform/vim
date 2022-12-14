@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Quickstart &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../../../../../" id="documentation_options" src="../../../../../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/completion/third_party/ycmd/third_party/watchdog_deps/watchdog/docs/source/quickstart.html" />
+    <link rel="index" title="Index" href="../../../../../../../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../../../../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../../../../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="quickstart">
+<span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h1>
+<p>Below we present a simple example that monitors the current directory
+recursively (which means, it will traverse any sub-directories)
+to detect changes. Here is what we will do with the API:</p>
+<ol class="arabic simple">
+<li><p>Create an instance of the <a class="reference internal" href="../api/#watchdog.observers.Observer" title="watchdog.observers.Observer"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.observers.Observer</span></code></a> thread class.</p></li>
+<li><p>Implement a subclass of <a class="reference internal" href="../api/#watchdog.events.FileSystemEventHandler" title="watchdog.events.FileSystemEventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.events.FileSystemEventHandler</span></code></a>
+(or as in our case, we will use the built-in
+<a class="reference internal" href="../api/#watchdog.events.LoggingEventHandler" title="watchdog.events.LoggingEventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.events.LoggingEventHandler</span></code></a>, which already does).</p></li>
+<li><p>Schedule monitoring a few paths with the observer instance
+attaching the event handler.</p></li>
+<li><p>Start the observer thread and wait for it generate events
+without blocking our main thread.</p></li>
+</ol>
+<p>By default, an <a class="reference internal" href="../api/#watchdog.observers.Observer" title="watchdog.observers.Observer"><code class="xref py py-class docutils literal notranslate"><span class="pre">watchdog.observers.Observer</span></code></a> instance will not monitor
+sub-directories. By passing <code class="docutils literal notranslate"><span class="pre">recursive=True</span></code> in the call to
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">watchdog.observers.Observer.schedule()</span></code> monitoring
+entire directory trees is ensured.</p>
+<section id="a-simple-example">
+<h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this heading">¶</a></h2>
+<p>The following example program will monitor the current directory recursively for
+file system changes and simply log them to the console:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">watchdog.observers</span> <span class="kn">import</span> <span class="n">Observer</span>
+<span class="kn">from</span> <span class="nn">watchdog.events</span> <span class="kn">import</span> <span class="n">LoggingEventHandler</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;.&#39;</span>
+    <span class="n">event_handler</span> <span class="o">=</span> <span class="n">LoggingEventHandler</span><span class="p">()</span>
+    <span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">event_handler</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">observer</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To stop the program, press Control-C.</p>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../../../../../../../">
+    <img class="logo" src="../../../../../../../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../../../../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../../../../../../../_sources/photon/completion/third_party/ycmd/third_party/watchdog_deps/watchdog/docs/source/quickstart.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Changelog &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../../../" id="documentation_options" src="../../../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/completion/third_party/ycmd/third_party/jedi_deps/parso/CHANGELOG.html" />
+    <link rel="index" title="Index" href="../../../../../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading">¶</a></h1>
+<section id="unreleased">
+<h2>Unreleased<a class="headerlink" href="#unreleased" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="id1">
+<h2>0.8.1 (2020-12-10)<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Various small bugfixes</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.8.0 (2020-08-05)<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Dropped Support for Python 2.7, 3.4, 3.5</p></li>
+<li><p>It’s possible to use <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> objects now in the API</p></li>
+<li><p>The stubs are gone, we are now using annotations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">namedexpr_test</span></code> nodes are now a proper class called <code class="docutils literal notranslate"><span class="pre">NamedExpr</span></code></p></li>
+<li><p>A lot of smaller refactorings</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.7.1 (2020-07-24)<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fixed a couple of smaller bugs (mostly syntax error detection in
+<code class="docutils literal notranslate"><span class="pre">Grammar.iter_errors</span></code>)</p></li>
+</ul>
+<p>This is going to be the last release that supports Python 2.7, 3.4 and 3.5.</p>
+</section>
+<section id="id4">
+<h2>0.7.0 (2020-04-13)<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix a lot of annoying bugs in the diff parser. The fuzzer did not find
+issues anymore even after running it for more than 24 hours (500k tests).</p></li>
+<li><p>Small grammar change: suites can now contain newlines even after a newline.
+This should really not matter if you don’t use error recovery. It allows for
+nicer error recovery.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>0.6.2 (2020-02-27)<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Bugfixes</p></li>
+<li><p>Add Grammar.refactor (might still be subject to change until 0.7.0)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>0.6.1 (2020-02-03)<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">parso.normalizer.Issue.end_pos</span></code> to make it possible to know where an
+issue ends</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>0.6.0 (2020-01-26)<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Dropped Python 2.6/Python 3.3 support</p></li>
+<li><p>del_stmt names are now considered as a definition
+(for <code class="docutils literal notranslate"><span class="pre">name.is_definition()</span></code>)</p></li>
+<li><p>Bugfixes</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>0.5.2 (2019-12-15)<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Add include_setitem to get_definition/is_definition and get_defined_names (#66)</p></li>
+<li><p>Fix named expression error listing (#89, #90)</p></li>
+<li><p>Fix some f-string tokenizer issues (#93)</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>0.5.1 (2019-07-13)<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix: Some unicode identifiers were not correctly tokenized</p></li>
+<li><p>Fix: Line continuations in f-strings are now working</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>0.5.0 (2019-06-20)<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Breaking Change</strong> comp_for is now called sync_comp_for for all Python
+versions to be compatible with the Python 3.8 Grammar</p></li>
+<li><p>Added .pyi stubs for a lot of the parso API</p></li>
+<li><p>Small FileIO changes</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>0.4.0 (2019-04-05)<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Python 3.8 support</p></li>
+<li><p>FileIO support, it’s now possible to use abstract file IO, support is alpha</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>0.3.4 (2019-02-13)<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix an f-string tokenizer error</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>0.3.3 (2019-02-06)<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix async errors in the diff parser</p></li>
+<li><p>A fix in iter_errors</p></li>
+<li><p>This is a very small bugfix release</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>0.3.2 (2019-01-24)<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>20+ bugfixes in the diff parser and 3 in the tokenizer</p></li>
+<li><p>A fuzzer for the diff parser, to give confidence that the diff parser is in a
+good shape.</p></li>
+<li><p>Some bugfixes for f-string</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>0.3.1 (2018-07-09)<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Bugfixes in the diff parser and keyword-only arguments</p></li>
+</ul>
+</section>
+<section id="id16">
+<h2>0.3.0 (2018-06-30)<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Rewrote the pgen2 parser generator.</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2>0.2.1 (2018-05-21)<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>A bugfix for the diff parser.</p></li>
+<li><p>Grammar files can now be loaded from a specific path.</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2>0.2.0 (2018-04-15)<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>f-strings are now parsed as a part of the normal Python grammar. This makes
+it way easier to deal with them.</p></li>
+</ul>
+</section>
+<section id="id19">
+<h2>0.1.1 (2017-11-05)<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fixed a few bugs in the caching layer</p></li>
+<li><p>Added support for Python 3.7</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>0.1.0 (2017-09-04)<a class="headerlink" href="#id20" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Pulling the library out of Jedi. Some APIs will definitely change.</p></li>
+</ul>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../../../../../">
+    <img class="logo" src="../../../../../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../../../../../_sources/photon/completion/third_party/ycmd/third_party/jedi_deps/parso/CHANGELOG.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

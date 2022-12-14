@@ -1,0 +1,1521 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Parser Tree &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../../../../../" id="documentation_options" src="../../../../../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/completion/third_party/ycmd/third_party/jedi_deps/parso/docs/docs/parser-tree.html" />
+    <link rel="index" title="Index" href="../../../../../../../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../../../../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../../../../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="parser-tree">
+<span id="id1"></span><h1>Parser Tree<a class="headerlink" href="#parser-tree" title="Permalink to this heading">¶</a></h1>
+<p>The parser tree is returned by calling <a class="reference internal" href="../usage/#parso.Grammar.parse" title="parso.Grammar.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parso.Grammar.parse()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that parso positions are always 1 based for lines and zero
+based for columns. This means the first position in a file is (1, 0).</p>
+</div>
+<section id="parser-tree-base-classes">
+<h2>Parser Tree Base Classes<a class="headerlink" href="#parser-tree-base-classes" title="Permalink to this heading">¶</a></h2>
+<p>Generally there are two types of classes you will deal with:
+<a class="reference internal" href="#parso.tree.Leaf" title="parso.tree.Leaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">parso.tree.Leaf</span></code></a> and <a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">parso.tree.BaseNode</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.tree.BaseNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.tree.</span></span><span class="sig-name descname"><span class="pre">BaseNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeOrLeaf</span></code></a></p>
+<p>The super class for all nodes.
+A node has children, a type and possibly a parent node.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.children">
+<span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#parso.tree.BaseNode.children" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of <a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeOrLeaf</span></code></a> child nodes.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.end_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">end_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.BaseNode.end_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the end position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.get_code">
+<span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode.get_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the code that was the input for the parser for this node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>include_prefix</strong> – Removes the prefix (whitespace and comments) of
+e.g. a statement.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.get_first_leaf">
+<span class="sig-name descname"><span class="pre">get_first_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode.get_first_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.get_last_leaf">
+<span class="sig-name descname"><span class="pre">get_last_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode.get_last_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.get_leaf_for_position">
+<span class="sig-name descname"><span class="pre">get_leaf_for_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_prefixes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode.get_leaf_for_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <a class="reference internal" href="#parso.tree.Leaf" title="parso.tree.Leaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">parso.tree.Leaf</span></code></a> at <code class="docutils literal notranslate"><span class="pre">position</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<em>tuple</em>) – A position tuple, row, column. Rows start from 1</p></li>
+<li><p><strong>include_prefixes</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code> will be returned if <code class="docutils literal notranslate"><span class="pre">position</span></code> falls
+on whitespace or comments before a leaf</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#parso.tree.Leaf" title="parso.tree.Leaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">parso.tree.Leaf</span></code></a> at <code class="docutils literal notranslate"><span class="pre">position</span></code>, or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.get_start_pos_of_prefix">
+<span class="sig-name descname"><span class="pre">get_start_pos_of_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.BaseNode.get_start_pos_of_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the start_pos of the prefix. This means basically it returns
+the end_pos of the last prefix. The <cite>get_start_pos_of_prefix()</cite> of the
+prefix <cite>+</cite> in <cite>2 + 1</cite> would be <cite>(1, 1)</cite>, while the start_pos is
+<cite>(1, 2)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.start_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.BaseNode.start_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the starting position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.BaseNode.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.tree.BaseNode.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.tree.Leaf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.tree.</span></span><span class="sig-name descname"><span class="pre">Leaf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.Leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeOrLeaf</span></code></a></p>
+<p>Leafs are basically tokens with a better API. Leafs exactly know where they
+were defined and what text preceeds them.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.Leaf.end_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">end_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.Leaf.end_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the end position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.Leaf.get_code">
+<span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.Leaf.get_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the code that was the input for the parser for this node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>include_prefix</strong> – Removes the prefix (whitespace and comments) of
+e.g. a statement.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.Leaf.get_first_leaf">
+<span class="sig-name descname"><span class="pre">get_first_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.Leaf.get_first_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.Leaf.get_last_leaf">
+<span class="sig-name descname"><span class="pre">get_last_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.Leaf.get_last_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.Leaf.get_start_pos_of_prefix">
+<span class="sig-name descname"><span class="pre">get_start_pos_of_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.Leaf.get_start_pos_of_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the start_pos of the prefix. This means basically it returns
+the end_pos of the last prefix. The <cite>get_start_pos_of_prefix()</cite> of the
+prefix <cite>+</cite> in <cite>2 + 1</cite> would be <cite>(1, 1)</cite>, while the start_pos is
+<cite>(1, 2)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.Leaf.prefix">
+<span class="sig-name descname"><span class="pre">prefix</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.tree.Leaf.prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code> Typically a mixture of whitespace and comments. Stuff
+that is syntactically irrelevant for the syntax tree.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.Leaf.start_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.Leaf.start_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the starting position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.Leaf.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#parso.tree.Leaf.value" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code> The value of the current token.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>All nodes and leaves have these methods/properties:</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.tree.</span></span><span class="sig-name descname"><span class="pre">NodeOrLeaf</span></span><a class="headerlink" href="#parso.tree.NodeOrLeaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for nodes and leaves.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.dump">
+<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#parso.tree.NodeOrLeaf.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted dump of the parser tree rooted at this node or leaf. This is
+mainly useful for debugging purposes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">indent</span></code> parameter is interpreted in a similar way as <code class="xref py py-func docutils literal notranslate"><span class="pre">ast.dump()</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">indent</span></code> is a non-negative integer or string, then the tree will be
+pretty-printed with that indent level. An indent level of 0, negative, or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>
+will only insert newlines. <code class="docutils literal notranslate"><span class="pre">None</span></code> selects the single line representation.
+Using a positive integer indent indents that many spaces per level. If
+<code class="docutils literal notranslate"><span class="pre">indent</span></code> is a string (such as <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code>), that string is used to indent each
+level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>indent</strong> – Indentation style as described above. The default indentation is
+4 spaces, which yields a pretty-printed dump.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">parso</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">parso</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;lambda x, y: x + y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">dump</span><span class="p">())</span>
+<span class="go">Module([</span>
+<span class="go">    Lambda([</span>
+<span class="go">        Keyword(&#39;lambda&#39;, (1, 0)),</span>
+<span class="go">        Param([</span>
+<span class="go">            Name(&#39;x&#39;, (1, 7), prefix=&#39; &#39;),</span>
+<span class="go">            Operator(&#39;,&#39;, (1, 8)),</span>
+<span class="go">        ]),</span>
+<span class="go">        Param([</span>
+<span class="go">            Name(&#39;y&#39;, (1, 10), prefix=&#39; &#39;),</span>
+<span class="go">        ]),</span>
+<span class="go">        Operator(&#39;:&#39;, (1, 11)),</span>
+<span class="go">        PythonNode(&#39;arith_expr&#39;, [</span>
+<span class="go">            Name(&#39;x&#39;, (1, 13), prefix=&#39; &#39;),</span>
+<span class="go">            Operator(&#39;+&#39;, (1, 15), prefix=&#39; &#39;),</span>
+<span class="go">            Name(&#39;y&#39;, (1, 17), prefix=&#39; &#39;),</span>
+<span class="go">        ]),</span>
+<span class="go">    ]),</span>
+<span class="go">    EndMarker(&#39;&#39;, (1, 18)),</span>
+<span class="go">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.end_pos">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">end_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.NodeOrLeaf.end_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the end position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_code">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the code that was the input for the parser for this node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>include_prefix</strong> – Removes the prefix (whitespace and comments) of
+e.g. a statement.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_first_leaf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_first_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_first_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_last_leaf">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_last_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_last_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last leaf of a node or itself if this is a leaf.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_next_leaf">
+<span class="sig-name descname"><span class="pre">get_next_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_next_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next leaf in the parser tree.
+Returns None if this is the last element in the parser tree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_next_sibling">
+<span class="sig-name descname"><span class="pre">get_next_sibling</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_next_sibling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the node immediately following this node in this parent’s
+children list. If this node does not have a next sibling, it is None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_previous_leaf">
+<span class="sig-name descname"><span class="pre">get_previous_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_previous_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the previous leaf in the parser tree.
+Returns <cite>None</cite> if this is the first element in the parser tree.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_previous_sibling">
+<span class="sig-name descname"><span class="pre">get_previous_sibling</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_previous_sibling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the node immediately preceding this node in this parent’s
+children list. If this node does not have a previous sibling, it is
+None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_root_node">
+<span class="sig-name descname"><span class="pre">get_root_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_root_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the root node of a parser tree. The returned node doesn’t have
+a parent node like all the other nodes/leaves.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.get_start_pos_of_prefix">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_start_pos_of_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.tree.NodeOrLeaf.get_start_pos_of_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the start_pos of the prefix. This means basically it returns
+the end_pos of the last prefix. The <cite>get_start_pos_of_prefix()</cite> of the
+prefix <cite>+</cite> in <cite>2 + 1</cite> would be <cite>(1, 1)</cite>, while the start_pos is
+<cite>(1, 2)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.parent">
+<span class="sig-name descname"><span class="pre">parent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><span class="pre">BaseNode</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.NodeOrLeaf.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>The parent <a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseNode</span></code></a> of this node or leaf.
+None if this is the root node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.search_ancestor">
+<span class="sig-name descname"><span class="pre">search_ancestor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">node_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><span class="pre">BaseNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#parso.tree.NodeOrLeaf.search_ancestor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively looks at the parents of this node or leaf and returns the
+first found node that matches <code class="docutils literal notranslate"><span class="pre">node_types</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if no
+matching node is found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node_types</strong> – type names that are searched for.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.start_pos">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#parso.tree.NodeOrLeaf.start_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the starting position of the prefix as a tuple, e.g. <cite>(3, 4)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return tuple of int<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(line, column)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.tree.NodeOrLeaf.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.tree.NodeOrLeaf.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-parso.python.tree">
+<span id="python-parser-tree"></span><h2>Python Parser Tree<a class="headerlink" href="#module-parso.python.tree" title="Permalink to this heading">¶</a></h2>
+<p>This is the syntax tree for Python 3 syntaxes. The classes represent
+syntax elements like functions and imports.</p>
+<p>All of the nodes can be traced back to the <a class="reference external" href="https://docs.python.org/3/reference/grammar.html">Python grammar file</a>. If you want to know how
+a tree is structured, just analyse that file (for each Python version it’s a
+bit different).</p>
+<p>There’s a lot of logic here that makes it easier for Jedi (and other libraries)
+to deal with a Python syntax tree.</p>
+<p>By using <a class="reference internal" href="#parso.tree.NodeOrLeaf.get_code" title="parso.tree.NodeOrLeaf.get_code"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parso.tree.NodeOrLeaf.get_code()</span></code></a> on a module, you can get
+back the 1-to-1 representation of the input given to the parser. This is
+important if you want to refactor a parser tree.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">parso</span> <span class="kn">import</span> <span class="n">parse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="s1">&#39;import os&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_root_node</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">module</span>
+<span class="go">&lt;Module: @1-1&gt;</span>
+</pre></div>
+</div>
+<p>Any subclasses of <a class="reference internal" href="#parso.python.tree.Scope" title="parso.python.tree.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code></a>, including <a class="reference internal" href="#parso.python.tree.Module" title="parso.python.tree.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a> has an attribute
+<a class="reference internal" href="#parso.python.tree.Scope.iter_imports" title="parso.python.tree.Scope.iter_imports"><code class="xref py py-attr docutils literal notranslate"><span class="pre">iter_imports</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">iter_imports</span><span class="p">())</span>
+<span class="go">[&lt;ImportName: import os@1,0&gt;]</span>
+</pre></div>
+</div>
+<section id="changes-to-the-python-grammar">
+<h3>Changes to the Python Grammar<a class="headerlink" href="#changes-to-the-python-grammar" title="Permalink to this heading">¶</a></h3>
+<p>A few things have changed when looking at Python grammar files:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#parso.python.tree.Param" title="parso.python.tree.Param"><code class="xref py py-class docutils literal notranslate"><span class="pre">Param</span></code></a> does not exist in Python grammar files. It is essentially a
+part of a <code class="docutils literal notranslate"><span class="pre">parameters</span></code> node.  <em>parso</em> splits it up to make it easier to
+analyse parameters. However this just makes it easier to deal with the syntax
+tree, it doesn’t actually change the valid syntax.</p></li>
+<li><p>A few nodes like <cite>lambdef</cite> and <cite>lambdef_nocond</cite> have been merged in the
+syntax tree to make it easier to do deal with them.</p></li>
+</ul>
+</section>
+<section id="parser-tree-classes">
+<h3>Parser Tree Classes<a class="headerlink" href="#parser-tree-classes" title="Permalink to this heading">¶</a></h3>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.AssertStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">AssertStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.AssertStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.KeywordStatement" title="parso.python.tree.KeywordStatement"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeywordStatement</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.AssertStmt.assertion">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assertion</span></span><a class="headerlink" href="#parso.python.tree.AssertStmt.assertion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Class">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.ClassOrFunc" title="parso.python.tree.ClassOrFunc"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassOrFunc</span></code></a></p>
+<p>Used to store the parsed contents of a python class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Class.get_super_arglist">
+<span class="sig-name descname"><span class="pre">get_super_arglist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Class.get_super_arglist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <cite>arglist</cite> node that defines the super classes. It returns
+None if there are no arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Class.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'classdef'</span></em><a class="headerlink" href="#parso.python.tree.Class.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ClassOrFunc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ClassOrFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ClassOrFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Scope" title="parso.python.tree.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ClassOrFunc.get_decorators">
+<span class="sig-name descname"><span class="pre">get_decorators</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ClassOrFunc.get_decorators" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of <a class="reference internal" href="#parso.python.tree.Decorator" title="parso.python.tree.Decorator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Decorator</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.ClassOrFunc.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#parso.python.tree.ClassOrFunc.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <cite>Name</cite> leaf that defines the function or class name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.ClassOrFunc.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.ClassOrFunc.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.CompFor">
+<span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">CompFor</span></span><a class="headerlink" href="#parso.python.tree.CompFor" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#parso.python.tree.SyncCompFor" title="parso.python.tree.SyncCompFor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncCompFor</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Decorator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Decorator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Decorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Decorator.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'decorator'</span></em><a class="headerlink" href="#parso.python.tree.Decorator.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.DocstringMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">DocstringMixin</span></span><a class="headerlink" href="#parso.python.tree.DocstringMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.DocstringMixin.get_doc_node">
+<span class="sig-name descname"><span class="pre">get_doc_node</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.DocstringMixin.get_doc_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the string leaf of a docstring. e.g. <code class="docutils literal notranslate"><span class="pre">r'''foo'''</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.EndMarker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">EndMarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.EndMarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_LeafWithoutNewlines</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.EndMarker.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'endmarker'</span></em><a class="headerlink" href="#parso.python.tree.EndMarker.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ExprStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ExprStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ExprStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a>, <a class="reference internal" href="#parso.python.tree.DocstringMixin" title="parso.python.tree.DocstringMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocstringMixin</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ExprStmt.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ExprStmt.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <cite>Name</cite> defined before the <cite>=</cite> sign.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ExprStmt.get_rhs">
+<span class="sig-name descname"><span class="pre">get_rhs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ExprStmt.get_rhs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the right-hand-side of the equals.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.ExprStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'expr_stmt'</span></em><a class="headerlink" href="#parso.python.tree.ExprStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ExprStmt.yield_operators">
+<span class="sig-name descname"><span class="pre">yield_operators</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ExprStmt.yield_operators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>+=</cite>, <cite>=</cite>, etc. or None if there is no operation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.FStringEnd">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">FStringEnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.FStringEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+<p>f-strings contain f-string expressions and normal python strings. These are
+the string parts of f-strings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.FStringEnd.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fstring_end'</span></em><a class="headerlink" href="#parso.python.tree.FStringEnd.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.FStringStart">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">FStringStart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.FStringStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+<p>f-strings contain f-string expressions and normal python strings. These are
+the string parts of f-strings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.FStringStart.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fstring_start'</span></em><a class="headerlink" href="#parso.python.tree.FStringStart.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.FStringString">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">FStringString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.FStringString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+<p>f-strings contain f-string expressions and normal python strings. These are
+the string parts of f-strings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.FStringString.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fstring_string'</span></em><a class="headerlink" href="#parso.python.tree.FStringString.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Flow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Flow.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.Flow.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ForStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ForStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ForStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Flow" title="parso.python.tree.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ForStmt.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ForStmt.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ForStmt.get_testlist">
+<span class="sig-name descname"><span class="pre">get_testlist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ForStmt.get_testlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the input node <code class="docutils literal notranslate"><span class="pre">y</span></code> from: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">y:</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.ForStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'for_stmt'</span></em><a class="headerlink" href="#parso.python.tree.ForStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Function">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.ClassOrFunc" title="parso.python.tree.ClassOrFunc"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassOrFunc</span></code></a></p>
+<p>Used to store the parsed contents of a python function.</p>
+<p>Children:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.</span> <span class="o">&lt;</span><span class="n">Keyword</span><span class="p">:</span> <span class="n">def</span><span class="o">&gt;</span>
+<span class="mf">1.</span> <span class="o">&lt;</span><span class="n">Name</span><span class="o">&gt;</span>
+<span class="mf">2.</span> <span class="n">parameter</span> <span class="nb">list</span> <span class="p">(</span><span class="n">including</span> <span class="nb">open</span><span class="o">-</span><span class="n">paren</span> <span class="ow">and</span> <span class="n">close</span><span class="o">-</span><span class="n">paren</span> <span class="o">&lt;</span><span class="n">Operator</span><span class="o">&gt;</span><span class="n">s</span><span class="p">)</span>
+<span class="mf">3.</span> <span class="ow">or</span> <span class="mf">5.</span> <span class="o">&lt;</span><span class="n">Operator</span><span class="p">:</span> <span class="p">:</span><span class="o">&gt;</span>
+<span class="mf">4.</span> <span class="ow">or</span> <span class="mf">6.</span> <span class="n">Node</span><span class="p">()</span> <span class="n">representing</span> <span class="n">function</span> <span class="n">body</span>
+<span class="mf">3.</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="k">if</span> <span class="n">annotation</span> <span class="ow">is</span> <span class="n">also</span> <span class="n">present</span><span class="p">)</span>
+<span class="mf">4.</span> <span class="n">annotation</span> <span class="p">(</span><span class="k">if</span> <span class="n">present</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Function.annotation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">annotation</span></span><a class="headerlink" href="#parso.python.tree.Function.annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the test node after <cite>-&gt;</cite> or <cite>None</cite> if there is no annotation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Function.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of <cite>Param()</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Function.is_generator">
+<span class="sig-name descname"><span class="pre">is_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function.is_generator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return bool<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Checks if a function is a generator or not.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Function.iter_raise_stmts">
+<span class="sig-name descname"><span class="pre">iter_raise_stmts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function.iter_raise_stmts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>raise_stmt</cite>. Includes raise statements inside try-except blocks</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Function.iter_return_stmts">
+<span class="sig-name descname"><span class="pre">iter_return_stmts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function.iter_return_stmts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>return_stmt</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Function.iter_yield_exprs">
+<span class="sig-name descname"><span class="pre">iter_yield_exprs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Function.iter_yield_exprs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>yield_expr</cite>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Function.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#parso.python.tree.Function.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <cite>Name</cite> leaf that defines the function or class name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Function.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'funcdef'</span></em><a class="headerlink" href="#parso.python.tree.Function.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.GlobalStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">GlobalStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.GlobalStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.KeywordStatement" title="parso.python.tree.KeywordStatement"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeywordStatement</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.GlobalStmt.get_global_names">
+<span class="sig-name descname"><span class="pre">get_global_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.GlobalStmt.get_global_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.IfStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">IfStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.IfStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Flow" title="parso.python.tree.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.IfStmt.get_corresponding_test_node">
+<span class="sig-name descname"><span class="pre">get_corresponding_test_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.IfStmt.get_corresponding_test_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for the branch in which the node is and returns the
+corresponding test node (see function above). However if the node is in
+the test node itself and not in the suite return None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.IfStmt.get_test_nodes">
+<span class="sig-name descname"><span class="pre">get_test_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.IfStmt.get_test_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>E.g. returns all the <cite>test</cite> nodes that are named as x, below:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if x:</dt><dd><p>pass</p>
+</dd>
+<dt>elif x:</dt><dd><p>pass</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.IfStmt.is_node_after_else">
+<span class="sig-name descname"><span class="pre">is_node_after_else</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.IfStmt.is_node_after_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a node is defined after <cite>else</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.IfStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'if_stmt'</span></em><a class="headerlink" href="#parso.python.tree.IfStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Import">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Import</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Import" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Import.get_path_for_name">
+<span class="sig-name descname"><span class="pre">get_path_for_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Import.get_path_for_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path is the list of names that leads to the searched name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return list of Name<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Import.is_nested">
+<span class="sig-name descname"><span class="pre">is_nested</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Import.is_nested" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Import.is_star_import">
+<span class="sig-name descname"><span class="pre">is_star_import</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Import.is_star_import" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Import.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.Import.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ImportFrom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportFrom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Import" title="parso.python.tree.Import"><code class="xref py py-class docutils literal notranslate"><span class="pre">Import</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportFrom.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the a list of <cite>Name</cite> that the import defines. The
+defined names are set after <cite>import</cite> or in case an alias - <cite>as</cite> - is
+present that name is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom.get_from_names">
+<span class="sig-name descname"><span class="pre">get_from_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportFrom.get_from_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom.get_paths">
+<span class="sig-name descname"><span class="pre">get_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportFrom.get_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>The import paths defined in an import statement. Typically an array
+like this: <code class="docutils literal notranslate"><span class="pre">[&lt;Name:</span> <span class="pre">datetime&gt;,</span> <span class="pre">&lt;Name:</span> <span class="pre">date&gt;]</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return list of list of Name<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom.level">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">level</span></span><a class="headerlink" href="#parso.python.tree.ImportFrom.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>The level parameter of <code class="docutils literal notranslate"><span class="pre">__import__</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.ImportFrom.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'import_from'</span></em><a class="headerlink" href="#parso.python.tree.ImportFrom.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ImportName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Import" title="parso.python.tree.Import"><code class="xref py py-class docutils literal notranslate"><span class="pre">Import</span></code></a></p>
+<p>For <code class="docutils literal notranslate"><span class="pre">import_name</span></code> nodes. Covers normal imports without <code class="docutils literal notranslate"><span class="pre">from</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportName.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the a list of <cite>Name</cite> that the import defines. The defined names
+is always the first name after <cite>import</cite> or in case an alias - <cite>as</cite> - is
+present that name is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName.get_paths">
+<span class="sig-name descname"><span class="pre">get_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportName.get_paths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName.is_nested">
+<span class="sig-name descname"><span class="pre">is_nested</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ImportName.is_nested" title="Permalink to this definition">¶</a></dt>
+<dd><p>This checks for the special case of nested imports, without aliases and
+from statement:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">foo.bar</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName.level">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">level</span></span><a class="headerlink" href="#parso.python.tree.ImportName.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>The level parameter of <code class="docutils literal notranslate"><span class="pre">__import__</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.ImportName.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'import_name'</span></em><a class="headerlink" href="#parso.python.tree.ImportName.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Keyword">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_LeafWithoutNewlines</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_StringComparisonMixin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Keyword.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'keyword'</span></em><a class="headerlink" href="#parso.python.tree.Keyword.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.KeywordStatement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">KeywordStatement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.KeywordStatement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<p>For the following statements: <cite>assert</cite>, <cite>del</cite>, <cite>global</cite>, <cite>nonlocal</cite>,
+<cite>raise</cite>, <cite>return</cite>, <cite>yield</cite>.</p>
+<p><cite>pass</cite>, <cite>continue</cite> and <cite>break</cite> are not in there, because they are just
+simple keywords and the parser reduces it to a keyword.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.KeywordStatement.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.KeywordStatement.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.KeywordStatement.keyword">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keyword</span></span><a class="headerlink" href="#parso.python.tree.KeywordStatement.keyword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.KeywordStatement.type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#parso.python.tree.KeywordStatement.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyword statements start with the keyword and end with <cite>_stmt</cite>. You can
+crosscheck this with the Python grammar.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Lambda">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Lambda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Function" title="parso.python.tree.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
+<p>Lambdas are basically trimmed functions, so give it the same interface.</p>
+<p>Children:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="mf">0.</span> <span class="o">&lt;</span><span class="n">Keyword</span><span class="p">:</span> <span class="k">lambda</span><span class="o">&gt;</span>
+ <span class="o">*.</span> <span class="o">&lt;</span><span class="n">Param</span> <span class="n">x</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">each</span> <span class="n">argument</span> <span class="n">x</span>
+<span class="o">-</span><span class="mf">2.</span> <span class="o">&lt;</span><span class="n">Operator</span><span class="p">:</span> <span class="p">:</span><span class="o">&gt;</span>
+<span class="o">-</span><span class="mf">1.</span> <span class="n">Node</span><span class="p">()</span> <span class="n">representing</span> <span class="n">body</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Lambda.annotation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">annotation</span></span><a class="headerlink" href="#parso.python.tree.Lambda.annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>None</cite>, lambdas don’t have annotations.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Lambda.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#parso.python.tree.Lambda.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises an AttributeError. Lambdas don’t have a defined name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Lambda.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lambdef'</span></em><a class="headerlink" href="#parso.python.tree.Lambda.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Literal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Literal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Literal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Literal.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.Literal.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Scope" title="parso.python.tree.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code></a></p>
+<p>The top scope, which is always a module.
+Depending on the underlying parser this may be a full module or just a part
+of a module.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Module.get_used_names">
+<span class="sig-name descname"><span class="pre">get_used_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Module.get_used_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all the <a class="reference internal" href="#parso.python.tree.Name" title="parso.python.tree.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> leafs that exist in this module. This
+includes both definitions and references of names.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Module.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'file_input'</span></em><a class="headerlink" href="#parso.python.tree.Module.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Name">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_LeafWithoutNewlines</span></code></p>
+<p>A string. Sometimes it is important to know if the string belongs to a name
+or not.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Name.get_definition">
+<span class="sig-name descname"><span class="pre">get_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">import_name_always</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Name.get_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns None if there’s no definition for a name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>import_name_always</strong> – Specifies if an import name is always a
+definition. Normally foo in <cite>from foo import bar</cite> is not a
+definition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Name.is_definition">
+<span class="sig-name descname"><span class="pre">is_definition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Name.is_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name is being defined.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Name.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'name'</span></em><a class="headerlink" href="#parso.python.tree.Name.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.NamedExpr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">NamedExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.NamedExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.NamedExpr.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.NamedExpr.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.NamedExpr.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'namedexpr_test'</span></em><a class="headerlink" href="#parso.python.tree.NamedExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Newline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Newline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Newline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+<p>Contains NEWLINE and ENDMARKER tokens.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Newline.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'newline'</span></em><a class="headerlink" href="#parso.python.tree.Newline.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Number">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Literal" title="parso.python.tree.Literal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Literal</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Number.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'number'</span></em><a class="headerlink" href="#parso.python.tree.Number.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Operator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_LeafWithoutNewlines</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_StringComparisonMixin</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Operator.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'operator'</span></em><a class="headerlink" href="#parso.python.tree.Operator.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Param">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<p>It’s a helper class that makes business logic with params much easier. The
+Python grammar defines no <code class="docutils literal notranslate"><span class="pre">param</span></code> node. It defines it in a different way
+that is not really suited to working with parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Param.annotation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">annotation</span></span><a class="headerlink" href="#parso.python.tree.Param.annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default is the test node that appears after <cite>:</cite>. Is <cite>None</cite> in case
+no annotation is present.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Param.default">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><a class="headerlink" href="#parso.python.tree.Param.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default is the test node that appears after the <cite>=</cite>. Is <cite>None</cite> in
+case no default is present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Param.get_code">
+<span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_comma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Param.get_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like all the other get_code functions, but includes the param
+<cite>include_comma</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bool</strong> (<em>include_comma</em>) – If enabled includes the comma in the string output.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Param.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Param.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Param.get_parent_function">
+<span class="sig-name descname"><span class="pre">get_parent_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Param.get_parent_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function/lambda of a parameter.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Param.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#parso.python.tree.Param.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <cite>Name</cite> leaf of the param.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Param.position_index">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position_index</span></span><a class="headerlink" href="#parso.python.tree.Param.position_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property for the positional index of a paramter.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.Param.star_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">star_count</span></span><a class="headerlink" href="#parso.python.tree.Param.star_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is <cite>0</cite> in case of <cite>foo</cite>, <cite>1</cite> in case of <cite>*foo</cite> or <cite>2</cite> in case of
+<cite>**foo</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Param.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'param'</span></em><a class="headerlink" href="#parso.python.tree.Param.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonBaseNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonBaseNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonBaseNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonMixin" title="parso.python.tree.PythonMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonMixin</span></code></a>, <a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseNode</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.PythonBaseNode.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.PythonBaseNode.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonErrorLeaf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonErrorLeaf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonErrorLeaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorLeaf</span></code>, <a class="reference internal" href="#parso.python.tree.PythonLeaf" title="parso.python.tree.PythonLeaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonLeaf</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonErrorNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonErrorNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonErrorNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonMixin" title="parso.python.tree.PythonMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorNode</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonLeaf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonLeaf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonLeaf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonMixin" title="parso.python.tree.PythonMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonMixin</span></code></a>, <a class="reference internal" href="#parso.tree.Leaf" title="parso.tree.Leaf"><code class="xref py py-class docutils literal notranslate"><span class="pre">Leaf</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.PythonLeaf.get_start_pos_of_prefix">
+<span class="sig-name descname"><span class="pre">get_start_pos_of_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonLeaf.get_start_pos_of_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basically calls <a class="reference internal" href="#parso.tree.NodeOrLeaf.get_start_pos_of_prefix" title="parso.tree.NodeOrLeaf.get_start_pos_of_prefix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parso.tree.NodeOrLeaf.get_start_pos_of_prefix()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.PythonLeaf.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.PythonLeaf.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonMixin</span></span><a class="headerlink" href="#parso.python.tree.PythonMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Some Python specific utilities.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.PythonMixin.get_name_of_position">
+<span class="sig-name descname"><span class="pre">get_name_of_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonMixin.get_name_of_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a (line, column) tuple, returns a <a class="reference internal" href="#parso.python.tree.Name" title="parso.python.tree.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code> if
+there is no name at that position.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.PythonNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">PythonNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.PythonNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonMixin" title="parso.python.tree.PythonMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.ReturnStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">ReturnStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.ReturnStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.KeywordStatement" title="parso.python.tree.KeywordStatement"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeywordStatement</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.Scope">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">Scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a>, <a class="reference internal" href="#parso.python.tree.DocstringMixin" title="parso.python.tree.DocstringMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocstringMixin</span></code></a></p>
+<p>Super class for the parser tree, which represents the state of a python
+text file.
+A Scope is either a function, class or lambda.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Scope.get_suite">
+<span class="sig-name descname"><span class="pre">get_suite</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Scope.get_suite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the part that is executed by the function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Scope.iter_classdefs">
+<span class="sig-name descname"><span class="pre">iter_classdefs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Scope.iter_classdefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>classdef</cite> nodes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Scope.iter_funcdefs">
+<span class="sig-name descname"><span class="pre">iter_funcdefs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Scope.iter_funcdefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>funcdef</cite> nodes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.Scope.iter_imports">
+<span class="sig-name descname"><span class="pre">iter_imports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.Scope.iter_imports" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator of <cite>import_name</cite> and <cite>import_from</cite> nodes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.Scope.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#parso.python.tree.Scope.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.String">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">String</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.String" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Literal" title="parso.python.tree.Literal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Literal</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="parso.python.tree.String.string_prefix">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">string_prefix</span></span><a class="headerlink" href="#parso.python.tree.String.string_prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.String.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'string'</span></em><a class="headerlink" href="#parso.python.tree.String.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.SyncCompFor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">SyncCompFor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.SyncCompFor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.SyncCompFor.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.SyncCompFor.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the a list of <cite>Name</cite> that the comprehension defines.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.SyncCompFor.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sync_comp_for'</span></em><a class="headerlink" href="#parso.python.tree.SyncCompFor.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.TryStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">TryStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.TryStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Flow" title="parso.python.tree.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.TryStmt.get_except_clause_tests">
+<span class="sig-name descname"><span class="pre">get_except_clause_tests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.TryStmt.get_except_clause_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <code class="docutils literal notranslate"><span class="pre">test</span></code> nodes found in <code class="docutils literal notranslate"><span class="pre">except_clause</span></code> nodes.
+Returns <code class="docutils literal notranslate"><span class="pre">[None]</span></code> for except clauses without an exception given.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.TryStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'try_stmt'</span></em><a class="headerlink" href="#parso.python.tree.TryStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.UsedNamesMapping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">UsedNamesMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dct</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.UsedNamesMapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></p>
+<p>This class exists for the sole purpose of creating an immutable dict.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.WhileStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">WhileStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.WhileStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Flow" title="parso.python.tree.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.WhileStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'while_stmt'</span></em><a class="headerlink" href="#parso.python.tree.WhileStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.WithStmt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">WithStmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.WithStmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.Flow" title="parso.python.tree.Flow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Flow</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.WithStmt.get_defined_names">
+<span class="sig-name descname"><span class="pre">get_defined_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_setitem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.WithStmt.get_defined_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the a list of <cite>Name</cite> that the with statement defines. The
+defined names are set after <cite>as</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="parso.python.tree.WithStmt.get_test_node_from_name">
+<span class="sig-name descname"><span class="pre">get_test_node_from_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.WithStmt.get_test_node_from_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.WithStmt.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'with_stmt'</span></em><a class="headerlink" href="#parso.python.tree.WithStmt.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="parso.python.tree.YieldExpr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">parso.python.tree.</span></span><span class="sig-name descname"><span class="pre">YieldExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">children</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#parso.python.tree.YieldExpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#parso.python.tree.PythonBaseNode" title="parso.python.tree.PythonBaseNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonBaseNode</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="parso.python.tree.YieldExpr.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'yield_expr'</span></em><a class="headerlink" href="#parso.python.tree.YieldExpr.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type is a string that typically matches the types of the grammar file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="utility">
+<h2>Utility<a class="headerlink" href="#utility" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="parso.tree.search_ancestor">
+<span class="sig-prename descclassname"><span class="pre">parso.tree.</span></span><span class="sig-name descname"><span class="pre">search_ancestor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#parso.tree.NodeOrLeaf" title="parso.tree.NodeOrLeaf"><span class="pre">NodeOrLeaf</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">node_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#parso.tree.BaseNode" title="parso.tree.BaseNode"><span class="pre">BaseNode</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#parso.tree.search_ancestor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively looks at the parents of a node and returns the first found node
+that matches <code class="docutils literal notranslate"><span class="pre">node_types</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if no matching node is found.</p>
+<p>This function is deprecated, use <a class="reference internal" href="#parso.tree.NodeOrLeaf.search_ancestor" title="parso.tree.NodeOrLeaf.search_ancestor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">NodeOrLeaf.search_ancestor()</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – The ancestors of this node will be checked.</p></li>
+<li><p><strong>node_types</strong> – type names that are searched for.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../../../../../../../">
+    <img class="logo" src="../../../../../../../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../../../../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../../../../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../../../../../../../_sources/photon/completion/third_party/ycmd/third_party/jedi_deps/parso/docs/docs/parser-tree.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

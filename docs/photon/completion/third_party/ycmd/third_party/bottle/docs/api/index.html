@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>API Reference &#8212; PHOTON platform&lt;br/&gt;•&lt;br/&gt;.vim  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/photonsphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../../../" id="documentation_options" src="../../../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="canonical" href="https://photon-platform.github.io/.vim/photon/completion/third_party/ycmd/third_party/bottle/docs/api.html" />
+    <link rel="index" title="Index" href="../../../../../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../../../../../search/" /> 
+   
+  <link rel="stylesheet" href="../../../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+ 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../../../../../../../log/atom.xml"
+  title="PHOTON platform • .vim"
+/>
+ 
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+             <section id="module-bottle">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-bottle" title="Permalink to this heading">¶</a></h1>
+<p>This is a mostly auto-generated API. If you are new to bottle, you might find the
+narrative <a class="reference internal" href="../tutorial/"><span class="doc">Tutorial</span></a> more helpful.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<p>The module defines several functions, constants, and an exception.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bottle.app">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bottle.app" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bottle.default_app">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">default_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bottle.default_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current <a class="reference internal" href="../tutorial/#default-app"><span class="std std-ref">Default Application</span></a>. Actually, these are callable instances of <code class="xref py py-class docutils literal notranslate"><span class="pre">AppStack</span></code> and implement a stack-like API.</p>
+</dd></dl>
+
+<section id="routing">
+<h3>Routing<a class="headerlink" href="#routing" title="Permalink to this heading">¶</a></h3>
+<p>Bottle maintains a stack of <code class="xref py py-class docutils literal notranslate"><span class="pre">Bottle</span></code> instances (see <a class="reference internal" href="#bottle.app" title="bottle.app"><code class="xref py py-func docutils literal notranslate"><span class="pre">app()</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">AppStack</span></code>) and uses the top of the stack as a <em>default application</em> for some of the module-level functions and decorators.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="bottle.route">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GET'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.route" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bottle.get">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.get" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bottle.post">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.post" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bottle.put">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.put" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bottle.delete">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to install a route to the current default application. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">Bottle.route()</span></code> for details.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bottle.error">
+<span class="sig-prename descclassname"><span class="pre">bottle.</span></span><span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bottle.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to install an error handler to the current default application. See <code class="xref py py-meth docutils literal notranslate"><span class="pre">Bottle.error()</span></code> for details.</p>
+</dd></dl>
+
+</section>
+<section id="wsgi-and-http-utilities">
+<h3>WSGI and HTTP Utilities<a class="headerlink" href="#wsgi-and-http-utilities" title="Permalink to this heading">¶</a></h3>
+</section>
+<section id="data-structures">
+<h3>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this heading">¶</a></h3>
+</section>
+<section id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">¶</a></h3>
+</section>
+</section>
+<section id="the-bottle-class">
+<h2>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Bottle</span></code> Class<a class="headerlink" href="#the-bottle-class" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="the-request-object">
+<h2>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> Object<a class="headerlink" href="#the-request-object" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code> class wraps a WSGI environment and provides helpful methods to parse and access form data, cookies, file uploads and other metadata. Most of the attributes are read-only.</p>
+<p>The module-level <code class="xref py py-data docutils literal notranslate"><span class="pre">bottle.request</span></code> is a proxy object (implemented in <code class="xref py py-class docutils literal notranslate"><span class="pre">LocalRequest</span></code>) and always refers to the <cite>current</cite> request, or in other words, the request that is currently processed by the request handler in the current thread. This <cite>thread locality</cite> ensures that you can safely use a global instance in a multi-threaded environment.</p>
+</section>
+<section id="the-response-object">
+<h2>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> Object<a class="headerlink" href="#the-response-object" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> class stores the HTTP status code as well as headers and cookies that are to be sent to the client. Similar to <code class="xref py py-data docutils literal notranslate"><span class="pre">bottle.request</span></code> there is a thread-local <code class="xref py py-data docutils literal notranslate"><span class="pre">bottle.response</span></code> instance that can be used to adjust the <cite>current</cite> response. Moreover, you can instantiate <code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code> and return it from your request handler. In this case, the custom instance overrules the headers and cookies defined in the global one.</p>
+<p>The following two classes can be raised as an exception. The most noticeable difference is that bottle invokes error handlers for <code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPError</span></code>, but not for <code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPResponse</span></code> or other response types.</p>
+</section>
+<section id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this heading">¶</a></h2>
+<p>All template engines supported by <a class="reference internal" href="../tutorial/#module-bottle" title="bottle"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bottle</span></code></a> implement the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTemplate</span></code> API. This way it is possible to switch and mix template engines without changing the application code at all.</p>
+<p>You can write your own adapter for your favourite template engine or use one of the predefined adapters. Currently there are four fully supported template engines:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>URL</p></th>
+<th class="head"><p>Decorator</p></th>
+<th class="head"><p>Render function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTemplate</span></code></p></td>
+<td><p><a class="reference internal" href="../stpl/"><span class="doc">SimpleTemplate Engine</span></a></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">view()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">template()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MakoTemplate</span></code></p></td>
+<td><p><a class="reference external" href="http://www.makotemplates.org">http://www.makotemplates.org</a></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">mako_view()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">mako_template()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CheetahTemplate</span></code></p></td>
+<td><p><a class="reference external" href="http://www.cheetahtemplate.org/">http://www.cheetahtemplate.org/</a></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">cheetah_view()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">cheetah_template()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Jinja2Template</span></code></p></td>
+<td><p><a class="reference external" href="http://jinja.pocoo.org/">http://jinja.pocoo.org/</a></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">jinja2_view()</span></code></p></td>
+<td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">jinja2_template()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>To use <code class="xref py py-class docutils literal notranslate"><span class="pre">MakoTemplate</span></code> as your default template engine, just import its specialised decorator and render function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bottle</span> <span class="kn">import</span> <span class="n">mako_view</span> <span class="k">as</span> <span class="n">view</span><span class="p">,</span> <span class="n">mako_template</span> <span class="k">as</span> <span class="n">template</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+<div class="section">
+   
+</div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../../../../../../">
+    <img class="logo" src="../../../../../../../../_static/logo.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">PHOTON platform<br/>•<br/>.vim</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="230" height="30" title="GitHub"></iframe>
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=photon-platform&repo=.vim&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+<!-- <h3>Navigation</h3> -->
+
+
+<h3>
+  <a href="../../../../../../../../log/">LOG recent</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/22.348-113439/"
+      >22.348 - Welcome to the .vim project</a
+    >
+  </li>
+  
+</ul>
+
+<h3>
+  <a href="../../../../../../../../log/category/">Categories</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/category/status/">STATUS (1)</a>
+  </li>
+   
+</ul>
+
+<h3>
+  <a href="../../../../../../../../log/archive/">Archives</a>
+</h3>
+<ul>
+   
+  <li>
+    <a href="../../../../../../../../log/2022/">2022 (1)</a>
+  </li>
+   
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../../../search/" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, PHOTON platform.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/photon-platform/photon-sphinx-theme">PHOTON Sphinx 0.0.1</a>
+      
+      |
+      <a href="../../../../../../../../_sources/photon/completion/third_party/ycmd/third_party/bottle/docs/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
