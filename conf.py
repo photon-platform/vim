@@ -3,7 +3,7 @@ from ablog.conf import *
 org = 'photon-platform'
 org_name = 'PHOTON platform'
 
-repo = '.vim'
+repo = 'vim'
 repo_name = '.vim'
 
 blog_title = f'{org_name} • {repo_name}'
