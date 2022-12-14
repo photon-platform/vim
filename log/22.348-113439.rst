@@ -1,0 +1,8 @@
+Welcome to the .vim project
+===========================
+
+.. post::  22.348-113439
+   :tags: 
+   :category: STATUS
+
+This is the first log entry
