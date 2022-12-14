@@ -82,6 +82,7 @@ let g:riv_projects = [wiki_phi]
 
 set rtp+=~/.vim/photon/voom
 set rtp+=~/.vim/photon/jinja
+au BufNewFile,BufRead *.j2,*.jinja set ft=jinja
 
 set rtp+=~/.vim/photon/python-syntax
 " let g:python_highlight_all = 1
