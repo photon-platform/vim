@@ -24,6 +24,8 @@ blog_authors = {
     "phi": ("phi ARCHITECT", None),
 }
 
+exclude_patterns.append('photon/*')
+
 html_theme_options = {
     'logo': 'logo.png',
     'logo_name': True,

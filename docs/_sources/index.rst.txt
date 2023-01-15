@@ -18,10 +18,14 @@ urgent todos:
    :tags: urgent
    :excerpts:
 
+contents:
+---------
 
 .. toctree::
-   :hidden:
    :maxdepth: 2
+
+   LOG </log#http://>
+   PLUGINS <photon/index.rst>
 
 
 
