@@ -82,7 +82,7 @@ let g:riv_projects = [wiki_phi]
 
 set rtp+=~/.vim/photon/voom
 set rtp+=~/.vim/photon/jinja
-au BufNewFile,BufRead *.j2,*.jinja set ft=jinja
+" au BufNewFile,BufRead *.j2,*.jinja2,*.jinja set ft=jinja2
 
 set rtp+=~/.vim/photon/python-syntax
 " let g:python_highlight_all = 1
@@ -123,5 +123,5 @@ set rtp+=~/.vim/photon/python-syntax
 
 helptags ALL
 
-
-
+" this setting should help riv from having errors in long file links
+set mmp=2000

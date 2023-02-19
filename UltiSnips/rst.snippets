@@ -310,7 +310,7 @@ endsnippet
 snippet fnt "Footnote or Citation" i
 [${1:Label}]_ $0
 
-.. [$1] ${2:Reference}
+.. [$1] ${2:reference}
 endsnippet
 
 # Only for Nikola — Static Site Generator
@@ -335,5 +335,31 @@ snippet sid "SideBar" b
 
     ${2:${VISUAL:SideBar Content}}
 endsnippet
+
+snippet ref "sphinx :ref: role" w
+:ref:\`${1:${VISUAL:reference}}\`
+endsnippet
+
+##########
+#  Math  #
+##########
+
+snippet math "general expression" w
+:math:\`${1:${VISUAL:A}}\`
+endsnippet
+
+snippet math_line "overline content" w
+:math:\`\overline\{${1:AB}\}\`
+endsnippet
+
+snippet math_seg "bar content" w
+:math:\`\bar\{${1:AB}\}\`
+endsnippet
+
+snippet math_circ "parens content" w
+:math:\`(${1:A}, ${2:B})\`\`
+endsnippet
+
+
 
 # vim:set list noet sts=0 sw=4 ts=4:
