@@ -127,6 +127,6 @@ helptags ALL
 set mmp=2000
 
 autocmd FileType python noremap <Leader>K :%!black -q 2>/dev/null -<CR>
-autocmd BufWritePre *.py execute "w" | silent %!black --quiet -
+" autocmd BufWritePre *.py execute "w" | silent %!black --quiet -
 
 
