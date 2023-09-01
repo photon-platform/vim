@@ -151,5 +151,9 @@ function! MarkdownLevel()
     endif
     return "=" 
 endfunction
+
+au BufEnter *.rst syn spell toplevel
+au BufEnter *.rst set spell
+
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
 au BufEnter *.md setlocal foldmethod=expr     
