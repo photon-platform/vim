@@ -85,7 +85,7 @@ set rtp+=~/.vim/photon/jinja
 " au BufNewFile,BufRead *.j2,*.jinja2,*.jinja set ft=jinja2
 
 set rtp+=~/.vim/photon/python-syntax
-" let g:python_highlight_all = 1
+let g:python_highlight_all = 1
 
 " Plugin 'airblade/vim-gitgutter'
 
@@ -157,3 +157,5 @@ au BufEnter *.rst set spell
 
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
 au BufEnter *.md setlocal foldmethod=expr     
+
+au BufEnter *.j2 setlocal syntax=j2
