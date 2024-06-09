@@ -1,3 +1,4 @@
+" https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
 function! s:get_visual_selection()
     " Why is this not a built-in Vim script function?!
     let [line_start, column_start] = getpos("'<")[1:2]
@@ -11,18 +12,34 @@ function! s:get_visual_selection()
     return join(lines, "\n")
 endfunction
 
-function! ClerkChat(prompt)
-    " Get the content of the visual selection or the entire buffer if no selection is made
-    let buffer_content = s:get_visual_selection()
-    if empty(buffer_content)
-        " Get the content of the entire buffer
+function! ClerkChat(prompt = '')
+    " Check if there is a visual selection
+    let visual_selection = s:get_visual_selection()
+
+    if !empty(visual_selection)
+        " If there is a visual selection, use it as the buffer content
+        let buffer_content = visual_selection
+    else
+        " If there is no visual selection, use the entire buffer content
         let buffer_content = join(getline(1, '$'), "\n")
+    endif
+
+    " Use a local variable for the prompt
+    let l:prompt = a:prompt
+
+    if empty(l:prompt)
+        let l:prompt = input("Enter your prompt: ")
+    endif
+
+    if empty(l:prompt)
+        echo "Prompt is empty. Aborting."
+        return
     endif
 
     " Wrap the buffer content in triple backticks
     let wrapped_content = "```" . "\n" . buffer_content . "\n" . "```"
     " Combine the buffer content with the prompt
-    let full_prompt = a:prompt . "\n\n" . wrapped_content
+    let full_prompt = wrapped_content . "\n\n" . l:prompt
     " Call the clerk.py script with the combined prompt
     let command = "python3 ~/.vim/photon/clerk/clerk.py chat " . shellescape(full_prompt)
     let output = system(command)
@@ -64,6 +81,5 @@ function! ClerkFim()
     endif
 endfunction
 
-command! -nargs=1 -range ClerkChat call ClerkChat(<f-args>)
+command! -nargs=? -range ClerkChat call ClerkChat(<f-args>)
 command! ClerkFim call ClerkFim()
-
