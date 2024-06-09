@@ -159,3 +159,9 @@ au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr     
 
 au BufEnter *.j2 setlocal syntax=j2
+
+" Other settings...
+
+" Source the clerk.vim file
+source ~/.vim/photon/clerk/clerk.vim
+
