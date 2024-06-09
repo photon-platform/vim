@@ -1,12 +1,21 @@
-function ClerkChat(prompt) range
-    " Check if there is a visual selection
-    echo a:firstline
-    echo a:lastline
-    if a:firstline != a:lastline
-        " Get the content of the current selection
-        let buffer_content = join(getline(a:firstline, a:lastline), "\n")
-    else
-        " Get the content of the current buffer
+function! s:get_visual_selection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
+
+function! ClerkChat(prompt)
+    " Get the content of the visual selection or the entire buffer if no selection is made
+    let buffer_content = s:get_visual_selection()
+    if empty(buffer_content)
+        " Get the content of the entire buffer
         let buffer_content = join(getline(1, '$'), "\n")
     endif
 
@@ -55,6 +64,6 @@ function! ClerkFim()
     endif
 endfunction
 
-command! -nargs=1 ClerkChat call ClerkChat(<q-args>)
+command! -nargs=1 -range ClerkChat call ClerkChat(<f-args>)
 command! ClerkFim call ClerkFim()
 
