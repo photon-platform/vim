@@ -57,13 +57,54 @@ function! ClerkChat(prompt = '')
         setlocal syntax=markdown
         " Write the output to the new buffer
         call setline(1, split(output, "\n"))
-        " Move the cursor back to the original buffer
-        " wincmd p
+    endif
+endfunction
+
+
+function! ClerkCode(prompt = '')
+    let system_prompt = "you are a code generator. you are to take the code wrapped in ``` below and regenerate the code as output, following the instructions which follow the code block. do not include any commentary unless inserted as comments in the code. do not wrap your output.\n\n"
+    " Get the entire buffer content
+    let buffer_content = join(getline(1, '$'), "\n")
+
+    " Use a local variable for the prompt
+    let l:prompt = a:prompt
+
+    if empty(l:prompt)
+        let l:prompt = input("Enter your prompt: ")
+    endif
+
+    if empty(l:prompt)
+        echo "Prompt is empty. Aborting."
+        return
+    endif
+
+    " Wrap the buffer content in triple backticks
+    let wrapped_content = "```" . "\n" . buffer_content . "\n" . "```"
+    " Combine the buffer content with the prompt
+    let full_prompt = system_prompt . wrapped_content . "\n\n" . l:prompt
+    " Call the clerk.py script with the combined prompt
+    let command = "python3 ~/.vim/photon/clerk/clerk.py code " . shellescape(full_prompt)
+    let output = system(command)
+    if v:shell_error
+        echohl ErrorMsg | echo "Error: " . output | echohl None
+    else
+        " Split the window vertically and open a new buffer
+        execute 'vsplit'
+        execute 'enew'
+        " Set buffer options
+        setlocal buftype=nofile
+        setlocal bufhidden=hide
+        setlocal noswapfile
+        setlocal buflisted
+        setlocal syntax=python
+        " Write the output to the new buffer
+        call setline(1, split(output, "\n"))
+        " Perform a diff between the original and the new buffer
+        " execute 'windo diffthis'
     endif
 endfunction
 
 function! ClerkFim()
-    let lnum = search('# FIM:', 'bn')
     if lnum == 0
         echo "No FIM comment found"
         return
@@ -75,11 +116,24 @@ function! ClerkFim()
     if v:shell_error
         echohl ErrorMsg | echo "Error: " . output | echohl None
     else
-        let middle = split(output, "\n")
-        call append(lnum, middle)
-        execute lnum . 'delete _'
+        " Split the window vertically and open a new buffer
+        execute 'vsplit'
+        execute 'enew'
+        " Set buffer options
+        setlocal buftype=nofile
+        setlocal bufhidden=hide
+        setlocal noswapfile
+        setlocal buflisted
+        setlocal syntax=python
+        " Write the output to the new buffer
+        call setline(1, split(output, "\n"))
+        " Move the cursor back to the original buffer
+        " wincmd p
     endif
 endfunction
 
 command! -nargs=? -range ClerkChat call ClerkChat(<f-args>)
 command! ClerkFim call ClerkFim()
+
+command! -nargs=? -range ClerkCode call ClerkCode(<f-args>)
+

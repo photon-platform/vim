@@ -165,3 +165,5 @@ au BufEnter *.j2 setlocal syntax=j2
 " Source the clerk.vim file
 source ~/.vim/photon/clerk/clerk.vim
 
+nnoremap <leader>Ac :ClerkChat<cr>
+nnoremap <leader>Af :ClerkFim<cr>
