@@ -48,6 +48,7 @@ function! ClerkChat(prompt = '')
     else
         " Split the window vertically and open a new buffer
         execute 'vsplit'
+        " execute 'splitright'
         execute 'enew'
         " Set buffer options
         setlocal buftype=nofile
@@ -62,7 +63,8 @@ endfunction
 
 
 function! ClerkCode(prompt = '')
-    let system_prompt = "you are a code generator. you are to take the code wrapped in ``` below and regenerate the code as output, following the instructions which follow the code block. do not include any commentary unless inserted as comments in the code. do not wrap your output.\n\n"
+    let system_prompt = "You are a code generator. You are to take the code wrapped in ``` below and regenerate the code as output, following the instructions which follow the code block. Do not include any commentary unless inserted as comments in the code. Do not wrap your output in triple backticks.\n\n"
+
     " Get the entire buffer content
     let buffer_content = join(getline(1, '$'), "\n")
 
@@ -83,7 +85,7 @@ function! ClerkCode(prompt = '')
     " Combine the buffer content with the prompt
     let full_prompt = system_prompt . wrapped_content . "\n\n" . l:prompt
     " Call the clerk.py script with the combined prompt
-    let command = "python3 ~/.vim/photon/clerk/clerk.py code " . shellescape(full_prompt)
+    let command = "python3 ~/.vim/photon/clerk/clerk.py chat " . shellescape(full_prompt)
     let output = system(command)
     if v:shell_error
         echohl ErrorMsg | echo "Error: " . output | echohl None
@@ -100,7 +102,9 @@ function! ClerkCode(prompt = '')
         " Write the output to the new buffer
         call setline(1, split(output, "\n"))
         " Perform a diff between the original and the new buffer
-        " execute 'windo diffthis'
+        execute 'diffthis'
+        execute 'wincmd p'
+        execute 'diffthis'
     endif
 endfunction
 
