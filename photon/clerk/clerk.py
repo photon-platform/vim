@@ -8,7 +8,7 @@ BASE_URL = "https://codestral.mistral.ai/v1"
 
 def make_request(url, data):
     """
-    Make a request to the CodeStral API.
+    Make a request to the Codestral API.
 
     Args:
         url (str): The URL to make the request to.
