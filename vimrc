@@ -154,9 +154,16 @@ endfunction
 
 au BufEnter *.rst syn spell toplevel
 au BufEnter *.rst set spell
+au BufEnter *.rst setlocal wrap linebreak 
+au BufEnter *.rst setlocal textwidth=80
 
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
 au BufEnter *.md setlocal foldmethod=expr     
+au BufEnter *.md setlocal wrap linebreak 
+au BufEnter *.md setlocal textwidth=80
+
+au BufEnter *.txt setlocal wrap linebreak 
+au BufEnter *.txt setlocal textwidth=80
 
 au BufEnter *.j2 setlocal syntax=j2
 
