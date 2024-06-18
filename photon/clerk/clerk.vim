@@ -109,30 +109,25 @@ function! ClerkCode(prompt = '')
 endfunction
 
 function! ClerkFim()
-    if lnum == 0
+    " Search for the first occurrence of 'FIM' in a comment line
+    let l:lnum = search('FIM')
+    if l:lnum == 0
         echo "No FIM comment found"
         return
     endif
-    let prompt = join(getline(1, lnum), "\n")
-    let suffix = join(getline(lnum + 1, '$'), "\n")
+    let prompt = join(getline(1, l:lnum), "\n")
+    let suffix = join(getline(l:lnum + 1, '$'), "\n")
     let command = "python3 ~/.vim/photon/clerk/clerk.py fim " . shellescape(prompt) . " " . shellescape(suffix)
     let output = system(command)
+    echo output
     if v:shell_error
         echohl ErrorMsg | echo "Error: " . output | echohl None
     else
-        " Split the window vertically and open a new buffer
-        execute 'vsplit'
-        execute 'enew'
-        " Set buffer options
-        setlocal buftype=nofile
-        setlocal bufhidden=hide
-        setlocal noswapfile
-        setlocal buflisted
-        setlocal syntax=python
-        " Write the output to the new buffer
-        call setline(1, split(output, "\n"))
-        " Move the cursor back to the original buffer
-        " wincmd p
+        " Split the output into lines
+        let output_lines = split(output, "\n")
+
+        " Replace the content from lnum to the end with the output lines
+        call setline(l:lnum, output_lines)
     endif
 endfunction
 
